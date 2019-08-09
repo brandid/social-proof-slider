@@ -100,8 +100,11 @@ class Social_Proof_Slider_Public {
 
 		ob_start();
 
+		// Declare defaults
 		$defaults['ids'] = '';
 		$defaults['exclude'] = '';
+		$defaults['category'] = '';
+
 		$shared = new Social_Proof_Slider_Shared( $this->plugin_name, $this->version );
 
 		// Get Shortcode Settings
@@ -121,6 +124,12 @@ class Social_Proof_Slider_Public {
 				'order' => $sc_settings['sortby'],
 				'orderby' => 'ID',
 			);
+		}
+
+		$taxSlug = "";
+		// Use category, if present
+		if ( !empty( $sc_atts['category'] ) ) {
+			$taxSlug = $sc_atts['category'];
 		}
 
 		$postLimiter = "";
@@ -179,7 +188,7 @@ class Social_Proof_Slider_Public {
 		}
 
 		$items = '';
-		$items = $shared->get_testimonials( $queryargs, 'shortcode', $postLimiter, $limiterIDs, $showFeaturedImages, $smartQuotes );	 // get_testimonials( $params, $src, $featimgs )
+		$items = $shared->get_testimonials( $queryargs, 'shortcode', $postLimiter, $limiterIDs, $showFeaturedImages, $smartQuotes, $taxSlug );
 
 		echo '<!-- // ********** SOCIAL PROOF SLIDER ********** // -->';
 		echo '<section id="_socialproofslider-shortcode" class="widget widget__socialproofslider ' . $sc_settings['animationStyle'] . ' paddingoverride-'.$sc_settings['doPaddingOverride'].' ">';

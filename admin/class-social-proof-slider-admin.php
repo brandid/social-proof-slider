@@ -152,7 +152,7 @@ class Social_Proof_Slider_Admin {
 
 		$opts['can_export']								= TRUE;
 		$opts['capability_type']						= $cap_type;
-		$opts['description']							= '';
+		$opts['description']							= __('Social Proof Slider Testimonials', 'social-proof-slider');
 		$opts['exclude_from_search']					= TRUE;
 		$opts['has_archive']							= FALSE;
 		$opts['hierarchical']							= FALSE;
@@ -168,7 +168,7 @@ class Social_Proof_Slider_Admin {
 		$opts['show_in_nav_menu']						= TRUE;
 		$opts['show_ui']								= TRUE;
 		$opts['supports']								= array( 'title', 'page-attributes', 'thumbnail' );
-		$opts['taxonomies']								= array();
+		$opts['taxonomies']								= array( 'category' );
 
 		$opts['capabilities']['delete_others_posts']	= "delete_others_{$cap_type}s";
 		$opts['capabilities']['delete_post']			= "delete_{$cap_type}";

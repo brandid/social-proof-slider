@@ -81,26 +81,31 @@ class Social_Proof_Slider_Shared {
 	 *
 	 * @param 	array 		$params 		An array of optional parameters
 	 * @param 	string 		$src 			String to determine if gathering posts for a shortcode or widget
-	 * @param 	bool 		$featimgs 		Whether to display featured images or not
-	 * @param 	bool 		$smartquotes 	Whether to display smart quotes or not
+	 * @param 	bool 		$featimgs 		Display featured images
+	 * @param 	bool 		$smartquotes 	Display smart quotes
+	 * @param 	string 		$taxSlug 	Category/taxonomy slug to limit testimonials
 	 *
 	 * @return 	string 		A string of HTML to output
 	 */
-	public function get_testimonials( $params, $src, $postLimit, $limitIDs, $featimgs, $smartquotes ){
+	public function get_testimonials( $params, $src, $postLimit, $limitIDs, $featimgs, $smartquotes, $taxSlug ){
 
 		$return = '';
 
-		if ( !empty($limitIDs) ) {
+		if ( !empty($taxSlug) ) {
+			// limit by category
+			$args = $this->set_args( $params, "", "", $taxSlug );
+
+		} else if ( !empty($limitIDs) ) {
 			// Including/Excluding
 			if ( !empty($postLimit) ) {
 				// Exclude
-				$args 	= $this->set_args( $params, $postLimit, $limitIDs );
+				$args 	= $this->set_args( $params, $postLimit, $limitIDs, "" );
 			} else {
 				// Include
-				$args 	= $this->set_args( $params, "", $limitIDs );
+				$args 	= $this->set_args( $params, "", $limitIDs, "" );
 			}
 		} else {
-			$args 	= $this->set_args( $params, "", "" );
+			$args 	= $this->set_args( $params, "", "", "" );
 		}
 
 		$query 	= new WP_Query( $args );
@@ -277,13 +282,36 @@ class Social_Proof_Slider_Shared {
 	 * @param 	array 		$params 		Array of shortcode parameters
 	 * @param 	string 		$postLimit 		A string for include/exclude posts
 	 * @param 	string 		$limitIDs 		Array of IDs to include/exclude
+	 * @param 	string 		$taxSlug 		Category/taxonomy slug to limit testimonials
+	 *
 	 * @return 	array 						An array of parameters for WP_Query
 	 */
-	private function set_args( $params, $postLimit, $limitIDs ) {
+	private function set_args( $params, $postLimit, $limitIDs, $taxSlug ) {
 
+		// If the parameters are empty, exit
 		if ( empty( $params ) ) { return; }
 
+		// Setup defaults
+		$limitByCat = false;
 		$limitedPosts = false;
+
+		// Setting a category in the shortcode will override the 'Sort By' setting.
+		// This enables users to specify a slug to only show posts assigned to that category.
+		if ( !empty ( $taxSlug ) ) {
+
+			$limitByCat = true;
+
+			$category_array = array(
+			    'tax_query' => array(
+			        array(
+			            'taxonomy' => 'category',
+			            'field' => 'slug',
+			            'terms' => $taxSlug
+			        )
+			    )
+			);
+
+		}
 
 		// Setting a list of IDs in the shortcode will override the 'Sort By' setting.
 		// This enables users to put the IDs in the exact order they want them to appear.
@@ -302,7 +330,7 @@ class Social_Proof_Slider_Shared {
 					'orderby' => 'post__in'
 				);
 
-			}else {
+			} else {
 				// Including (only show) these posts from the 'idArray' list
 
 				$inclexcl_array = array(
@@ -312,29 +340,35 @@ class Social_Proof_Slider_Shared {
 
 			}
 
-		} else {
-
-			// Use 'orderby' and 'order' settings from params
-
 		}
 
+		// Create array for query arguments
 		$args = array();
 
+		// Specify default arguments
 		$args['no_found_rows']			= true;
 		$args['post_status'] 			= 'publish';
 		$args['post_type'] 				= 'socialproofslider';
 		$args['update_post_term_cache'] = false;
 		$args['posts_per_page'] = -1;
 
+		// If limiting by category
+		if ( $limitByCat ) {
+			$args = array_merge( $args, $category_array );
+		}
 
+		// If limiting posts by ID
 		if ( $limitedPosts ){
 			$args = array_merge( $args, $inclexcl_array );
 		}
 
+		// If there are no parameters
 		if ( empty( $params ) ) { return $args; }
 
+		// Parse all the arguments and format for query
 		$args = wp_parse_args( $params, $args );
 
+		// Return the query
 		return $args;
 
 	} // set_args()
