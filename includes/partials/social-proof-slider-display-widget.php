@@ -248,7 +248,9 @@ $excinc = '';
 $excincStr = '';
 if ( ! empty( $instance['excinc'] ) ) {
 	$excinc = $instance['excinc'];
-	if ( $instance['excinc'] == 'in' ) {
+	if ( $instance['excinc'] == 'cat' ) {
+		$excincStr = 'CATEGORY';
+	} else if ( $instance['excinc'] == 'in' ) {
 		$excincStr = 'INCLUDE';
 	} else if ( $instance['excinc'] == 'ex' ) {
 		$excincStr = 'EXCLUDE';
@@ -258,6 +260,11 @@ if ( ! empty( $instance['excinc'] ) ) {
 $excincIDs = '';
 if ( ! empty( $instance['excincIDs'] ) ) {
 	$excincIDs = $instance['excincIDs'];
+}
+
+$categorySlug = '';
+if ( ! empty( $instance['catSlug'] ) ) {
+	$categorySlug = $instance['catSlug'];
 }
 
 ob_start();
@@ -276,8 +283,11 @@ if ( $sortby == "RAND" || $sortby == "rand" ) {
 	);
 }
 
-$postLimiter = "";
-$limiterIDs = "";
+// Set defaults
+$postLimiter = '';
+$limiterIDs = '';
+$taxSlug = '';
+
 // Use Exclude/Include and IDs attributes, if present
 if ( !empty( $excincIDs ) ) {
 
@@ -288,9 +298,14 @@ if ( !empty( $excincIDs ) ) {
 		$postLimiter = $instance['excinc'];
 	} else {
 		// INCLUDING
-		$postLimiter = "";
+		$postLimiter = '';
 	}
 
+}
+
+// Use category, if present
+if ( !empty( $categorySlug ) ) {
+	$taxSlug = $instance['catSlug'];
 }
 
 $paddingStr = '';	// default
@@ -304,7 +319,7 @@ if ( $autoheightStr == 'NO' ) {
 	$alignStr = ' valign-' . $verticalalign;
 }
 
-$items = $shared->get_testimonials( $queryargs, 'widget', $postLimiter, $limiterIDs, $showfeaturedimg, $surroundquotes );	// get_testimonials( $params, $src, $featimgs )
+$items = $shared->get_testimonials( $queryargs, 'widget', $postLimiter, $limiterIDs, $showfeaturedimg, $surroundquotes, $taxSlug );	// get_testimonials( $params, $src, $featimgs )
 
 echo '<!-- // ********** SOCIAL PROOF SLIDER ********** // -->'."\n";
 echo '<section id="' . $thisWidgetID . '" class="widget _socialproofslider-widget widget__socialproofslider ' . $animationstyle . ' ">'."\n";
