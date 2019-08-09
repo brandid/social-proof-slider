@@ -259,6 +259,49 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 					})
 				});
 
+				/* ********** Limit Testimonials ********** */
+				// Assign elements
+				var limitByIDElem = [
+					$( ".spslider_options_excincIDs" )
+				];
+				var limitByCatElem = [
+					$( ".spslider_options_catSlug" )
+				];
+
+				$.each(limitByIDElem, function(i, elem) {
+					$(elem).addClass('sub-option limit');
+				});
+
+				$.each(limitByCatElem, function(i, elem) {
+					$(elem).addClass('sub-option limit');
+				});
+
+				$( "div[id*='_social_proof_slider_widget-']:not([id*='__i__']).widget select[id*='excinc']" ).each(function(){
+
+					// Check for selected first
+					var optionSelected = $(this).find("option:selected");
+					var valueSelected  = optionSelected.val();
+					if ( valueSelected == "cat" ) {
+						showItemsWithIDs(limitByCatElem);
+						hideItemsWithIDs(limitByIDElem);
+					} else {
+						showItemsWithIDs(limitByIDElem);
+						hideItemsWithIDs(limitByCatElem);
+					}
+
+					// Check on change
+					$(this).on('change', function() {
+						if ($(this).val() == 'cat') {
+							showItemsWithIDs(limitByCatElem);
+							hideItemsWithIDs(limitByIDElem);
+						} else {
+							showItemsWithIDs(limitByIDElem);
+							hideItemsWithIDs(limitByCatElem);
+						}
+					});
+
+				});
+
 			}
 
 			function initColorPicker( widget ) {
@@ -383,8 +426,9 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 		$defaults['arrowhovercolor'] = '#999999';
 		$defaults['showdots'] = 1;
 		$defaults['dotscolor'] = '#333333';
-		$defaults['excinc'] = 'in';
+		$defaults['excinc'] = 'cat';
 		$defaults['excincIDs'] = '';
+		$defaults['catSlug'] = '';
 
 		$instance = wp_parse_args( (array) $instance, $defaults );
 
@@ -1036,11 +1080,12 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 		$field_excinc_name = $this->get_field_name( $field_excinc );
 		$field_excinc_value = esc_attr( $instance[$field_excinc] );
 
-		echo '<div class="spslider_options_excinc"><label for="' . $field_excinc_id . '">' . __('Include/Exclude: ') . '</label><br>';
+		echo '<div class="spslider_options_excinc"><label for="' . $field_excinc_id . '">' . __('Limit Testimonials: ') . '</label><br>';
 		?>
-		<select name="<?php echo $field_excinc_name; ?>">
-			<option value="in" <?php echo $field_excinc_value == 'in' ? 'selected="selected"' : ''; ?> >Include</option>
-			<option value="ex" <?php echo $field_excinc_value == 'ex' ? 'selected="selected"' : ''; ?> >Exclude</option>
+		<select name="<?php echo $field_excinc_name; ?>"  id="<?php echo $field_excinc_id; ?>">
+			<option value="cat" <?php echo $field_excinc_value == 'cat' ? 'selected="selected"' : ''; ?> >Limit by Category</option>
+			<option value="in" <?php echo $field_excinc_value == 'in' ? 'selected="selected"' : ''; ?> >Include by ID</option>
+			<option value="ex" <?php echo $field_excinc_value == 'ex' ? 'selected="selected"' : ''; ?> >Exclude by ID</option>
 		</select>
 		<?php
 		echo '</div>';
@@ -1060,6 +1105,24 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				name="<?php echo $field_excincIDs_name; ?>"
 				type="text"
 				value="<?php echo $field_excincIDs_value; ?>"
+			/>
+			<?php
+		echo '</label></div>';
+
+		// LIMIT BY CATEGORY TEXTBOX
+		$field_catSlug = 'catSlug'; // name of the field
+		$field_catSlug_id = $this->get_field_id( $field_catSlug );
+		$field_catSlug_name = $this->get_field_name( $field_catSlug );
+		$field_catSlug_value = esc_attr( $instance[$field_catSlug] );
+
+		echo '<div class="spslider_options_catSlug"><label for="' . $field_catSlug_id . '">' . __('Category: ') . '';
+		?>
+			<input
+				class=""
+				id="<?php echo $field_catSlug_id; ?>"
+				name="<?php echo $field_catSlug_name; ?>"
+				type="text"
+				value="<?php echo $field_catSlug_value; ?>"
 			/>
 			<?php
 		echo '</label></div>';
@@ -1176,6 +1239,7 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 		$instance['dotscolor'] = $new_instance['dotscolor'];
 		$instance['excinc'] = $new_instance['excinc'];
 		$instance['excincIDs'] = $new_instance['excincIDs'];
+		$instance['catSlug'] = $new_instance['catSlug'];
 
 		return $instance;
 
