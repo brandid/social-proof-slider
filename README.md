@@ -47,6 +47,11 @@ https://thebrandidthemes.com/forum/support/plugins/social-proof-testimonial-slid
 
 ## Changelog
 
+### 2.1.2 - (Aug 9, 2019)
+* Added: Categories to the testimonials CPT
+* Added: The ability to only show testimonials in a category
+* Update: Compatible with WordPress 5.2.2
+
 ### 2.1.1 - (May 15, 2019)
 * Update: Compatible with WordPress 5.2
 
