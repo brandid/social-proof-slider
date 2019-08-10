@@ -27,6 +27,9 @@ This section describes how to install the plugin and get it working.
 ### Can I use the Social Proof Slider with Gutenberg?
 Yes! You can use a Shortcode block to display the Social Proof Slider - use the following shortcode: `social-proof-slider`
 
+### Can I show testimonials by Category?
+Yes! We've added the ability to create Categories and assign them to your testimonials. Use the Category slug in the shortcode or widget settings to only display testimonials assigned to that category.
+
 ### How do I create a Manual Slider?
 You can easily create a new slider on any page by using shortcodes. You will need to wrap each testimonial item in a shortcode: `[spslider-item]Your Testimonial Text Here[/spslider-item]`. Then you will need to wrap ALL your testimonial items with the manual slider shortcode:
 ```

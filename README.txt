@@ -5,9 +5,9 @@ Author URI: https://thebrandidthemes.com/product/social-proof-testimonial-slider
 Donate link: https://thebrandid.com/
 Tags: awards, carousel, content slider, custom post type, features, feedback, jquery, portfolio, responsive, reviews, quotes, sidebar, slider, slideshow, social, testimonial, video, vimeo, widget, youtube
 Requires at least: 4.5
-Tested up to: 5.2
-Stable tag: 2.1.1
-Version: 2.1.1
+Tested up to: 5.2.2
+Stable tag: 2.1.2
+Version: 2.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,6 +35,9 @@ This section describes how to install the plugin and get it working.
 = Can I use the Social Proof Slider with Gutenberg? =
 Yes! You can use a Shortcode block to display the Social Proof Slider - use the following shortcode: `social-proof-slider`
 
+= Can I show testimonials by Category? =
+Yes! We've added the ability to create Categories and assign them to your testimonials. Use the Category slug in the shortcode or widget settings to only display testimonials assigned to that category.
+
 = How do I create a Manual Slider? =
 You can easily create a new slider on any page by using shortcodes. You will need to wrap each testimonial item in a shortcode: `[spslider-item]Your Testimonial Text Here[/spslider-item]`. Then you will need to wrap ALL your testimonial items with the manual slider shortcode: `[spslider-manual]Your Testimonial Items Inside Here[/spslider-manual]`. Please see the Screenshots for an example.
 
@@ -53,6 +56,7 @@ Please see the following page for support: https://thebrandidthemes.com/forum/su
 8. Video Testimonials
 9. For Manual sliders, use shortcode: `spslider-item` to wrap each testimonial, then use `spslider-manual` to wrap them all
 10. A Manual Slider created with shortcodes
+11. Limit Testimonials by Category
 
 == Changelog ==
 
