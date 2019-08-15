@@ -1,0 +1,19 @@
+{
+  "name": "social-proof-slider",
+  "version": "2.1.2",
+  "description": "> Showcase your expertise with an easy-to-customize responsive carousel slider of your featured testimonials.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://alexmustin@github.com/brandid/social-proof-slider.git"
+  },
+  "author": "brandiD",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brandid/social-proof-slider/issues"
+  },
+  "homepage": "https://github.com/brandid/social-proof-slider#readme"
+}
