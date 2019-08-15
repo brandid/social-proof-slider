@@ -91,7 +91,7 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 					$(elem).addClass('sub-option autoplaytime');
 				});
 
-				$( "div[id*='_social_proof_slider_widget-'].widget:not([id*='__i__']) input[id*='autoplay']" ).each(function(){
+				$( "div[id*='_social_proof_slider_widget-'].widget.not([id*='__i__']) input[id*='autoplay']" ).each(function(){
 
 					// Check first
 					if( $(this).is( ':checked' ) ) {
@@ -119,7 +119,7 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 					$(elem).addClass('sub-option valign');
 				});
 
-				$( "div[id*='_social_proof_slider_widget-'].widget:not([id*='__i__']) select[id*='autoheight']" ).each(function(){
+				$( "div[id*='_social_proof_slider_widget-'].widget.not([id*='__i__']) select[id*='autoheight']" ).each(function(){
 
 					// Check first
 					// if( $(this).is( ':checked' ) ) {
@@ -160,7 +160,7 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				$.each(paddingoverrideElems, function(i, elem) {
 					$(elem).addClass('sub-option padding');
 				});
-				$( "div[id*='_social_proof_slider_widget-']:not([id*='__i__']).widget input[id*='paddingoverride']" ).each(function(){
+				$( "div[id*='_social_proof_slider_widget-'].not([id*='__i__']).widget input[id*='paddingoverride']" ).each(function(){
 					// Check first
 					if( $(this).is( ':checked' ) ) {
 						showItemsWithIDs(paddingoverrideElems);
@@ -189,7 +189,7 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				$.each(showfeaturedimgElems, function(i, elem) {
 					$(elem).addClass('sub-option featimg');
 				});
-				$( "div[id*='_social_proof_slider_widget-'].widget:not([id*='__i__']) input[id*='showfeaturedimg']" ).each(function(){
+				$( "div[id*='_social_proof_slider_widget-'].widget.not([id*='__i__']) input[id*='showfeaturedimg']" ).each(function(){
 					// Check first
 					if( $(this).is( ':checked' ) ) {
 						showItemsWithIDs(showfeaturedimgElems);
@@ -217,7 +217,7 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				$.each(showarrowsElems, function(i, elem) {
 					$(elem).addClass('sub-option arrows');
 				});
-				$( "div[id*='_social_proof_slider_widget-'].widget:not([id*='__i__']) input[id*='showarrows']" ).each(function(){
+				$( "div[id*='_social_proof_slider_widget-'].widget.not([id*='__i__']) input[id*='showarrows']" ).each(function(){
 					// Check first
 					if( $(this).is( ':checked' ) ) {
 						showItemsWithIDs(showarrowsElems);
@@ -242,7 +242,7 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				$.each(showdotsElems, function(i, elem) {
 					$(elem).addClass('sub-option dots');
 				});
-				$( "div[id*='_social_proof_slider_widget-'].widget:not([id*='__i__']) input[id*='showdots']" ).each(function(){
+				$( "div[id*='_social_proof_slider_widget-'].widget.not([id*='__i__']) input[id*='showdots']" ).each(function(){
 					// Check first
 					if( $(this).is( ':checked' ) ) {
 						showItemsWithIDs(showdotsElems);
@@ -276,7 +276,7 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 					$(elem).addClass('sub-option limit');
 				});
 
-				$( "div[id*='_social_proof_slider_widget-']:not([id*='__i__']).widget select[id*='excinc']" ).each(function(){
+				$( "div[id*='_social_proof_slider_widget-'].not([id*='__i__']).widget select[id*='excinc']" ).each(function(){
 
 					// Check for selected first
 					var optionSelected = $(this).find("option:selected");

@@ -248,6 +248,7 @@ class Social_Proof_Slider_Public {
 		$thisWidgetJS .= '		infinite: true,'."\n";
 		// $thisWidgetJS .= '		adaptiveHeight: true'."\n";
 		$thisWidgetJS .= '	});'."\n";
+		$thisWidgetJS .= 'console.log("I\'m loaded!");'."\n";
 		$thisWidgetJS .= '});'."\n";
 		$thisWidgetJS .= '</script>'."\n";
 		echo  $thisWidgetJS;
@@ -414,6 +415,158 @@ class Social_Proof_Slider_Public {
 	} // spslider_item_shortcode()
 
 	/**
+	 * Processes shortcode for Block
+	 *
+	 * @param   array	$atts		The attributes from the shortcode
+	 *
+	 * @uses	get_option
+	 * @uses	get_layout
+	 *
+	 * @return	mixed	$output		Output of the buffer
+	 */
+	public function spslider_block_shortcode( $atts = array() ) {
+
+		ob_start();
+
+		// Declare defaults
+		$defaults['ids'] = '';
+		$defaults['exclude'] = '';
+		$defaults['category'] = '';
+
+		$shared = new Social_Proof_Slider_Shared( $this->plugin_name, $this->version );
+
+		// Get Shortcode Settings
+		$sc_settings = $shared->get_shortcode_settings();
+
+		// Get Attributes inside the manually-entered Shortcode
+		$sc_atts = shortcode_atts( $defaults, $atts, 'social-proof-slider' );
+
+		// Determine ORDERBY and ORDER args
+		$sortbysetting = $sc_settings['sortby'];
+		if ( $sortbysetting == "RAND" ) {
+			$queryargs = array(
+				'orderby' => 'rand',
+			);
+		} else {
+			$queryargs = array(
+				'order' => $sc_settings['sortby'],
+				'orderby' => 'ID',
+			);
+		}
+
+		$taxSlug = "";
+		// Use category, if present
+		if ( !empty( $sc_atts['category'] ) ) {
+			$taxSlug = $sc_atts['category'];
+		}
+
+		$postLimiter = "";
+		$limiterIDs = "";
+		// Use Exclude/Include and IDs attributes, if present
+		if ( !empty( $sc_atts['ids'] ) ) {
+
+			$limiterIDs = $sc_atts['ids'];
+
+			if ( !empty( $sc_atts['exclude'] ) ) {
+				// EXCLUDING
+				$postLimiter = $sc_atts['exclude'];
+			} else {
+				// INCLUDING
+				$postLimiter = "";
+			}
+
+		}
+
+		$showFeaturedImages = $sc_settings['showFeaturedImages'];
+
+		$showImageBorder = $sc_settings['showImageBorder'];
+		$imageBorderColor = $sc_settings['imageBorderColor'];
+		$imageBorderThickness = $sc_settings['imageBorderThickness'];
+		$imageBorderPadding = $sc_settings['imageBorderPadding'];
+
+		$smartQuotes = $sc_settings['surroundWithQuotes'];
+
+		$doPaddingOverride = $sc_settings['doPaddingOverride'];
+		$contentPaddingTop = $sc_settings['contentPaddingTop'];
+		$contentPaddingBottom = $sc_settings['contentPaddingBottom'];
+		$featImgMarginTop = $sc_settings['featImgMarginTop'];
+		$featImgMarginBottom = $sc_settings['featImgMarginBottom'];
+		$textPaddingTop = $sc_settings['textPaddingTop'];
+		$textPaddingBottom = $sc_settings['textPaddingBottom'];
+		$quoteMarginBottom = $sc_settings['quoteMarginBottom'];
+		$dotsMarginTop = $sc_settings['dotsMarginTop'];
+
+		$contentPaddingStr = ''; // default
+		$imgMarginStr = ''; // default
+		$textPaddingStr = ''; // default
+		$quoteMarginStr = ''; // default
+		$dotsMarginStr = ''; // default
+
+		if ( $doPaddingOverride == 'true' ) {
+			$contentPaddingStr = "padding-top: ".$contentPaddingTop."; padding-bottom: ".$contentPaddingBottom.";";
+			$imgMarginStr = "margin-top:".$featImgMarginTop."; margin-bottom:".$featImgMarginBottom.";";
+			$textPaddingStr = "padding-top: ".$textPaddingTop."; padding-bottom: ".$textPaddingBottom.";";
+			$quoteMarginStr = "margin-bottom: ".$quoteMarginBottom.";";
+			$dotsMarginStr = "margin-top: ".$dotsMarginTop.";";
+		}
+
+		$alignStr = '';	// default
+		if ( $sc_settings['doAutoHeight'] != 'true' ) {
+			$alignStr = ' valign-' . $sc_settings['verticalalign'];
+		}
+
+		$items = '';
+		$items = $shared->get_testimonials( $queryargs, 'shortcode', $postLimiter, $limiterIDs, $showFeaturedImages, $smartQuotes, $taxSlug );
+
+		$uniqueID = uniqid('spslider_block_');
+
+		echo '<!-- // ********** SOCIAL PROOF SLIDER ********** // -->';
+		echo '<section id="' . $uniqueID . '" class="block block-socialproofslider ' . $sc_settings['animationStyle'] . ' paddingoverride-'.$sc_settings['doPaddingOverride'].' ">';
+		echo '<div class="widget-wrap">';
+		echo '<div class="social-proof-slider-wrap ' . $sc_settings['textalign'] . $alignStr . '">';
+
+		echo $items;
+
+		echo '</div><!-- // .social-proof-slider-wrap // -->';
+
+		//* Output styles
+		echo '<style>'."\n";
+		$uniqueID = '#' . $uniqueID;
+		echo $uniqueID . ' .social-proof-slider-wrap{ background-color:' . $sc_settings['bgcolor'] . '; '.$contentPaddingStr.' }'."\n";
+		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img { '.$imgMarginStr.' }'."\n";
+		if ( $sc_settings['imageBorderRadius'] === 0 ){
+			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius: 0; }'."\n";
+		} else {
+			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius:' . $sc_settings['imageBorderRadius'] . '; }'."\n";
+		}
+
+		if ( $showImageBorder == '1' ) {
+
+			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img { border: ' . $imageBorderThickness . ' solid ' . $imageBorderColor . ' !important; padding: ' . $imageBorderPadding . ' }'."\n";
+
+		}
+
+		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text{ color:' . $sc_settings['textColor'] . '; '.$textPaddingStr.' }'."\n";
+		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .quote { '.$quoteMarginStr.' }'."\n";
+		echo $uniqueID . ' .social-proof-slider-wrap .slick-arrow span { color:' . $sc_settings['arrowColor'] . '; }'."\n";
+		echo $uniqueID . ' .social-proof-slider-wrap .slick-arrow:hover span{ color:' . $sc_settings['arrowHoverColor'] . '; }'."\n";
+		echo $uniqueID . ' .social-proof-slider-wrap ul.slick-dots{ '.$dotsMarginStr.' }'."\n";
+		echo $uniqueID . ' .social-proof-slider-wrap ul.slick-dots li button::before, #_socialproofslider-shortcode .slick-dots li.slick-active button:before { color:' . $sc_settings['dotsColor'] . ' }'."\n";
+		echo '</style>'."\n";
+
+		echo '</div><!-- // .widget-wrap // -->';
+		echo '</section>';
+		echo '<!-- // ********** // END SOCIAL PROOF SLIDER // ********** // -->';
+
+		$output = ob_get_contents();
+
+		ob_end_clean();
+
+		return $output;
+
+	} // spslider_block_shortcode()
+
+	/**
 	 * Registers all shortcodes at once
 	 *
 	 * @return [type] [description]
@@ -423,6 +576,7 @@ class Social_Proof_Slider_Public {
 		add_shortcode( 'social-proof-slider', array( $this, 'spslider_shortcode' ) );
 		add_shortcode( 'spslider-item', array( $this, 'spslider_item_shortcode' ) );
 		add_shortcode( 'spslider-manual', array( $this, 'spslider_manual_shortcode' ) );
+		add_shortcode( 'spslider-block', array( $this, 'spslider_block_shortcode' ) );
 
 	} // register_shortcodes()
 
@@ -455,11 +609,25 @@ class Social_Proof_Slider_Public {
 			array( 'wp-edit-blocks' )
 		);
 
+		// Render callback
+		function spslider_render_gutenberg_block($atts) {
+
+	 		// return 'Heading Size: ' . $atts['heading'];
+			return '' . do_shortcode('[spslider-block]');
+
+	 	}
+
 		// Enqueue the Editor script
 		register_block_type('social-proof-slider/main', array(
 			'editor_script' => 'spslider-block',
 			'editor_style' => 'spslider-block-edit-style',
-			'style' => 'spslider-block-edit-style'
+			'style' => 'spslider-block-edit-style',
+			'render_callback' => 'spslider_render_gutenberg_block',
+			'attributes' => [
+				'heading' => [
+					'default' => 'h2'
+				]
+			]
 		));
 
 	}
