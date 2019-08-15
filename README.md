@@ -24,30 +24,25 @@ This section describes how to install the plugin and get it working.
 
 ## Development
 
-To compile the plugin code on your local development environment, you will need to have `Node.js`, `npm`, `Webpack`, and `Babel` installed.
+To compile the plugin code on your local development environment, you will need to have `Node.js` and `npm` installed.
 
 Follow these steps:
 
-1. Fork a copy of the plugin into your own GitHub account.
+1. Fork the plugin repo into your own GitHub account, then clone it to a folder on your computer.
 2. Open the Terminal and navigate to the plugin directory.
-3. Install Webpack by typing: `npm install webpack --save-dev`
-4. Install the Webpack Text Extractor: `npm install extract-text-webpack-plugin@next --save-dev`
-5. Install the SASS/CSS dependencies: `npm install node-sass sass-loader css-loader --save-dev`
-6. Use local dependencies instead of Global ones: `npm install npx -g`
-7. Install Webpack CLI: `npm install webpack-cli --save-dev`
-8. Install Babel: `npm install --save-dev @babel/preset-react babel-preset-minify @babel/core @babel/cli @babel/preset-en`
-9. Run Webpack: `npx webpack`
-10. You should see the project compile - you're ready to develop!
+3. Install the dependencies by typing: `npm install`
+4. Run Webpack: `npx webpack`
+5. You should see the project compile - you're ready to develop!
 
 ## Frequently Asked Questions
 
-### Can I use the Social Proof Slider with Gutenberg?
+### Can I use the Social Proof Slider with the Gutenberg block editor?
 Yes! You can use a Shortcode block to display the Social Proof Slider - use the following shortcode: `social-proof-slider`
 
-### Can I show testimonials by Category?
+### Can I show testimonials by category?
 Yes! We've added the ability to create Categories and assign them to your testimonials. Use the Category slug in the shortcode or widget settings to only display testimonials assigned to that category.
 
-### How do I create a Manual Slider?
+### How do I create a slider without using the Custom Post Type?
 You can easily create a new slider on any page by using shortcodes. You will need to wrap each testimonial item in a shortcode: `[spslider-item]Your Testimonial Text Here[/spslider-item]`. Then you will need to wrap ALL your testimonial items with the manual slider shortcode:
 ```
 [spslider-manual]
@@ -57,6 +52,10 @@ You can easily create a new slider on any page by using shortcodes. You will nee
 [/spslider-manual]
 ```
 Please see the Screenshots for an example.
+
+### How do I report a bug or request a feature?
+Please open an Issue on the GitHub project:
+https://github.com/brandid/social-proof-slider/issues
 
 ### Somethinge Else?
 Please see the following page for support:

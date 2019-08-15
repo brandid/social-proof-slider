@@ -30,19 +30,44 @@ This section describes how to install the plugin and get it working.
 5. To configure Shortcode display settings, use the Settings->Social Proof Slider screen. For widgets, you will see the settings panel for each Social Proof Slider widget individually.
 6. Easily embed responsive YouTube or Vimeo videos! Enter your video code into the "Testimonial Text" field in the following format: `https://www.youtube.com/watch?v=abcde123456` or `https://vimeo.com/12345678` and the rest is done automatically! *Note:* It is recommended to disable the "Auto-play" feature when embedding videos.
 
+== Development ==
+
+To compile the plugin code on your local development environment, you will need to have `Node.js` and `npm` installed.
+
+Follow these steps:
+
+1. Fork the plugin repo into your own GitHub account, then clone it to a folder on your computer.
+2. Open the Terminal and navigate to the plugin directory.
+3. Install the dependencies by typing: `npm install`
+4. Run Webpack: `npx webpack`
+5. You should see the project compile - you're ready to develop!
+
 == Frequently Asked Questions ==
 
-= Can I use the Social Proof Slider with Gutenberg? =
+= Can I use the Social Proof Slider with the Gutenberg block editor? =
 Yes! You can use a Shortcode block to display the Social Proof Slider - use the following shortcode: `social-proof-slider`
 
-= Can I show testimonials by Category? =
+= Can I show testimonials by category? =
 Yes! We've added the ability to create Categories and assign them to your testimonials. Use the Category slug in the shortcode or widget settings to only display testimonials assigned to that category.
 
-= How do I create a Manual Slider? =
-You can easily create a new slider on any page by using shortcodes. You will need to wrap each testimonial item in a shortcode: `[spslider-item]Your Testimonial Text Here[/spslider-item]`. Then you will need to wrap ALL your testimonial items with the manual slider shortcode: `[spslider-manual]Your Testimonial Items Inside Here[/spslider-manual]`. Please see the Screenshots for an example.
+= How do I create a slider without using the Custom Post Type? =
+You can easily create a new slider on any page by using shortcodes. You will need to wrap each testimonial item in a shortcode: `[spslider-item]Your Testimonial Text Here[/spslider-item]`. Then you will need to wrap ALL your testimonial items with the manual slider shortcode:
+```
+[spslider-manual]
+[spslider-item]Your Testimonial Text Here[/spslider-item]
+[spslider-item]Your Testimonial Text Here[/spslider-item]
+[spslider-item]Your Testimonial Text Here[/spslider-item]
+[/spslider-manual]
+```
+Please see the Screenshots for an example.
 
-= Something Else? =
-Please see the following page for support: https://thebrandidthemes.com/forum/support/plugins/social-proof-testimonial-slider/
+= How do I report a bug or request a feature? =
+Please open an Issue on the GitHub project:
+https://github.com/brandid/social-proof-slider/issues
+
+= Somethinge Else? =
+Please see the following page for support:
+https://thebrandidthemes.com/forum/support/plugins/social-proof-testimonial-slider/
 
 == Screenshots ==
 
