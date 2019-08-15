@@ -35,7 +35,7 @@ if ( ! defined( 'SOCIAL_PROOF_SLIDER_FILE' ) ) {
 }
 
 // Define Constants
-define( 'SPSLIDER_PLUGIN_VERSION', '2.1.0');
+define( 'SPSLIDER_PLUGIN_VERSION', '2.1.2');
 
 /**
  * The code that runs during plugin activation.
