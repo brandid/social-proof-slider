@@ -22,6 +22,23 @@ This section describes how to install the plugin and get it working.
 5. To configure Shortcode display settings, use the Settings->Social Proof Slider screen. For widgets, you will see the settings panel for each Social Proof Slider widget individually.
 6. Easily embed responsive YouTube or Vimeo videos! Enter your video code into the "Testimonial Text" field in the following format: `https://www.youtube.com/watch?v=abcde123456` or `https://vimeo.com/12345678` and the rest is done automatically! *Note:* It is recommended to disable the "Auto-play" feature when embedding videos.
 
+## Development
+
+To compile the plugin code on your local development environment, you will need to have `Node.js`, `npm`, `Webpack`, and `Babel` installed.
+
+Follow these steps:
+
+1. Fork a copy of the plugin into your own GitHub account.
+2. Open the Terminal and navigate to the plugin directory.
+3. Install Webpack by typing: `npm install webpack --save-dev`
+4. Install the Webpack Text Extractor: `npm install extract-text-webpack-plugin@next --save-dev`
+5. Install the SASS/CSS dependencies: `npm install node-sass sass-loader css-loader --save-dev`
+6. Use local dependencies instead of Global ones: `npm install npx -g`
+7. Install Webpack CLI: `npm install webpack-cli --save-dev`
+8. Install Babel: `npm install --save-dev @babel/preset-react babel-preset-minify @babel/core @babel/cli @babel/preset-en`
+9. Run Webpack: `npx webpack`
+10. You should see the project compile - you're ready to develop!
+
 ## Frequently Asked Questions
 
 ### Can I use the Social Proof Slider with Gutenberg?

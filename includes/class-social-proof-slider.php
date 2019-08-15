@@ -84,7 +84,7 @@ class Social_Proof_Slider {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
+		$this->define_shared_hooks();
 		$this->define_widget_hooks();
 		$this->define_metabox_hooks();
 
@@ -209,6 +209,7 @@ class Social_Proof_Slider {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
+		$this->loader->add_action( 'init', $plugin_public, 'spslider_register_gutenberg_block' );
 
 	}
 

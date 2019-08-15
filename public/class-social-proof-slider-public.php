@@ -426,4 +426,42 @@ class Social_Proof_Slider_Public {
 
 	} // register_shortcodes()
 
+	/**
+	 * Registers Gutenberg Block
+	 *
+	 * @since 	2.1.2
+	 * @access 	public
+	 */
+	public function spslider_register_gutenberg_block() {
+
+		// Register block script
+		wp_register_script(
+			'spslider-block',
+			plugins_url('../blocks/dist/blocks.build.js', __FILE__),
+			array('wp-blocks', 'wp-element', 'wp-editor')
+		);
+
+		// Register block's base CSS
+		wp_register_style(
+			'spslider-block-style',
+			plugins_url( '../blocks/dist/blocks.style.build.css', __FILE__ ),
+			array( 'wp-blocks' )
+		);
+
+		// Register block's editor CSS
+		wp_register_style(
+			'spslider-block-edit-style',
+			plugins_url('../blocks/dist/blocks.editor.build.css', __FILE__),
+			array( 'wp-edit-blocks' )
+		);
+
+		// Enqueue the Editor script
+		register_block_type('social-proof-slider/main', array(
+			'editor_script' => 'spslider-block',
+			'editor_style' => 'spslider-block-edit-style',
+			'style' => 'spslider-block-edit-style'
+		));
+
+	}
+
 }

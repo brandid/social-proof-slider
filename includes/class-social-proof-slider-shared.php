@@ -557,7 +557,6 @@ class Social_Proof_Slider_Shared {
 
 	}
 
-
 	/**
 	 * Registers widgets with WordPress
 	 *
