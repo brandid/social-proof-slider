@@ -548,6 +548,9 @@ class Social_Proof_Slider_Public {
 
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text{ '.$textPaddingStr.' }'."\n";
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .quote { '.$quoteMarginStr.' }'."\n";
+		if ( ! empty( $atts['align'] ) ) {
+			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text * { text-align:' . $atts['align'] . '; }'."\n";
+		}
 		if ( ! empty( $atts['testimonialtextcolor'] ) ) {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .quote p { color:' . $atts['testimonialtextcolor'] . '; }'."\n";
 		}
@@ -623,6 +626,10 @@ class Social_Proof_Slider_Public {
 
 			$settings = '';
 
+			if ( $atts['align'] ) {
+				$settings .= 'align="' . $atts['align'] . '" ';
+			}
+
 			if ( $atts['bgcolor'] ) {
 				$settings .= 'bgcolor="' . $atts['bgcolor'] . '" ';
 			}
@@ -650,6 +657,9 @@ class Social_Proof_Slider_Public {
 			'style' => 'spslider-block-edit-style',
 			'render_callback' => 'spslider_render_gutenberg_block',
 			'attributes' => [
+				'align' => [
+					'default' => ''
+				],
 				'bgcolor' => [
 					'default' => ''
 				],

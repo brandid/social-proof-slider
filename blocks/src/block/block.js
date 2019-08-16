@@ -8,7 +8,7 @@ const { createElement } = wp.element;
 const { __ } = wp.i18n;
 
 // Import controls from block building library
-const { InspectorControls, PanelColorSettings } = wp.editor;
+const { AlignmentToolbar, BlockControls, InspectorControls, PanelColorSettings } = wp.editor;
 
 // Import components
 const { Icon, ColorPicker, TextControl, SelectControl, ServerSideRender } = wp.components;
@@ -29,6 +29,9 @@ registerBlockType('social-proof-slider/main', {
     icon: iconEl,
     category: 'common',
     attributes: {
+        align: {
+    		type: 'string',
+    	},
         bgcolor: {
             type: 'string',
         },
@@ -47,6 +50,11 @@ registerBlockType('social-proof-slider/main', {
 		const setAttributes = props.setAttributes;
 
         const customEvent = new Event( 'gutenbergSlick' );
+
+        // Update Text Alignment attr
+        function updateAlignment(value) {
+			setAttributes({ align: value });
+		}
 
         // Update BG Color attr
         function updateBGColor(value) {
@@ -68,25 +76,37 @@ registerBlockType('social-proof-slider/main', {
             setAttributes({ authortitlecolor: value })
         }
 
-        //Display block preview and UI
+        // Display block preview and UI
 		return createElement('div', {}, [
+            // Trigger event for loading Slick
             document.dispatchEvent( customEvent ),
-			//Preview a block with a PHP render callback
+			// Preview a block with a PHP render callback
             createElement( ServerSideRender, {
                 block: 'social-proof-slider/main',
                 attributes: props.attributes
             } ),
-			//Block inspector
+            // Block Controls
+            createElement( BlockControls, {},
+                [
+                    <AlignmentToolbar
+						value={attributes.align}
+						onChange={ ( nextAlign ) => {
+							setAttributes( { align: nextAlign } );
+						} }
+					/>
+                ]
+            ),
+			// Inspector Controls
 			createElement( InspectorControls, {},
 				[
 
                     <PanelColorSettings
-                    title={ __('Background Color') }
-                    colorSettings={[{
-                        value: attributes.bgcolor,
-                        onChange: updateBGColor,
-                        label: __('Slider Background Color')
-                    }]}
+                        title={ __('Background Color') }
+                        colorSettings={[{
+                            value: attributes.bgcolor,
+                            onChange: updateBGColor,
+                            label: __('Slider Background Color')
+                        }]}
                     />,
 
                     <PanelColorSettings
