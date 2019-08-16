@@ -532,7 +532,7 @@ class Social_Proof_Slider_Public {
 		//* Output styles
 		echo '<style>'."\n";
 		$uniqueID = '#' . $uniqueID;
-		echo $uniqueID . ' .social-proof-slider-wrap{ background-color:' . $sc_settings['bgcolor'] . '; '.$contentPaddingStr.' }'."\n";
+		echo $uniqueID . ' .social-proof-slider-wrap{ background-color:' . $atts['bgcolor'] . '; '.$contentPaddingStr.' }'."\n";
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img { '.$imgMarginStr.' }'."\n";
 		if ( $sc_settings['imageBorderRadius'] === 0 ){
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius: 0; }'."\n";
@@ -546,8 +546,17 @@ class Social_Proof_Slider_Public {
 
 		}
 
-		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text{ color:' . $sc_settings['textColor'] . '; '.$textPaddingStr.' }'."\n";
+		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text{ '.$textPaddingStr.' }'."\n";
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .quote { '.$quoteMarginStr.' }'."\n";
+		if ( ! empty( $atts['testimonialtextcolor'] ) ) {
+			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .quote p { color:' . $atts['testimonialtextcolor'] . '; }'."\n";
+		}
+		if ( ! empty( $atts['authornamecolor'] ) ) {
+			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .author > .author-name { color:' . $atts['authornamecolor'] . '; }'."\n";
+		}
+		if ( ! empty( $atts['authortitlecolor'] ) ) {
+			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .author > .author-title { color:' . $atts['authortitlecolor'] . '; }'."\n";
+		}
 		echo $uniqueID . ' .social-proof-slider-wrap .slick-arrow span { color:' . $sc_settings['arrowColor'] . '; }'."\n";
 		echo $uniqueID . ' .social-proof-slider-wrap .slick-arrow:hover span{ color:' . $sc_settings['arrowHoverColor'] . '; }'."\n";
 		echo $uniqueID . ' .social-proof-slider-wrap ul.slick-dots{ '.$dotsMarginStr.' }'."\n";
@@ -612,8 +621,25 @@ class Social_Proof_Slider_Public {
 		// Render callback
 		function spslider_render_gutenberg_block($atts) {
 
-	 		// return 'Heading Size: ' . $atts['heading'];
-			return '' . do_shortcode('[spslider-block]');
+			$settings = '';
+
+			if ( $atts['bgcolor'] ) {
+				$settings .= 'bgcolor="' . $atts['bgcolor'] . '" ';
+			}
+
+			if ( $atts['testimonialtextcolor'] ) {
+				$settings .= 'testimonialtextcolor="' . $atts['testimonialtextcolor'] . '" ';
+			}
+
+			if ( $atts['authornamecolor'] ) {
+				$settings .= 'authornamecolor="' . $atts['authornamecolor'] . '" ';
+			}
+
+			if ( $atts['authortitlecolor'] ) {
+				$settings .= 'authortitlecolor="' . $atts['authortitlecolor'] . '" ';
+			}
+
+			return '' . do_shortcode('[spslider-block ' . $settings . ']');
 
 	 	}
 
@@ -624,9 +650,18 @@ class Social_Proof_Slider_Public {
 			'style' => 'spslider-block-edit-style',
 			'render_callback' => 'spslider_render_gutenberg_block',
 			'attributes' => [
-				'heading' => [
-					'default' => 'h2'
-				]
+				'bgcolor' => [
+					'default' => ''
+				],
+				'testimonialtextcolor' => [
+					'default' => ''
+				],
+				'authornamecolor' => [
+					'default' => ''
+				],
+				'authortitlecolor' => [
+					'default' => ''
+				],
 			]
 		));
 

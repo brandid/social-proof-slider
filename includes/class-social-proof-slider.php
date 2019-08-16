@@ -194,7 +194,7 @@ class Social_Proof_Slider {
 		$this->loader->add_action( 'manage_socialproofslider_posts_custom_column' , $plugin_admin, 'custom_socialproofslider_column', 10, 2 );
 
 		// Enqueue Slick JS for Block Editor
-		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'block_editor_scripts' );
+		$this->loader->add_action( 'enqueue_block_assets', $plugin_admin, 'spslider_block_scripts' );
 	}
 
 	/**

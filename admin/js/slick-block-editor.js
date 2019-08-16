@@ -7,7 +7,7 @@ document.addEventListener( 'gutenbergSlick', function( e ) {
 }, false );
 
 const createSlider = function() {
-    $(".social-proof-slider-wrap").not(".slick-initialized").slick({
+    jQuery(".social-proof-slider-wrap").not(".slick-initialized").slick({
         dots: false,
         arrows: false,
         infinite: true,

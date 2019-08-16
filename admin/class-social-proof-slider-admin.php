@@ -122,14 +122,14 @@ class Social_Proof_Slider_Admin {
 	}
 
 	/**
-	 * Enqueue Slick JS for the Block Editor.
+	 * Enqueue Slick JS for the Block.
 	 *
 	 * @since    2.1.2
 	 */
-	public function block_editor_scripts() {
+	public function spslider_block_scripts() {
 		wp_enqueue_script( 'slick-js', '//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js', array( 'jquery' ), '1.8.1', true );
-		wp_enqueue_script( 'slick-block-editor-js', plugin_dir_url( __FILE__ ) . 'js/slick-block-editor.js', array( 'jquery', 'slick-js' ), $this->version, true );
-		wp_enqueue_style( 'slick-block-editor-css', '//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css', array(), '1.8.1', 'all' );
+		wp_enqueue_script( 'slick-spslider-block-js', plugin_dir_url( __FILE__ ) . 'js/slick-block-editor.js', array( 'jquery', 'slick-js' ), $this->version, true );
+		wp_enqueue_style( 'slick-spslider-block-css', '//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css', array(), '1.8.1', 'all' );
 	}
 
 	/**

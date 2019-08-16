@@ -8,10 +8,10 @@ const { createElement } = wp.element;
 const { __ } = wp.i18n;
 
 // Import controls from block building library
-const { InspectorControls } = wp.editor;
+const { InspectorControls, PanelColorSettings } = wp.editor;
 
 // Import components
-const { Icon, TextControl, SelectControl, ServerSideRender } = wp.components;
+const { Icon, ColorPicker, TextControl, SelectControl, ServerSideRender } = wp.components;
 
 // Import SCSS files
 import './style.scss';
@@ -29,9 +29,18 @@ registerBlockType('social-proof-slider/main', {
     icon: iconEl,
     category: 'common',
     attributes: {
-		heading: {
-			default: 'h2'
-		}
+        bgcolor: {
+            type: 'string',
+        },
+        testimonialtextcolor: {
+            type: 'string',
+        },
+        authornamecolor: {
+            type: 'string',
+        },
+        authortitlecolor: {
+            type: 'string',
+        },
 	},
     edit(props) {
         const attributes = props.attributes;
@@ -39,11 +48,25 @@ registerBlockType('social-proof-slider/main', {
 
         const customEvent = new Event( 'gutenbergSlick' );
 
-        //Function to update heading level
-		function changeHeading(heading){
-			setAttributes({heading});
-            console.log('Header Updated!');
-		}
+        // Update BG Color attr
+        function updateBGColor(value) {
+            setAttributes({ bgcolor: value })
+        }
+
+        // Update Testimonials Text Color
+        function updateTestimonialTextColor(value) {
+            setAttributes({ testimonialtextcolor: value })
+        }
+
+        // Update Author name Color
+        function updateAuthorNameColor(value) {
+            setAttributes({ authornamecolor: value })
+        }
+
+        // Update Author Title Color
+        function updateAuthorTitleColor(value) {
+            setAttributes({ authortitlecolor: value })
+        }
 
         //Display block preview and UI
 		return createElement('div', {}, [
@@ -56,24 +79,44 @@ registerBlockType('social-proof-slider/main', {
 			//Block inspector
 			createElement( InspectorControls, {},
 				[
-                    //Select heading level
-					createElement(SelectControl, {
-						value: attributes.heading,
-						label: __( 'Heading' ),
-						onChange: changeHeading,
-						options: [
-							{value: 'h2', label: 'H2'},
-							{value: 'h3', label: 'H3'},
-							{value: 'h4', label: 'H4'},
-						]
-					})
+
+                    <PanelColorSettings
+                    title={ __('Background Color') }
+                    colorSettings={[{
+                        value: attributes.bgcolor,
+                        onChange: updateBGColor,
+                        label: __('Slider Background Color')
+                    }]}
+                    />,
+
+                    <PanelColorSettings
+                    title={ __('Text Colors') }
+                    colorSettings={[
+                        {
+                        value: attributes.testimonialtextcolor,
+                        onChange: updateTestimonialTextColor,
+                        label: __('Testimonial Text Color'),
+                        },
+                        {
+                        value: attributes.authornamecolor,
+                        onChange: updateAuthorNameColor,
+                        label: __('Author Name Color'),
+                        },
+                        {
+                        value: attributes.authortitlecolor,
+                        onChange: updateAuthorTitleColor,
+                        label: __('Author Title Color'),
+                        },
+                    ]}
+                    />,
+
 				]
-			)
+			),
 		] );
 
     },
     save({ attributes }) {
-        return null;//save has to exist. This all we need
+        return null;
     }
 
 });
