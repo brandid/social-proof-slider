@@ -51,36 +51,35 @@ registerBlockType('social-proof-slider/main', {
 
         const customEvent = new Event( 'gutenbergSlick' );
 
-        // Update Text Alignment attr
-        function updateAlignment(value) {
-			setAttributes({ align: value });
-		}
-
         // Update BG Color attr
         function updateBGColor(value) {
-            setAttributes({ bgcolor: value })
+            setAttributes({ bgcolor: value });
+            document.dispatchEvent( customEvent )
         }
 
         // Update Testimonials Text Color
         function updateTestimonialTextColor(value) {
-            setAttributes({ testimonialtextcolor: value })
+            setAttributes({ testimonialtextcolor: value });
+            document.dispatchEvent( customEvent )
         }
 
         // Update Author name Color
         function updateAuthorNameColor(value) {
-            setAttributes({ authornamecolor: value })
+            setAttributes({ authornamecolor: value });
+            document.dispatchEvent( customEvent )
         }
 
         // Update Author Title Color
         function updateAuthorTitleColor(value) {
-            setAttributes({ authortitlecolor: value })
+            setAttributes({ authortitlecolor: value });
+            document.dispatchEvent( customEvent )
         }
 
         // Display block preview and UI
 		return createElement('div', {}, [
             // Trigger event for loading Slick
             document.dispatchEvent( customEvent ),
-			// Preview a block with a PHP render callback
+            // Preview the block with a PHP render callback
             createElement( ServerSideRender, {
                 block: 'social-proof-slider/main',
                 attributes: props.attributes
@@ -92,6 +91,7 @@ registerBlockType('social-proof-slider/main', {
 						value={attributes.align}
 						onChange={ ( nextAlign ) => {
 							setAttributes( { align: nextAlign } );
+                            document.dispatchEvent( customEvent )
 						} }
 					/>
                 ]

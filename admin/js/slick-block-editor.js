@@ -3,7 +3,7 @@ jQuery( document ).ready( function() {
 } );
 
 document.addEventListener( 'gutenbergSlick', function( e ) {
-	window.setTimeout( createSlider, 1000 );
+	window.setTimeout( createSlider, 1500 );
 }, false );
 
 const createSlider = function() {
