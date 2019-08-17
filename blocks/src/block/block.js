@@ -11,7 +11,7 @@ const { __ } = wp.i18n;
 const { AlignmentToolbar, BlockControls, InspectorControls, PanelColorSettings } = wp.editor;
 
 // Import components
-const { Icon, ColorPicker, TextControl, SelectControl, ServerSideRender } = wp.components;
+const { Icon, ColorPicker, TextControl, SelectControl, ServerSideRender, PanelBody } = wp.components;
 
 // Import SCSS files
 import './style.scss';
@@ -97,39 +97,44 @@ registerBlockType('social-proof-slider/main', {
                 ]
             ),
 			// Inspector Controls
-			createElement( InspectorControls, {},
+			createElement(
+                InspectorControls, {},
 				[
+                    <PanelBody
+                        title={ __( 'Colors' ) }
+                        initialOpen={ false }>
 
-                    <PanelColorSettings
+                        <PanelColorSettings
                         title={ __('Background Color') }
+                        initialOpen={ false }
                         colorSettings={[{
                             value: attributes.bgcolor,
                             onChange: updateBGColor,
                             label: __('Slider Background Color')
                         }]}
-                    />,
-
-                    <PanelColorSettings
-                    title={ __('Text Colors') }
-                    colorSettings={[
-                        {
-                        value: attributes.testimonialtextcolor,
-                        onChange: updateTestimonialTextColor,
-                        label: __('Testimonial Text Color'),
-                        },
-                        {
-                        value: attributes.authornamecolor,
-                        onChange: updateAuthorNameColor,
-                        label: __('Author Name Color'),
-                        },
-                        {
-                        value: attributes.authortitlecolor,
-                        onChange: updateAuthorTitleColor,
-                        label: __('Author Title Color'),
-                        },
-                    ]}
-                    />,
-
+                        />
+                        <PanelColorSettings
+                        title={ __('Text Colors') }
+                        initialOpen={ false }
+                        colorSettings={[
+                            {
+                            value: attributes.testimonialtextcolor,
+                            onChange: updateTestimonialTextColor,
+                            label: __('Testimonial Text Color'),
+                            },
+                            {
+                            value: attributes.authornamecolor,
+                            onChange: updateAuthorNameColor,
+                            label: __('Author Name Color'),
+                            },
+                            {
+                            value: attributes.authortitlecolor,
+                            onChange: updateAuthorTitleColor,
+                            label: __('Author Title Color'),
+                            },
+                        ]}
+                        />
+                    </PanelBody>
 				]
 			),
 		] );
