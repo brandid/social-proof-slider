@@ -496,7 +496,7 @@ class Social_Proof_Slider_Public {
 		$quoteMarginBottom = $sc_settings['quoteMarginBottom'];
 		$dotsMarginTop = $sc_settings['dotsMarginTop'];
 
-		$contentPaddingStr = ''; // default
+		$contentPaddingStr = 'padding: 50px;'; // default
 		$imgMarginStr = ''; // default
 		$textPaddingStr = ''; // default
 		$quoteMarginStr = ''; // default
