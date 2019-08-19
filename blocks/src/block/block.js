@@ -11,7 +11,7 @@ const { __ } = wp.i18n;
 const { AlignmentToolbar, BlockControls, InspectorControls, PanelColorSettings } = wp.editor;
 
 // Import components
-const { Icon, ColorPicker, TextControl, SelectControl, ServerSideRender, PanelBody } = wp.components;
+const { Icon, ColorPicker, TextControl, SelectControl, ToggleControl, ServerSideRender, PanelBody, PanelRow } = wp.components;
 
 // Import SCSS files
 import './style.scss';
@@ -29,7 +29,10 @@ registerBlockType('social-proof-slider/main', {
     icon: iconEl,
     category: 'common',
     attributes: {
-        align: {
+        showarrows: {
+    		type: 'boolean',
+    	},
+        textalign: {
     		type: 'string',
     	},
         bgcolor: {
@@ -50,6 +53,19 @@ registerBlockType('social-proof-slider/main', {
 		const setAttributes = props.setAttributes;
 
         const customEvent = new Event( 'gutenbergSlick' );
+
+        // Update Setting - Slider - Show Arrows
+        function toggleShowArrows() {
+            console.log('showarrows WAS: ' + attributes.showarrows);
+    		setAttributes({ showarrows: ! attributes.showarrows });
+            document.dispatchEvent( customEvent );
+            console.log('showarrows NOW: ' + ! attributes.showarrows);
+    	}
+
+        // Tooltip - Slider - Show Arrows
+    	function getShowArrowsHelp( checked ) {
+    		return checked ? __( 'Showing the arrows on the Slider.' ) : __( 'Toggle to show the arrows on both sides of the Slider.' );
+    	}
 
         // Update BG Color attr
         function updateBGColor(value) {
@@ -88,9 +104,9 @@ registerBlockType('social-proof-slider/main', {
             createElement( BlockControls, {},
                 [
                     <AlignmentToolbar
-						value={attributes.align}
+						value={attributes.textalign}
 						onChange={ ( nextAlign ) => {
-							setAttributes( { align: nextAlign } );
+							setAttributes( { textalign: nextAlign } );
                             document.dispatchEvent( customEvent )
 						} }
 					/>
@@ -101,9 +117,20 @@ registerBlockType('social-proof-slider/main', {
                 InspectorControls, {},
 				[
                     <PanelBody
+                        title={ __( 'Slider Settings' ) }
+                        initialOpen={ false }>
+                        <PanelRow>
+                            <ToggleControl
+    						label={ __( 'Show Arrows' ) }
+    						checked={ !! attributes.showarrows }
+    						onChange={ toggleShowArrows }
+    						help={ getShowArrowsHelp }
+    						/>
+                        </PanelRow>
+                    </PanelBody>,
+                    <PanelBody
                         title={ __( 'Colors' ) }
                         initialOpen={ false }>
-
                         <PanelColorSettings
                         title={ __('Background Color') }
                         initialOpen={ false }
