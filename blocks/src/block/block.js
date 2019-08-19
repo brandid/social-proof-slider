@@ -32,6 +32,9 @@ registerBlockType('social-proof-slider/main', {
         showarrows: {
     		type: 'boolean',
     	},
+        showdots: {
+    		type: 'boolean',
+    	},
         textalign: {
     		type: 'string',
     	},
@@ -54,18 +57,33 @@ registerBlockType('social-proof-slider/main', {
 
         const customEvent = new Event( 'gutenbergSlick' );
 
+        /* SLIDER SETTINGS
+        --------------------------------------------------------------------- */
+
         // Update Setting - Slider - Show Arrows
         function toggleShowArrows() {
-            console.log('showarrows WAS: ' + attributes.showarrows);
-    		setAttributes({ showarrows: ! attributes.showarrows });
+            setAttributes({ showarrows: ! attributes.showarrows });
             document.dispatchEvent( customEvent );
-            console.log('showarrows NOW: ' + ! attributes.showarrows);
     	}
 
         // Tooltip - Slider - Show Arrows
     	function getShowArrowsHelp( checked ) {
     		return checked ? __( 'Showing the arrows on the Slider.' ) : __( 'Toggle to show the arrows on both sides of the Slider.' );
     	}
+
+        // Update Setting - Slider - Show Dots
+        function toggleShowDots() {
+            setAttributes({ showdots: ! attributes.showdots });
+            document.dispatchEvent( customEvent );
+    	}
+
+        // Tooltip - Slider - Show Dots
+    	function getShowDotsHelp( checked ) {
+    		return checked ? __( 'Showing the dot indicators below the Slider.' ) : __( 'Toggle to show the dot indicators below the Slider.' );
+    	}
+
+        /* COLOR SETTINGS
+        --------------------------------------------------------------------- */
 
         // Update BG Color attr
         function updateBGColor(value) {
@@ -90,6 +108,8 @@ registerBlockType('social-proof-slider/main', {
             setAttributes({ authortitlecolor: value });
             document.dispatchEvent( customEvent )
         }
+
+        /* ------------------------------------------------------------------ */
 
         // Display block preview and UI
 		return createElement('div', {}, [
@@ -126,6 +146,14 @@ registerBlockType('social-proof-slider/main', {
     						onChange={ toggleShowArrows }
     						help={ getShowArrowsHelp }
     						/>
+                        </PanelRow>
+                        <PanelRow>
+                            <ToggleControl
+                            label={ __( 'Show Dots' ) }
+                            checked={ !! attributes.showdots }
+                            onChange={ toggleShowDots }
+                            help={ getShowDotsHelp }
+                            />
                         </PanelRow>
                     </PanelBody>,
                     <PanelBody

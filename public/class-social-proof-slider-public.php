@@ -429,19 +429,67 @@ class Social_Proof_Slider_Public {
 		ob_start();
 
 		// Declare defaults
+		$defaults['blockalign'] = 'center';
 		$defaults['showarrows'] = false;
 		$defaults['ids'] = '';
 		$defaults['exclude'] = '';
 		$defaults['category'] = '';
 
-		// Get Slider settings
-		$slider_showarrows = $atts['showarrows'];
+		// Get Block Settings
+		$block_textalign = $atts['textalign'];
+		if ( empty( $block_textalign ) ) {
+			$block_textalign = $defaults['blockalign'];
+		}
 
-		// Get Style settings
+		// Get Post Settings
+		/*
+		Sort Posts By
+		Limit Testimonials
+		- Limit by IDs
+		- Limit by Category
+		Add Quotation Marks
+		Show Featured Images
+		- Image Border Radius
+		Show Featured Image Border
+		- Featured Image Border Size
+		*/
+
+		// Get Slider Settings
+		$slider_showarrows = $atts['showarrows'];
+		$slider_showdots = $atts['showdots'];
+		/*
+		Auto Play
+		- Display Time
+		Animation Style
+		Adaptive Height
+		Vertical Align
+		- Arrow Style
+		*/
+
+		// Get Margin & Padding Settings
+		/*
+		Content Padding Top
+		Content Padding Bottom
+		Featured Image Border Padding
+		Featured Image Margin Top
+		Featured Image Margin Bottom
+		Text Padding Top
+		Text Padding Bottom
+		Testimonial Text Margin Bottom
+		Dots Margin Top
+		*/
+
+		// Get Color Settings
 		$style_bgcolor = $atts['bgcolor'];
 		$style_testimonialcolor = $atts['testimonialtextcolor'];
 		$style_authornamecolor = $atts['authornamecolor'];
 		$style_authortitlecolor = $atts['authortitlecolor'];
+		/*
+		Image Border Color
+		Arrows Color
+		Arrows Hover Color
+		Dots Color
+		*/
 
 		$shared = new Social_Proof_Slider_Shared( $this->plugin_name, $this->version );
 
@@ -530,12 +578,22 @@ class Social_Proof_Slider_Public {
 
 		$uniqueID = uniqid('spslider_block_');
 
+		$textAlignStr = "align_" . $block_textalign;
+
 		$slickData = "'{";
 
 		if ( $slider_showarrows === "true" || $slider_showarrows === "1" ) {
 			$slickData .= '"arrows":true';
 		} else {
 			$slickData .= '"arrows":false';
+		}
+
+		$slickData .= ",";
+
+		if ( $slider_showdots === "true" || $slider_showdots === "1" ) {
+			$slickData .= '"dots":true';
+		} else {
+			$slickData .= '"dots":false';
 		}
 
 		$slickData .= "}'";
@@ -545,7 +603,7 @@ class Social_Proof_Slider_Public {
 
 		echo '<div class="widget-wrap">';
 
-		echo '<div class="social-proof-slider-wrap" data-slick='.$slickData.'>';
+		echo '<div class="social-proof-slider-wrap ' . $textAlignStr . '" data-slick='.$slickData.'>';
 
 		echo $items;
 
@@ -577,9 +635,7 @@ class Social_Proof_Slider_Public {
 
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text{ '.$textPaddingStr.' }'."\n";
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .quote { '.$quoteMarginStr.' }'."\n";
-		if ( ! empty( $atts['textalign'] ) ) {
-			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text * { text-align:' . $atts['textalign'] . '; }'."\n";
-		}
+
 		if ( ! empty( $style_testimonialcolor ) ) {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .quote p { color:' . $style_testimonialcolor . '; }'."\n";
 		}
@@ -657,6 +713,8 @@ class Social_Proof_Slider_Public {
 
 			$settings .= 'showarrows="' . $atts['showarrows'] . '" ';
 
+			$settings .= 'showdots="' . $atts['showdots'] . '" ';
+
 			if ( $atts['textalign'] ) {
 				$settings .= 'textalign="' . $atts['textalign'] . '" ';
 			}
@@ -689,6 +747,9 @@ class Social_Proof_Slider_Public {
 			'render_callback' => 'spslider_render_gutenberg_block',
 			'attributes' => [
 				'showarrows' => [
+					'default' => false
+				],
+				'showdots' => [
 					'default' => false
 				],
 				'textalign' => [
