@@ -1,0 +1,68 @@
+/* SP SLIDER TESTIMONIALS BLOCK
+--------------------------------------------- */
+.wp-block-socialproofslider .social-proof-slider-wrap.align_left {
+	text-align: left;
+}
+
+.wp-block-socialproofslider .social-proof-slider-wrap.align_center {
+	text-align: center;
+}
+
+.wp-block-socialproofslider .social-proof-slider-wrap.align_center .testimonial-text img {
+	margin-left: auto;
+	margin-right: auto;
+	border: none;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+.wp-block-socialproofslider .social-proof-slider-wrap.align_right {
+	text-align: right;
+}
+
+.wp-block-socialproofslider .social-proof-slider-wrap ul.slick-dots {
+	margin: 10px 0 0 0;
+}
+
+.wp-block-socialproofslider .social-proof-slider-wrap ul.slick-dots > li {
+	position: relative;
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	margin: 0 10px;
+	padding: 0 0 0 0;
+	cursor: pointer;
+	border: none;
+	background-image: none;
+}
+
+.wp-block-socialproofslider .social-proof-slider-wrap .slick-dots li button {
+	font-size: 0;
+	line-height: 0;
+	display: block;
+	width: 24px;
+	height: 24px;
+	padding: 5px;
+	cursor: pointer;
+	color: transparent;
+	border: 0;
+	outline: none;
+	background: transparent;
+}
+
+.wp-block-socialproofslider .social-proof-slider-wrap .slick-dots li button::before {
+	font-family: 'FontAwesome';
+	content: "\f10c";
+	font-size: 14px;
+	line-height: 14px;
+	width: 14px;
+	height: 14px;
+	text-align: center;
+	opacity: 0.33;
+	-webkit-font-smoothing: antialiased;
+}
+
+.wp-block-socialproofslider .social-proof-slider-wrap .slick-dots li.slick-active button:before {
+	opacity: 1;
+	content: "\f111";
+}

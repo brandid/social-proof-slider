@@ -133,6 +133,15 @@ class Social_Proof_Slider_Admin {
 	}
 
 	/**
+	 * Enqueue Admin CSS for the Block.
+	 *
+	 * @since    2.1.2
+	 */
+	public function spslider_admin_block_styles() {
+		wp_enqueue_style( 'spslider-admin-block-css', plugin_dir_url( __FILE__ ) . 'css/sp-slider-testimonials-block.css', array(), $this->version, 'all' );
+	}
+
+	/**
 	 * Adds a link to the plugin settings page
 	 *
 	 * @since 		2.0.0
