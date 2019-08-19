@@ -195,6 +195,7 @@ class Social_Proof_Slider {
 
 		// Enqueue Slick JS for Block Editor
 		$this->loader->add_action( 'enqueue_block_assets', $plugin_admin, 'spslider_block_scripts' );
+		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'spslider_admin_block_styles' );
 	}
 
 	/**
