@@ -31,7 +31,8 @@ class SPTestimonialsSlider extends Component {
 		this.toggleShowArrows = this.createToggleAttribute( 'showarrows' );
         this.toggleShowDots = this.createToggleAttribute( 'showdots' );
         this.toggleAdaptiveHeight = this.createToggleAttribute( 'adaptiveheight' );
-        // this.updateBGColor = this.updateSetting('bgcolor');
+
+        this.toggleShowFeaturedImages = this.createToggleAttribute( 'showfeaturedimages' );
 	}
 
     createToggleAttribute( propName ) {
@@ -60,6 +61,11 @@ class SPTestimonialsSlider extends Component {
     // Tooltip - Slider - Adaptive Height
     getAdaptiveHeightHelp( checked ) {
         return checked ? __( 'The slider will dynamically adjust height based on each slide\'s height.' ) : __( 'Toggle to dynamically adjust slider height based on each slide\'s height.' );
+    }
+
+    // Tooltip - Slider - Adaptive Height
+    getShowFeaturedImagesHelp( checked ) {
+        return checked ? __( 'Showing the Featured Images.' ) : __( 'Toggle to show the Featured Image for each testimonial.' );
     }
 
     render() {
@@ -112,6 +118,18 @@ class SPTestimonialsSlider extends Component {
                     />
                 </BlockControls>
                 <InspectorControls>
+                    <PanelBody
+                        title={ __( 'Post Settings' ) }
+                        initialOpen={ false }>
+                        <PanelRow>
+                            <ToggleControl
+                            label={ __( 'Show Featured Images' ) }
+                            checked={ !! attributes.showfeaturedimages }
+                            onChange={ this.toggleShowFeaturedImages }
+                            help={ this.getShowFeaturedImagesHelp }
+                            />
+                        </PanelRow>
+                    </PanelBody>
                     <PanelBody
                         title={ __( 'Slider Settings' ) }
                         initialOpen={ false }>

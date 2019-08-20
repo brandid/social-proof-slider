@@ -46,6 +46,10 @@ registerBlockType('social-proof-slider/main', {
     		type: 'boolean',
             default: false,
     	},
+        showfeaturedimages: {
+    		type: 'boolean',
+            default: false,
+    	},
         textalign: {
     		type: 'string',
     	},

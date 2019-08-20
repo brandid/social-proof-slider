@@ -20,6 +20,29 @@
 	text-align: right;
 }
 
+.wp-block-socialproofslider .social-proof-slider-wrap.align_left .testimonial-item.featured-image .testimonial-author-img-wrap {
+	text-align: left;
+}
+
+.wp-block-socialproofslider .social-proof-slider-wrap.align_center .testimonial-item.featured-image .testimonial-author-img-wrap {
+	text-align: center;
+}
+
+.wp-block-socialproofslider .social-proof-slider-wrap.align_right .testimonial-item.featured-image .testimonial-author-img-wrap {
+	text-align: right;
+}
+
+.wp-block-socialproofslider .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img-wrap .testimonial-author-img {
+	display: inline-block;
+	margin: 20px auto;
+}
+
+.wp-block-socialproofslider .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img-wrap .testimonial-author-img img {
+	display: block;
+	width: 100%;
+	max-width: 200px;
+}
+
 .wp-block-socialproofslider .social-proof-slider-wrap ul.slick-dots {
 	margin: 10px 0 0 0;
 }

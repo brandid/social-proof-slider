@@ -435,6 +435,8 @@ class Social_Proof_Slider_Public {
 		$defaults['showdots'] = false;
 		$defaults['adaptiveheight'] = false;
 
+		$defaults['showfeaturedimages'] = false;
+
 		$defaults['ids'] = '';
 		$defaults['exclude'] = '';
 		$defaults['category'] = '';
@@ -446,13 +448,19 @@ class Social_Proof_Slider_Public {
 		}
 
 		// Get Post Settings
+		$posts_showfeaturedimages = $atts['showfeaturedimages'];
+		if ( $posts_showfeaturedimages === "true" ) {
+			$posts_showfeaturedimages = 1;
+		}
+		if ( empty( $posts_showfeaturedimages ) ) {
+			$posts_showfeaturedimages = $defaults['showfeaturedimages'];
+		}
 		/*
 		Sort Posts By
 		Limit Testimonials
 		- Limit by IDs
 		- Limit by Category
 		Add Quotation Marks
-		Show Featured Images
 		- Image Border Radius
 		Show Featured Image Border
 		- Featured Image Border Size
@@ -550,8 +558,6 @@ class Social_Proof_Slider_Public {
 
 		}
 
-		$showFeaturedImages = $sc_settings['showFeaturedImages'];
-
 		$showImageBorder = $sc_settings['showImageBorder'];
 		$imageBorderColor = $sc_settings['imageBorderColor'];
 		$imageBorderThickness = $sc_settings['imageBorderThickness'];
@@ -590,7 +596,7 @@ class Social_Proof_Slider_Public {
 
 		// Create 'items' object with all testimonials
 		$items = '';
-		$items = $shared->get_testimonials( $queryargs, 'shortcode', $postLimiter, $limiterIDs, $showFeaturedImages, $smartQuotes, $taxSlug );
+		$items = $shared->get_testimonials( $queryargs, 'shortcode', $postLimiter, $limiterIDs, $posts_showfeaturedimages, $smartQuotes, $taxSlug );
 
 		// Generate Unique ID for this block
 		$uniqueID = uniqid('spslider_block_');
@@ -735,6 +741,8 @@ class Social_Proof_Slider_Public {
 			$settings .= 'showdots="' . $atts['showdots'] . '" ';
 			$settings .= 'adaptiveheight="' . $atts['adaptiveheight'] . '" ';
 
+			$settings .= 'showfeaturedimages="' . $atts['showfeaturedimages'] . '" ';
+
 			if ( $atts['textalign'] ) {
 				$settings .= 'textalign="' . $atts['textalign'] . '" ';
 			}
@@ -773,6 +781,9 @@ class Social_Proof_Slider_Public {
 					'default' => false
 				],
 				'adaptiveheight' => [
+					'default' => false
+				],
+				'showfeaturedimages' => [
 					'default' => false
 				],
 				'textalign' => [
