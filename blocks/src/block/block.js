@@ -13,6 +13,11 @@ const { AlignmentToolbar, BlockControls, InspectorControls, PanelColorSettings }
 // Import components
 const { Icon, ColorPicker, TextControl, SelectControl, ToggleControl, ServerSideRender, PanelBody, PanelRow } = wp.components;
 
+/**
+ * Internal dependencies
+ */
+import edit from './edit';
+
 // Import SCSS files
 import './style.scss';
 import './editor.scss';
@@ -31,12 +36,15 @@ registerBlockType('social-proof-slider/main', {
     attributes: {
         showarrows: {
     		type: 'boolean',
+            default: false,
     	},
         showdots: {
     		type: 'boolean',
+            default: false,
     	},
         adaptiveheight: {
     		type: 'boolean',
+            default: false,
     	},
         textalign: {
     		type: 'string',
@@ -54,169 +62,7 @@ registerBlockType('social-proof-slider/main', {
             type: 'string',
         },
 	},
-    edit(props) {
-        const attributes = props.attributes;
-		const setAttributes = props.setAttributes;
-
-        const customEvent = new Event( 'gutenbergSlick' );
-
-        /* SLIDER SETTINGS
-        --------------------------------------------------------------------- */
-
-        // Update Setting - Slider - Show Arrows
-        function toggleShowArrows() {
-            setAttributes({ showarrows: ! attributes.showarrows });
-            document.dispatchEvent( customEvent );
-    	}
-
-        // Tooltip - Slider - Show Arrows
-    	function getShowArrowsHelp( checked ) {
-    		return checked ? __( 'Showing the arrows on the Slider.' ) : __( 'Toggle to show the arrows on both sides of the Slider.' );
-    	}
-
-        // Update Setting - Slider - Show Dots
-        function toggleShowDots() {
-            setAttributes({ showdots: ! attributes.showdots });
-            document.dispatchEvent( customEvent );
-    	}
-
-        // Tooltip - Slider - Show Dots
-    	function getShowDotsHelp( checked ) {
-    		return checked ? __( 'Showing the dot indicators below the Slider.' ) : __( 'Toggle to show the dot indicators below the Slider.' );
-    	}
-
-        // Update Setting - Slider - Adaptive Height
-        function toggleAdaptiveHeight() {
-            setAttributes({ adaptiveheight: ! attributes.adaptiveheight });
-            document.dispatchEvent( customEvent );
-    	}
-
-        // Tooltip - Slider - Adaptive Height
-    	function getAdaptiveHeightHelp( checked ) {
-    		return checked ? __( 'The slider will dynamically adjust height based on each slide\'s height.' ) : __( 'Toggle to dynamically adjust slider height based on each slide\'s height.' );
-    	}
-
-        /* COLOR SETTINGS
-        --------------------------------------------------------------------- */
-
-        // Update BG Color attr
-        function updateBGColor(value) {
-            setAttributes({ bgcolor: value });
-            document.dispatchEvent( customEvent )
-        }
-
-        // Update Testimonials Text Color
-        function updateTestimonialTextColor(value) {
-            setAttributes({ testimonialtextcolor: value });
-            document.dispatchEvent( customEvent )
-        }
-
-        // Update Author name Color
-        function updateAuthorNameColor(value) {
-            setAttributes({ authornamecolor: value });
-            document.dispatchEvent( customEvent )
-        }
-
-        // Update Author Title Color
-        function updateAuthorTitleColor(value) {
-            setAttributes({ authortitlecolor: value });
-            document.dispatchEvent( customEvent )
-        }
-
-        /* ------------------------------------------------------------------ */
-
-        // Display block preview and UI
-		return createElement('div', {}, [
-            // Trigger event for loading Slick
-            document.dispatchEvent( customEvent ),
-            // Preview the block with a PHP render callback
-            createElement( ServerSideRender, {
-                block: 'social-proof-slider/main',
-                attributes: props.attributes
-            } ),
-            // Block Controls
-            createElement( BlockControls, {},
-                [
-                    <AlignmentToolbar
-						value={attributes.textalign}
-						onChange={ ( nextAlign ) => {
-							setAttributes( { textalign: nextAlign } );
-                            document.dispatchEvent( customEvent )
-						} }
-					/>
-                ]
-            ),
-			// Inspector Controls
-			createElement(
-                InspectorControls, {},
-				[
-                    <PanelBody
-                        title={ __( 'Slider Settings' ) }
-                        initialOpen={ false }>
-                        <PanelRow>
-                            <ToggleControl
-    						label={ __( 'Show Arrows' ) }
-    						checked={ !! attributes.showarrows }
-    						onChange={ toggleShowArrows }
-    						help={ getShowArrowsHelp }
-    						/>
-                        </PanelRow>
-                        <PanelRow>
-                            <ToggleControl
-                            label={ __( 'Show Dots' ) }
-                            checked={ !! attributes.showdots }
-                            onChange={ toggleShowDots }
-                            help={ getShowDotsHelp }
-                            />
-                        </PanelRow>
-                        <PanelRow>
-                            <ToggleControl
-                            label={ __( 'Adaptive Height' ) }
-                            checked={ !! attributes.adaptiveheight }
-                            onChange={ toggleAdaptiveHeight }
-                            help={ getAdaptiveHeightHelp }
-                            />
-                        </PanelRow>
-                    </PanelBody>,
-                    <PanelBody
-                        title={ __( 'Colors' ) }
-                        initialOpen={ false }>
-                        <PanelColorSettings
-                        title={ __('Background Color') }
-                        initialOpen={ false }
-                        colorSettings={[{
-                            value: attributes.bgcolor,
-                            onChange: updateBGColor,
-                            label: __('Slider Background Color')
-                        }]}
-                        />
-                        <PanelColorSettings
-                        title={ __('Text Colors') }
-                        initialOpen={ false }
-                        colorSettings={[
-                            {
-                            value: attributes.testimonialtextcolor,
-                            onChange: updateTestimonialTextColor,
-                            label: __('Testimonial Text Color'),
-                            },
-                            {
-                            value: attributes.authornamecolor,
-                            onChange: updateAuthorNameColor,
-                            label: __('Author Name Color'),
-                            },
-                            {
-                            value: attributes.authortitlecolor,
-                            onChange: updateAuthorTitleColor,
-                            label: __('Author Title Color'),
-                            },
-                        ]}
-                        />
-                    </PanelBody>
-				]
-			),
-		] );
-
-    },
+    edit,
     save({ attributes }) {
         return null;
     }
