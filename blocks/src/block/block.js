@@ -34,6 +34,9 @@ registerBlockType('social-proof-slider/main', {
     icon: iconEl,
     category: 'common',
     attributes: {
+        textalign: {
+    		type: 'string',
+    	},
         showarrows: {
     		type: 'boolean',
             default: false,
@@ -50,9 +53,34 @@ registerBlockType('social-proof-slider/main', {
     		type: 'boolean',
             default: false,
     	},
-        textalign: {
-    		type: 'string',
-    	},
+        paddingsync: {
+			type: 'boolean',
+			default: true
+		},
+		paddingunit: {
+			type: 'string',
+			default: 'px'
+		},
+		padding: {
+			type: 'number',
+			default: 50
+		},
+		paddingtop: {
+			type: 'number',
+			default: 0
+		},
+		paddingright: {
+			type: 'number',
+			default: 0
+		},
+		paddingbottom: {
+			type: 'number',
+			default: 0
+		},
+		paddingleft: {
+			type: 'number',
+			default: 0
+		},
         bgcolor: {
             type: 'string',
         },

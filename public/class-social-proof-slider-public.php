@@ -490,16 +490,23 @@ class Social_Proof_Slider_Public {
 		*/
 
 		// Get Margin & Padding Settings
+		$paddingunit = $atts['paddingunit'];
+		$paddingsync = $atts['paddingsync'];
+		$contentPaddingStr = '';
+		if ( $paddingsync === "true" || $paddingsync === "1" ) {
+			$contentPaddingStr = 'padding: ' . $atts['padding'] . $paddingunit . ';';
+		} else {
+			$contentPaddingStr = 'padding-top: ' . $atts['paddingtop'] . $paddingunit . '; ';
+			$contentPaddingStr .= 'padding-right: ' . $atts['paddingright'] . $paddingunit . '; ';
+			$contentPaddingStr .= 'padding-bottom: ' . $atts['paddingbottom'] . $paddingunit . '; ';
+			$contentPaddingStr .= 'padding-left: ' . $atts['paddingleft'] . $paddingunit . ';';
+		}
 		/*
-		Content Padding Top
-		Content Padding Bottom
-		Featured Image Border Padding
-		Featured Image Margin Top
-		Featured Image Margin Bottom
-		Text Padding Top
-		Text Padding Bottom
-		Testimonial Text Margin Bottom
-		Dots Margin Top
+		Featured Image -- Border Padding - (synced) - Range: 0-100
+		Featured Image -- Margin Bottom - Default: 20px
+		Testimonial Text Container -- Margin Bottom - Default: 30px
+		Quote Text -- Margin Bottom - Default: 30px
+		Dots Margin Top - Default: 10px
 		*/
 
 		// Get Color Settings
@@ -565,29 +572,29 @@ class Social_Proof_Slider_Public {
 
 		$smartQuotes = $sc_settings['surroundWithQuotes'];
 
-		$doPaddingOverride = $sc_settings['doPaddingOverride'];
-		$contentPaddingTop = $sc_settings['contentPaddingTop'];
-		$contentPaddingBottom = $sc_settings['contentPaddingBottom'];
-		$featImgMarginTop = $sc_settings['featImgMarginTop'];
-		$featImgMarginBottom = $sc_settings['featImgMarginBottom'];
-		$textPaddingTop = $sc_settings['textPaddingTop'];
-		$textPaddingBottom = $sc_settings['textPaddingBottom'];
-		$quoteMarginBottom = $sc_settings['quoteMarginBottom'];
-		$dotsMarginTop = $sc_settings['dotsMarginTop'];
+		// $doPaddingOverride = $sc_settings['doPaddingOverride'];
+		// $contentPaddingTop = $sc_settings['contentPaddingTop'];
+		// $contentPaddingBottom = $sc_settings['contentPaddingBottom'];
+		// $featImgMarginTop = $sc_settings['featImgMarginTop'];
+		// $featImgMarginBottom = $sc_settings['featImgMarginBottom'];
+		// $textPaddingTop = $sc_settings['textPaddingTop'];
+		// $textPaddingBottom = $sc_settings['textPaddingBottom'];
+		// $quoteMarginBottom = $sc_settings['quoteMarginBottom'];
+		// $dotsMarginTop = $sc_settings['dotsMarginTop'];
 
-		$contentPaddingStr = 'padding: 50px;'; // default
+		// $contentPaddingStr = 'padding: 50px;'; // default
 		$imgMarginStr = ''; // default
 		$textPaddingStr = ''; // default
 		$quoteMarginStr = ''; // default
 		$dotsMarginStr = ''; // default
 
-		if ( $doPaddingOverride == 'true' ) {
-			$contentPaddingStr = "padding-top: ".$contentPaddingTop."; padding-bottom: ".$contentPaddingBottom.";";
-			$imgMarginStr = "margin-top:".$featImgMarginTop."; margin-bottom:".$featImgMarginBottom.";";
-			$textPaddingStr = "padding-top: ".$textPaddingTop."; padding-bottom: ".$textPaddingBottom.";";
-			$quoteMarginStr = "margin-bottom: ".$quoteMarginBottom.";";
-			$dotsMarginStr = "margin-top: ".$dotsMarginTop.";";
-		}
+		// if ( $doPaddingOverride == 'true' ) {
+		// 	$contentPaddingStr = "padding-top: ".$contentPaddingTop."; padding-bottom: ".$contentPaddingBottom.";";
+		// 	$imgMarginStr = "margin-top:".$featImgMarginTop."; margin-bottom:".$featImgMarginBottom.";";
+		// 	$textPaddingStr = "padding-top: ".$textPaddingTop."; padding-bottom: ".$textPaddingBottom.";";
+		// 	$quoteMarginStr = "margin-bottom: ".$quoteMarginBottom.";";
+		// 	$dotsMarginStr = "margin-top: ".$dotsMarginTop.";";
+		// }
 
 		$alignStr = '';	// default
 		if ( $sc_settings['doAutoHeight'] != 'true' ) {
@@ -737,16 +744,29 @@ class Social_Proof_Slider_Public {
 
 			$settings = '';
 
-			$settings .= 'showarrows="' . $atts['showarrows'] . '" ';
-			$settings .= 'showdots="' . $atts['showdots'] . '" ';
-			$settings .= 'adaptiveheight="' . $atts['adaptiveheight'] . '" ';
-
-			$settings .= 'showfeaturedimages="' . $atts['showfeaturedimages'] . '" ';
-
+			// Block settings
 			if ( $atts['textalign'] ) {
 				$settings .= 'textalign="' . $atts['textalign'] . '" ';
 			}
 
+			// Post settings
+			$settings .= 'showfeaturedimages="' . $atts['showfeaturedimages'] . '" ';
+
+			// Slider settings
+			$settings .= 'showarrows="' . $atts['showarrows'] . '" ';
+			$settings .= 'showdots="' . $atts['showdots'] . '" ';
+			$settings .= 'adaptiveheight="' . $atts['adaptiveheight'] . '" ';
+
+			// Margin & Padding
+			$settings .= 'paddingunit="' . $atts['paddingunit'] . '" ';
+			$settings .= 'paddingsync="' . $atts['paddingsync'] . '" ';
+			$settings .= 'padding="' . $atts['padding'] . '" ';
+			$settings .= 'paddingtop="' . $atts['paddingtop'] . '" ';
+			$settings .= 'paddingright="' . $atts['paddingright'] . '" ';
+			$settings .= 'paddingbottom="' . $atts['paddingbottom'] . '" ';
+			$settings .= 'paddingleft="' . $atts['paddingleft'] . '" ';
+
+			// Colors
 			if ( $atts['bgcolor'] ) {
 				$settings .= 'bgcolor="' . $atts['bgcolor'] . '" ';
 			}
@@ -774,6 +794,9 @@ class Social_Proof_Slider_Public {
 			'style' => 'spslider-block-edit-style',
 			'render_callback' => 'spslider_render_gutenberg_block',
 			'attributes' => [
+				'textalign' => [
+					'default' => ''
+				],
 				'showarrows' => [
 					'default' => false
 				],
@@ -786,8 +809,26 @@ class Social_Proof_Slider_Public {
 				'showfeaturedimages' => [
 					'default' => false
 				],
-				'textalign' => [
-					'default' => ''
+				'paddingsync' => [
+					'default' => true
+				],
+				'paddingunit' => [
+					'default' => 'px'
+				],
+				'padding' => [
+					'default' => 50
+				],
+				'paddingtop' => [
+					'default' => 0
+				],
+				'paddingright' => [
+					'default' => 0
+				],
+				'paddingbottom' => [
+					'default' => 0
+				],
+				'paddingleft' => [
+					'default' => 0
 				],
 				'bgcolor' => [
 					'default' => ''

@@ -17,6 +17,12 @@ const { AlignmentToolbar, BlockControls, InspectorControls, PanelColorSettings }
 // Import components
 const { Icon, ColorPicker, TextControl, SelectControl, ToggleControl, ServerSideRender, PanelBody, PanelRow } = wp.components;
 
+/**
+ * Internal dependencies.
+ */
+import Margin from './margin';
+import Padding from './padding';
+
 const customEvent = new Event( 'gutenbergSlick' );
 
 class SPTestimonialsSlider extends Component {
@@ -28,11 +34,13 @@ class SPTestimonialsSlider extends Component {
 		// Create toggles for each attribute; we create them here rather than
 		// passing `this.createToggleAttribute( 'showarrows' )` directly to
 		// `onChange` to avoid re-renders.
+        this.toggleShowFeaturedImages = this.createToggleAttribute( 'showfeaturedimages' );
+
 		this.toggleShowArrows = this.createToggleAttribute( 'showarrows' );
         this.toggleShowDots = this.createToggleAttribute( 'showdots' );
         this.toggleAdaptiveHeight = this.createToggleAttribute( 'adaptiveheight' );
 
-        this.toggleShowFeaturedImages = this.createToggleAttribute( 'showfeaturedimages' );
+        this.togglePaddingSync = this.createToggleAttribute( 'paddingsync' );
 	}
 
     createToggleAttribute( propName ) {
@@ -50,22 +58,22 @@ class SPTestimonialsSlider extends Component {
 
     // Tooltip - Slider - Show Arrows
     getShowArrowsHelp( checked ) {
-        return checked ? __( 'Showing the arrows on the Slider.' ) : __( 'Toggle to show the arrows on both sides of the Slider.' );
+        return checked ? __( 'Showing the arrows on the Slider.', 'socialproofslider' ) : __( 'Toggle to show the arrows on both sides of the Slider.', 'socialproofslider' );
     }
 
     // Tooltip - Slider - Show Dots
     getShowDotsHelp( checked ) {
-        return checked ? __( 'Showing the dot indicators below the Slider.' ) : __( 'Toggle to show the dot indicators below the Slider.' );
+        return checked ? __( 'Showing the dot indicators below the Slider.', 'socialproofslider' ) : __( 'Toggle to show the dot indicators below the Slider.', 'socialproofslider' );
     }
 
     // Tooltip - Slider - Adaptive Height
     getAdaptiveHeightHelp( checked ) {
-        return checked ? __( 'The slider will dynamically adjust height based on each slide\'s height.' ) : __( 'Toggle to dynamically adjust slider height based on each slide\'s height.' );
+        return checked ? __( 'The slider will dynamically adjust height based on each slide\'s height.', 'socialproofslider' ) : __( 'Toggle to dynamically adjust slider height based on each slide\'s height.', 'socialproofslider' );
     }
 
     // Tooltip - Slider - Adaptive Height
     getShowFeaturedImagesHelp( checked ) {
-        return checked ? __( 'Showing the Featured Images.' ) : __( 'Toggle to show the Featured Image for each testimonial.' );
+        return checked ? __( 'Showing the Featured Images.', 'socialproofslider' ) : __( 'Toggle to show the Featured Image for each testimonial.', 'socialproofslider' );
     }
 
     render() {
@@ -99,6 +107,13 @@ class SPTestimonialsSlider extends Component {
             document.dispatchEvent( customEvent )
         }
 
+        /* CSS Units. */
+		const cssUnits = [
+			{ value: 'px', label: __( 'Pixel (px)', 'socialproofslider' ) },
+			{ value: '%', label: __( 'Percent (%)', 'socialproofslider' ) },
+			{ value: 'em', label: __( 'Em (em)', 'socialproofslider' ) }
+        ];
+
         /* ------------------------------------------------------------------ */
 
         // Display block preview and UI
@@ -119,11 +134,11 @@ class SPTestimonialsSlider extends Component {
                 </BlockControls>
                 <InspectorControls>
                     <PanelBody
-                        title={ __( 'Post Settings' ) }
+                        title={ __( 'Post Settings', 'socialproofslider' ) }
                         initialOpen={ false }>
                         <PanelRow>
                             <ToggleControl
-                            label={ __( 'Show Featured Images' ) }
+                            label={ __( 'Show Featured Images', 'socialproofslider' ) }
                             checked={ !! attributes.showfeaturedimages }
                             onChange={ this.toggleShowFeaturedImages }
                             help={ this.getShowFeaturedImagesHelp }
@@ -131,11 +146,11 @@ class SPTestimonialsSlider extends Component {
                         </PanelRow>
                     </PanelBody>
                     <PanelBody
-                        title={ __( 'Slider Settings' ) }
+                        title={ __( 'Slider Settings', 'socialproofslider' ) }
                         initialOpen={ false }>
                         <PanelRow>
                             <ToggleControl
-                            label={ __( 'Show Arrows' ) }
+                            label={ __( 'Show Arrows', 'socialproofslider' ) }
                             checked={ !! attributes.showarrows }
                             onChange={ this.toggleShowArrows }
                             help={ this.getShowArrowsHelp }
@@ -143,7 +158,7 @@ class SPTestimonialsSlider extends Component {
                         </PanelRow>
                         <PanelRow>
                             <ToggleControl
-                            label={ __( 'Show Dots' ) }
+                            label={ __( 'Show Dots', 'socialproofslider' ) }
                             checked={ !! attributes.showdots }
                             onChange={ this.toggleShowDots }
                             help={ this.getShowDotsHelp }
@@ -151,7 +166,7 @@ class SPTestimonialsSlider extends Component {
                         </PanelRow>
                         <PanelRow>
                             <ToggleControl
-                            label={ __( 'Adaptive Height' ) }
+                            label={ __( 'Adaptive Height', 'socialproofslider' ) }
                             checked={ !! attributes.adaptiveheight }
                             onChange={ this.toggleAdaptiveHeight }
                             help={ this.getAdaptiveHeightHelp }
@@ -159,15 +174,72 @@ class SPTestimonialsSlider extends Component {
                         </PanelRow>
                     </PanelBody>
                     <PanelBody
-                        title={ __( 'Colors' ) }
+    					title={ __( 'Margin and Padding', 'socialproofslider' ) }
+    					initialOpen={ false }>
+                        <SelectControl
+                            label={ __( 'Padding Unit', 'socialproofslider' ) }
+                            help={ __( 'Choose between pixel, percent, or em units.', 'socialproofslider' ) }
+                            options={ cssUnits }
+                            value={ attributes.paddingunit }
+                            onChange={ ( value ) => this.props.setAttributes({ paddingunit: value }) }
+                        />
+                        <ToggleControl
+                            label={ __( 'Sync Padding', 'socialproofslider' ) }
+                            checked={ !! attributes.paddingsync }
+                            onChange={ this.togglePaddingSync }
+                            help={ __( 'Padding on all sides will have the same value.', 'socialproofslider' ) }
+                        />
+                        { ! attributes.paddingsync ?
+                            <Padding
+                                /* Padding top. */
+                                paddingEnableTop={ true }
+                                paddingTop={ attributes.paddingtop }
+                                paddingTopMin="0"
+                                paddingTopMax="200"
+                                onChangePaddingTop={ paddingtop => setAttributes({ paddingtop }) }
+
+                                /* Padding right. */
+                                paddingEnableRight={ true }
+                                paddingRight={ attributes.paddingright }
+                                paddingRightMin="0"
+                                paddingRightMax="200"
+                                onChangePaddingRight={ paddingright => setAttributes({ paddingright }) }
+
+                                /* Padding bottom. */
+                                paddingEnableBottom={ true }
+                                paddingBottom={ attributes.paddingbottom }
+                                paddingBottomMin="0"
+                                paddingBottomMax="200"
+                                onChangePaddingBottom={ paddingbottom => setAttributes({ paddingbottom }) }
+
+                                /* Padding left. */
+                                paddingEnableLeft={ true }
+                                paddingLeft={ attributes.paddingleft }
+                                paddingLeftMin="0"
+                                paddingLeftMax="200"
+                                onChangePaddingLeft={ paddingleft => setAttributes({ paddingleft }) }
+                            />
+                            :
+                            <Padding
+                                /* Padding. */
+                                paddingEnable={ true }
+                                padding={ attributes.padding }
+                                paddingMin="0"
+                                paddingMax="200"
+                                onChangePadding={ padding => setAttributes({ padding }) }
+                            />
+                    }
+                    </PanelBody>
+                    <PanelBody
+                        title={ __( 'Colors', 'socialproofslider' ) }
                         initialOpen={ false }>
                         <PanelColorSettings
-                        title={ __('Background Color') }
+                        title={ __( 'Background Color', 'socialproofslider' ) }
                         initialOpen={ false }
                         colorSettings={[{
                             value: attributes.bgcolor,
                             onChange: updateBGColor,
-                            label: __('Slider Background Color')
+                            label: __( 'Slider Background Color', 'socialproofslider' )
                         }]}
                         />
                         <PanelColorSettings
@@ -177,17 +249,17 @@ class SPTestimonialsSlider extends Component {
                             {
                             value: attributes.testimonialtextcolor,
                             onChange: updateTestimonialTextColor,
-                            label: __('Testimonial Text Color'),
+                            label: __( 'Testimonial Text Color', 'socialproofslider' ),
                             },
                             {
                             value: attributes.authornamecolor,
                             onChange: updateAuthorNameColor,
-                            label: __('Author Name Color'),
+                            label: __( 'Author Name Color', 'socialproofslider' ),
                             },
                             {
                             value: attributes.authortitlecolor,
                             onChange: updateAuthorTitleColor,
-                            label: __('Author Title Color'),
+                            label: __( 'Author Title Color', 'socialproofslider' ),
                             },
                         ]}
                         />
