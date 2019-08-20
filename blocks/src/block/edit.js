@@ -31,6 +31,7 @@ class SPTestimonialsSlider extends Component {
 		this.toggleShowArrows = this.createToggleAttribute( 'showarrows' );
         this.toggleShowDots = this.createToggleAttribute( 'showdots' );
         this.toggleAdaptiveHeight = this.createToggleAttribute( 'adaptiveheight' );
+        // this.updateBGColor = this.updateSetting('bgcolor');
 	}
 
     createToggleAttribute( propName ) {
@@ -61,39 +62,36 @@ class SPTestimonialsSlider extends Component {
         return checked ? __( 'The slider will dynamically adjust height based on each slide\'s height.' ) : __( 'Toggle to dynamically adjust slider height based on each slide\'s height.' );
     }
 
-    /* COLOR SETTINGS
-    --------------------------------------------------------------------- */
-
-    // Update BG Color attr
-    updateBGColor(value) {
-        setAttributes({ bgcolor: value });
-        document.dispatchEvent( customEvent )
-    }
-
-    // Update Testimonials Text Color
-    updateTestimonialTextColor(value) {
-        setAttributes({ testimonialtextcolor: value });
-        document.dispatchEvent( customEvent )
-    }
-
-    // Update Author name Color
-    updateAuthorNameColor(value) {
-        setAttributes({ authornamecolor: value });
-        document.dispatchEvent( customEvent )
-    }
-
-    // Update Author Title Color
-    updateAuthorTitleColor(value) {
-        setAttributes({ authortitlecolor: value });
-        document.dispatchEvent( customEvent )
-    }
-
-	render() {
+    render() {
 
         const attributes = this.props.attributes;
         const setAttributes = this.props.setAttributes;
 
         document.dispatchEvent( customEvent )
+
+        // Update BG Color attr
+        function updateBGColor(value) {
+            setAttributes({ bgcolor: value });
+            document.dispatchEvent( customEvent )
+        }
+
+        // Update Testimonials Text Color
+        function updateTestimonialTextColor(value) {
+            setAttributes({ testimonialtextcolor: value });
+            document.dispatchEvent( customEvent )
+        }
+
+        // Update Author name Color
+        function updateAuthorNameColor(value) {
+            setAttributes({ authornamecolor: value });
+            document.dispatchEvent( customEvent )
+        }
+
+        // Update Author Title Color
+        function updateAuthorTitleColor(value) {
+            setAttributes({ authortitlecolor: value });
+            document.dispatchEvent( customEvent )
+        }
 
         /* ------------------------------------------------------------------ */
 
@@ -150,7 +148,7 @@ class SPTestimonialsSlider extends Component {
                         initialOpen={ false }
                         colorSettings={[{
                             value: attributes.bgcolor,
-                            onChange: this.updateBGColor,
+                            onChange: updateBGColor,
                             label: __('Slider Background Color')
                         }]}
                         />
@@ -160,17 +158,17 @@ class SPTestimonialsSlider extends Component {
                         colorSettings={[
                             {
                             value: attributes.testimonialtextcolor,
-                            onChange: this.updateTestimonialTextColor,
+                            onChange: updateTestimonialTextColor,
                             label: __('Testimonial Text Color'),
                             },
                             {
                             value: attributes.authornamecolor,
-                            onChange: this.updateAuthorNameColor,
+                            onChange: updateAuthorNameColor,
                             label: __('Author Name Color'),
                             },
                             {
                             value: attributes.authortitlecolor,
-                            onChange: this.updateAuthorTitleColor,
+                            onChange: updateAuthorTitleColor,
                             label: __('Author Title Color'),
                             },
                         ]}
