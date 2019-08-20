@@ -35,6 +35,9 @@ registerBlockType('social-proof-slider/main', {
         showdots: {
     		type: 'boolean',
     	},
+        adaptiveheight: {
+    		type: 'boolean',
+    	},
         textalign: {
     		type: 'string',
     	},
@@ -80,6 +83,17 @@ registerBlockType('social-proof-slider/main', {
         // Tooltip - Slider - Show Dots
     	function getShowDotsHelp( checked ) {
     		return checked ? __( 'Showing the dot indicators below the Slider.' ) : __( 'Toggle to show the dot indicators below the Slider.' );
+    	}
+
+        // Update Setting - Slider - Adaptive Height
+        function toggleAdaptiveHeight() {
+            setAttributes({ adaptiveheight: ! attributes.adaptiveheight });
+            document.dispatchEvent( customEvent );
+    	}
+
+        // Tooltip - Slider - Adaptive Height
+    	function getAdaptiveHeightHelp( checked ) {
+    		return checked ? __( 'The slider will dynamically adjust height based on each slide\'s height.' ) : __( 'Toggle to dynamically adjust slider height based on each slide\'s height.' );
     	}
 
         /* COLOR SETTINGS
@@ -153,6 +167,14 @@ registerBlockType('social-proof-slider/main', {
                             checked={ !! attributes.showdots }
                             onChange={ toggleShowDots }
                             help={ getShowDotsHelp }
+                            />
+                        </PanelRow>
+                        <PanelRow>
+                            <ToggleControl
+                            label={ __( 'Adaptive Height' ) }
+                            checked={ !! attributes.adaptiveheight }
+                            onChange={ toggleAdaptiveHeight }
+                            help={ getAdaptiveHeightHelp }
                             />
                         </PanelRow>
                     </PanelBody>,

@@ -430,7 +430,11 @@ class Social_Proof_Slider_Public {
 
 		// Declare defaults
 		$defaults['blockalign'] = 'center';
+
 		$defaults['showarrows'] = false;
+		$defaults['showdots'] = false;
+		$defaults['adaptiveheight'] = false;
+
 		$defaults['ids'] = '';
 		$defaults['exclude'] = '';
 		$defaults['category'] = '';
@@ -456,12 +460,23 @@ class Social_Proof_Slider_Public {
 
 		// Get Slider Settings
 		$slider_showarrows = $atts['showarrows'];
+		if ( empty( $slider_showarrows ) ) {
+			$slider_showarrows = $defaults['showarrows'];
+		}
+
 		$slider_showdots = $atts['showdots'];
+		if ( empty( $slider_showdots ) ) {
+			$slider_showdots = $defaults['showdots'];
+		}
+
+		$slider_adaptiveheight = $atts['adaptiveheight'];
+		if ( empty( $slider_adaptiveheight ) ) {
+			$slider_adaptiveheight = $defaults['adaptiveheight'];
+		}
 		/*
 		Auto Play
 		- Display Time
 		Animation Style
-		Adaptive Height
 		Vertical Align
 		- Arrow Style
 		*/
@@ -573,13 +588,14 @@ class Social_Proof_Slider_Public {
 			$alignStr = ' valign-' . $sc_settings['verticalalign'];
 		}
 
+		// Create 'items' object with all testimonials
 		$items = '';
 		$items = $shared->get_testimonials( $queryargs, 'shortcode', $postLimiter, $limiterIDs, $showFeaturedImages, $smartQuotes, $taxSlug );
 
+		// Generate Unique ID for this block
 		$uniqueID = uniqid('spslider_block_');
 
-		$textAlignStr = "align_" . $block_textalign;
-
+		// Build data attr string for Slick settings
 		$slickData = "'{";
 
 		if ( $slider_showarrows === "true" || $slider_showarrows === "1" ) {
@@ -596,24 +612,28 @@ class Social_Proof_Slider_Public {
 			$slickData .= '"dots":false';
 		}
 
+		$slickData .= ",";
+
+		if ( $slider_adaptiveheight === "true" || $slider_adaptiveheight === "1" ) {
+			$slickData .= '"adaptiveHeight":true';
+		} else {
+			$slickData .= '"adaptiveHeight":false';
+		}
+
 		$slickData .= "}'";
+
+		$textAlignStr = "align_" . $block_textalign;
 
 		echo '<!-- // ********** SOCIAL PROOF SLIDER ********** // -->';
 		echo '<section id="' . $uniqueID . '" class="block wp-block-socialproofslider ' . $sc_settings['animationStyle'] . ' paddingoverride-'.$sc_settings['doPaddingOverride'].' ">';
-
 		echo '<div class="widget-wrap">';
-
 		echo '<div class="social-proof-slider-wrap ' . $textAlignStr . '" data-slick='.$slickData.'>';
-
 		echo $items;
-
 		echo '</div><!-- // .social-proof-slider-wrap // -->';
 
 		//* Output styles
-		echo '<style>'."\n";
-
 		$uniqueID = '#' . $uniqueID;
-
+		echo '<style>'."\n";
 		echo $uniqueID . ' .social-proof-slider-wrap button.slick-arrow { width: 30px; padding: 0; position: absolute; top: 50%; margin-top: -20px; z-index: 1; font-size: 32px; line-height: 32px; transition: all .3s ease; }';
 		echo $uniqueID . ' .social-proof-slider-wrap button.slick-arrow, ' . $uniqueID . ' .social-proof-slider-wrap button.slick-arrow:hover, ' . $uniqueID . ' .social-proof-slider-wrap button.slick-arrow:focus, ' . $uniqueID . ' .social-proof-slider-wrap button.slick-arrow:active { background: transparent; outline: 0; border: 0; }';
 		echo $uniqueID . ' .social-proof-slider-wrap button.slick-prev { left: 10px; }';
@@ -712,8 +732,8 @@ class Social_Proof_Slider_Public {
 			$settings = '';
 
 			$settings .= 'showarrows="' . $atts['showarrows'] . '" ';
-
 			$settings .= 'showdots="' . $atts['showdots'] . '" ';
+			$settings .= 'adaptiveheight="' . $atts['adaptiveheight'] . '" ';
 
 			if ( $atts['textalign'] ) {
 				$settings .= 'textalign="' . $atts['textalign'] . '" ';
@@ -750,6 +770,9 @@ class Social_Proof_Slider_Public {
 					'default' => false
 				],
 				'showdots' => [
+					'default' => false
+				],
+				'adaptiveheight' => [
 					'default' => false
 				],
 				'textalign' => [
