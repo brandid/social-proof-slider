@@ -430,13 +430,11 @@ class Social_Proof_Slider_Public {
 
 		// Declare defaults
 		$defaults['blockalign'] = 'center';
-
+		$defaults['showfeaturedimages'] = false;
+		$defaults['autoplay'] = true;
 		$defaults['showarrows'] = false;
 		$defaults['showdots'] = false;
 		$defaults['adaptiveheight'] = false;
-
-		$defaults['showfeaturedimages'] = false;
-
 		$defaults['ids'] = '';
 		$defaults['exclude'] = '';
 		$defaults['category'] = '';
@@ -456,17 +454,22 @@ class Social_Proof_Slider_Public {
 			$posts_showfeaturedimages = $defaults['showfeaturedimages'];
 		}
 		/*
-		Sort Posts By
-		Limit Testimonials
-		- Limit by IDs
-		- Limit by Category
-		Add Quotation Marks
-		- Image Border Radius
-		Show Featured Image Border
-		- Featured Image Border Size
+		Sort Posts By - Select: Random, Date DESC, Date ASC
+		Limit Testimonials - Select: Limit by Category, Limit by ID
+		Limit Testimonials > Limit by IDs - Text Input
+		Limit Testimonials > Limit by Category - Text Input
+		Add Quotation Marks - Toggle
+		Show Featured Image Border - Toggle
+		Show Featured Image Border > Image Border Radius - Text Input
+		Show Featured Image Border > Featured Image Border Size - Range: 0-10
 		*/
 
 		// Get Slider Settings
+		$slider_autoplay = $atts['autoplay'];
+		if ( empty( $slider_autoplay ) ) {
+			$slider_autoplay = $defaults['autoplay'];
+		}
+
 		$slider_showarrows = $atts['showarrows'];
 		if ( empty( $slider_showarrows ) ) {
 			$slider_showarrows = $defaults['showarrows'];
@@ -482,11 +485,10 @@ class Social_Proof_Slider_Public {
 			$slider_adaptiveheight = $defaults['adaptiveheight'];
 		}
 		/*
-		Auto Play
-		- Display Time
-		Animation Style
-		Vertical Align
-		- Arrow Style
+		Auto Play > Display Time - Range: 0-10, Step: 0.25, Default: 3
+		Animation Style - Select: Slide, Fade
+		Adaptive Height > Vertical Align - Radio Buttons: Top, Middle, Bottom
+		Show Arrows > Arrow Style - Radio Buttons
 		*/
 
 		// Get Margin & Padding Settings
@@ -502,11 +504,11 @@ class Social_Proof_Slider_Public {
 			$contentPaddingStr .= 'padding-left: ' . $atts['paddingleft'] . $paddingunit . ';';
 		}
 		/*
-		Featured Image -- Border Padding - (synced) - Range: 0-100
-		Featured Image -- Margin Bottom - Default: 20px
-		Testimonial Text Container -- Margin Bottom - Default: 30px
-		Quote Text -- Margin Bottom - Default: 30px
-		Dots Margin Top - Default: 10px
+		Featured Image Border Padding - (synced) - Range: 0-50 | Default: 4px
+		Featured Image Margin Bottom - Range: 0-100 | Default: 20px
+		Testimonial Text Container Margin Bottom - Range: 0-100 | Default: 30px
+		Quote Text Margin Bottom - Range: 0-100 | Default: 30px
+		Dots Margin Top - Range: 0-100 | Default: 10px
 		*/
 
 		// Get Color Settings
@@ -515,10 +517,10 @@ class Social_Proof_Slider_Public {
 		$style_authornamecolor = $atts['authornamecolor'];
 		$style_authortitlecolor = $atts['authortitlecolor'];
 		/*
-		Image Border Color
-		Arrows Color
-		Arrows Hover Color
-		Dots Color
+		Image Border Color - Color Picker | Default: #000000
+		Arrows Color - Color Picker | Default: #000000
+		Arrows Hover Color - Color Picker | Default: #000000
+		Dots Color - Color Picker | Default: #000000
 		*/
 
 		$shared = new Social_Proof_Slider_Shared( $this->plugin_name, $this->version );
@@ -610,6 +612,14 @@ class Social_Proof_Slider_Public {
 
 		// Build data attr string for Slick settings
 		$slickData = "'{";
+
+		if ( $slider_autoplay === "true" || $slider_autoplay === "1" ) {
+			$slickData .= '"autoplay":true';
+		} else {
+			$slickData .= '"autoplay":false';
+		}
+
+		$slickData .= ",";
 
 		if ( $slider_showarrows === "true" || $slider_showarrows === "1" ) {
 			$slickData .= '"arrows":true';
@@ -753,6 +763,7 @@ class Social_Proof_Slider_Public {
 			$settings .= 'showfeaturedimages="' . $atts['showfeaturedimages'] . '" ';
 
 			// Slider settings
+			$settings .= 'autoplay="' . $atts['autoplay'] . '" ';
 			$settings .= 'showarrows="' . $atts['showarrows'] . '" ';
 			$settings .= 'showdots="' . $atts['showdots'] . '" ';
 			$settings .= 'adaptiveheight="' . $atts['adaptiveheight'] . '" ';
@@ -796,6 +807,9 @@ class Social_Proof_Slider_Public {
 			'attributes' => [
 				'textalign' => [
 					'default' => ''
+				],
+				'autoplay' => [
+					'default' => true
 				],
 				'showarrows' => [
 					'default' => false

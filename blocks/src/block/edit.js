@@ -36,6 +36,7 @@ class SPTestimonialsSlider extends Component {
 		// `onChange` to avoid re-renders.
         this.toggleShowFeaturedImages = this.createToggleAttribute( 'showfeaturedimages' );
 
+        this.toggleAutoplay = this.createToggleAttribute( 'autoplay' );
 		this.toggleShowArrows = this.createToggleAttribute( 'showarrows' );
         this.toggleShowDots = this.createToggleAttribute( 'showdots' );
         this.toggleAdaptiveHeight = this.createToggleAttribute( 'adaptiveheight' );
@@ -55,6 +56,11 @@ class SPTestimonialsSlider extends Component {
 
     /* TOOLTIPS
     --------------------------------------------------------------------- */
+
+    // Tooltip - Slider - Autoplay
+    getAutoplayHelp( checked ) {
+        return checked ? __( 'Autplay is enabled.', 'socialproofslider' ) : __( 'Toggle to advance the slides automatically.', 'socialproofslider' );
+    }
 
     // Tooltip - Slider - Show Arrows
     getShowArrowsHelp( checked ) {
@@ -148,6 +154,14 @@ class SPTestimonialsSlider extends Component {
                     <PanelBody
                         title={ __( 'Slider Settings', 'socialproofslider' ) }
                         initialOpen={ false }>
+                        <PanelRow>
+                            <ToggleControl
+                            label={ __( 'Autoplay', 'socialproofslider' ) }
+                            checked={ !! attributes.autoplay }
+                            onChange={ this.toggleAutoplay }
+                            help={ this.getAutoplayHelp }
+                            />
+                        </PanelRow>
                         <PanelRow>
                             <ToggleControl
                             label={ __( 'Show Arrows', 'socialproofslider' ) }
