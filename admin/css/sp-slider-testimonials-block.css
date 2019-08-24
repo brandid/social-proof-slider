@@ -89,3 +89,10 @@
 	opacity: 1;
 	content: "\f111";
 }
+
+/* Inspector Panel
+----------------------------------------------------------------------------- */
+.spslider-inspector-panel .components-base-control__field > label,
+.spslider-inspector-panel .editor-panel-color-settings .components-base-control__field > .components-base-control__label {
+	font-weight: bold;
+}

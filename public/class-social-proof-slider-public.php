@@ -433,6 +433,7 @@ class Social_Proof_Slider_Public {
 		$defaults['showfeaturedimages'] = false;
 		$defaults['autoplay'] = true;
 		$defaults['displaytime'] = 3;
+		$defaults['animationstyle'] = 'fade';
 		$defaults['showarrows'] = false;
 		$defaults['showdots'] = false;
 		$defaults['adaptiveheight'] = false;
@@ -474,6 +475,11 @@ class Social_Proof_Slider_Public {
 		$slider_displaytime = $atts['displaytime'];
 		if ( empty( $slider_displaytime ) ) {
 			$slider_displaytime = $defaults['displaytime'];
+		}
+
+		$slider_animationstyle = $atts['animationstyle'];
+		if ( empty( $slider_animationstyle ) ) {
+			$slider_animationstyle = $defaults['animationstyle'];
 		}
 
 		$slider_showarrows = $atts['showarrows'];
@@ -618,26 +624,30 @@ class Social_Proof_Slider_Public {
 		// Build data attr string for Slick settings
 		$slickData = "'{";
 
+		// Autoplay
 		if ( $slider_autoplay === "true" || $slider_autoplay === "1" ) {
-
 			$slickData .= '"autoplay":true';
-
+			// Autoplay - Display Time
 			if ( ! empty( $slider_displaytime ) ) {
-
 				$displayTimeNumber = intval($slider_displaytime) * 1000;
-
 				$slickData .= ',"autoplaySpeed":'.$displayTimeNumber;
-
 			}
-
 		} else {
-
 			$slickData .= '"autoplay":false';
-
 		}
 
 		$slickData .= ",";
 
+		// Animation Style
+		if ( $slider_animationstyle === "fade" ) {
+			$slickData .= '"fade":true';
+		} else {
+			$slickData .= '"fade":false';
+		}
+
+		$slickData .= ",";
+
+		// Show Arrows
 		if ( $slider_showarrows === "true" || $slider_showarrows === "1" ) {
 			$slickData .= '"arrows":true';
 		} else {
@@ -646,6 +656,7 @@ class Social_Proof_Slider_Public {
 
 		$slickData .= ",";
 
+		// Show Dots
 		if ( $slider_showdots === "true" || $slider_showdots === "1" ) {
 			$slickData .= '"dots":true';
 		} else {
@@ -654,6 +665,7 @@ class Social_Proof_Slider_Public {
 
 		$slickData .= ",";
 
+		// Adaptive Height
 		if ( $slider_adaptiveheight === "true" || $slider_adaptiveheight === "1" ) {
 			$slickData .= '"adaptiveHeight":true';
 		} else {
@@ -782,6 +794,7 @@ class Social_Proof_Slider_Public {
 			// Slider settings
 			$settings .= 'autoplay="' . $atts['autoplay'] . '" ';
 			$settings .= 'displaytime="' . $atts['displaytime'] . '" ';
+			$settings .= 'animationstyle="' . $atts['animationstyle'] . '" ';
 			$settings .= 'showarrows="' . $atts['showarrows'] . '" ';
 			$settings .= 'showdots="' . $atts['showdots'] . '" ';
 			$settings .= 'adaptiveheight="' . $atts['adaptiveheight'] . '" ';
@@ -831,6 +844,9 @@ class Social_Proof_Slider_Public {
 				],
 				'displaytime' => [
 					'default' => 3
+				],
+				'animationstyle' => [
+					'default' => 'fade'
 				],
 				'showarrows' => [
 					'default' => false

@@ -15,7 +15,18 @@ const { __ } = wp.i18n;
 const { AlignmentToolbar, BlockControls, InspectorControls, PanelColorSettings } = wp.editor;
 
 // Import components
-const { Icon, ColorPicker, TextControl, SelectControl, ToggleControl, ServerSideRender, PanelBody, PanelRow, RangeControl } = wp.components;
+const {
+    Icon,
+    ColorPicker,
+    TextControl,
+    SelectControl,
+    ToggleControl,
+    ServerSideRender,
+    PanelBody,
+    PanelRow,
+    RadioControl,
+    RangeControl
+    } = wp.components;
 
 /**
  * Internal dependencies.
@@ -147,7 +158,8 @@ class SPTestimonialsSlider extends Component {
                 <InspectorControls>
                     <PanelBody
                         title={ __( 'Post Settings', 'socialproofslider' ) }
-                        initialOpen={ false }>
+                        initialOpen={ false }
+                        className={ 'spslider-inspector-panel' }>
                         <PanelRow>
                             <ToggleControl
                             label={ __( 'Show Featured Images', 'socialproofslider' ) }
@@ -159,7 +171,8 @@ class SPTestimonialsSlider extends Component {
                     </PanelBody>
                     <PanelBody
                         title={ __( 'Slider Settings', 'socialproofslider' ) }
-                        initialOpen={ false }>
+                        initialOpen={ false }
+                        className={ 'spslider-inspector-panel' }>
                         <PanelRow>
                             <ToggleControl
                             label={ __( 'Autoplay', 'socialproofslider' ) }
@@ -173,7 +186,7 @@ class SPTestimonialsSlider extends Component {
             					label={ __( 'Display Time (seconds)', 'socialproofslider' ) }
                                 beforeIcon={ 'clock' }
             					value={ attributes.displaytime }
-            					min={ 0 }
+            					min={ 1 }
             					max={ 10 }
                                 initialPosition={ 3 }
             					onChange={ ( value ) => this.props.setAttributes({ displaytime: value }) }
@@ -183,6 +196,18 @@ class SPTestimonialsSlider extends Component {
                             :
                             null
                         }
+                        <PanelRow>
+                            <RadioControl
+                                label={ __( 'Animation Style', 'socialproofslider' ) }
+                                help={ __( 'Choose how to animate each slide.', 'socialproofslider' ) }
+                                options={ [
+                                    { label: __( 'Fade', 'socialproofslider' ), value: 'fade' },
+                                    { label: __( 'Slide', 'socialproofslider' ), value: 'slide' },
+                                ] }
+                                onChange={ ( value ) => this.props.setAttributes({ animationstyle: value }) }
+                                selected={ attributes.animationstyle }
+                            />
+                        </PanelRow>
                         <PanelRow>
                             <ToggleControl
                             label={ __( 'Show Arrows', 'socialproofslider' ) }
@@ -210,7 +235,8 @@ class SPTestimonialsSlider extends Component {
                     </PanelBody>
                     <PanelBody
     					title={ __( 'Margin and Padding', 'socialproofslider' ) }
-    					initialOpen={ false }>
+    					initialOpen={ false }
+                        className={ 'spslider-inspector-panel' }>
                         <SelectControl
                             label={ __( 'Padding Unit', 'socialproofslider' ) }
                             help={ __( 'Choose between pixel, percent, or em units.', 'socialproofslider' ) }
@@ -267,7 +293,8 @@ class SPTestimonialsSlider extends Component {
                     </PanelBody>
                     <PanelBody
                         title={ __( 'Colors', 'socialproofslider' ) }
-                        initialOpen={ false }>
+                        initialOpen={ false }
+                        className={ 'spslider-inspector-panel' }>
                         <PanelColorSettings
                         title={ __( 'Background Color', 'socialproofslider' ) }
                         initialOpen={ false }

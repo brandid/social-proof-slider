@@ -49,6 +49,10 @@ registerBlockType('social-proof-slider/main', {
     		type: 'number',
             default: 3,
     	},
+        animationstyle: {
+    		type: 'string',
+            default: 'fade',
+    	},
         showdots: {
     		type: 'boolean',
             default: false,
