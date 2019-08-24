@@ -435,6 +435,7 @@ class Social_Proof_Slider_Public {
 		$defaults['displaytime'] = 3;
 		$defaults['animationstyle'] = 'fade';
 		$defaults['showarrows'] = false;
+		$defaults['arrowstyle'] = 'angle';
 		$defaults['showdots'] = false;
 		$defaults['adaptiveheight'] = false;
 		$defaults['ids'] = '';
@@ -487,6 +488,11 @@ class Social_Proof_Slider_Public {
 			$slider_showarrows = $defaults['showarrows'];
 		}
 
+		$slider_arrowstyle = $atts['arrowstyle'];
+		if ( empty( $slider_arrowstyle ) ) {
+			$slider_arrowstyle = $defaults['arrowstyle'];
+		}
+
 		$slider_showdots = $atts['showdots'];
 		if ( empty( $slider_showdots ) ) {
 			$slider_showdots = $defaults['showdots'];
@@ -496,9 +502,12 @@ class Social_Proof_Slider_Public {
 		if ( empty( $slider_adaptiveheight ) ) {
 			$slider_adaptiveheight = $defaults['adaptiveheight'];
 		}
+
+		$slider_verticalalign = $atts['verticalalign'];
+		if ( empty( $slider_verticalalign ) ) {
+			$slider_verticalalign = $defaults['verticalalign'];
+		}
 		/*
-		Animation Style - Select: Slide, Fade
-		Adaptive Height > Vertical Align - Radio Buttons: Top, Middle, Bottom
 		Show Arrows > Arrow Style - Radio Buttons
 		*/
 
@@ -609,10 +618,10 @@ class Social_Proof_Slider_Public {
 		// 	$dotsMarginStr = "margin-top: ".$dotsMarginTop.";";
 		// }
 
-		$alignStr = '';	// default
-		if ( $sc_settings['doAutoHeight'] != 'true' ) {
-			$alignStr = ' valign-' . $sc_settings['verticalalign'];
-		}
+		// $alignStr = '';	// default
+		// if ( $sc_settings['doAutoHeight'] != 'true' ) {
+		// 	$alignStr = ' valign-' . $sc_settings['verticalalign'];
+		// }
 
 		// Create 'items' object with all testimonials
 		$items = '';
@@ -629,7 +638,7 @@ class Social_Proof_Slider_Public {
 			$slickData .= '"autoplay":true';
 			// Autoplay - Display Time
 			if ( ! empty( $slider_displaytime ) ) {
-				$displayTimeNumber = intval($slider_displaytime) * 1000;
+				$displayTimeNumber = $slider_displaytime * 1000;
 				$slickData .= ',"autoplaySpeed":'.$displayTimeNumber;
 			}
 		} else {
@@ -656,6 +665,12 @@ class Social_Proof_Slider_Public {
 
 		$slickData .= ",";
 
+		// Arrows Style
+		$slickData .= '"prevArrow":"#'.$uniqueID.'-arrow-left",';
+		$slickData .= '"nextArrow":"#'.$uniqueID.'-arrow-right"';
+
+		$slickData .= ",";
+
 		// Show Dots
 		if ( $slider_showdots === "true" || $slider_showdots === "1" ) {
 			$slickData .= '"dots":true';
@@ -676,22 +691,31 @@ class Social_Proof_Slider_Public {
 
 		$textAlignStr = "align_" . $block_textalign;
 
+		$alignStr = "valign-".$atts['verticalalign'];
+
 		echo '<!-- // ********** SOCIAL PROOF SLIDER ********** // -->';
 		echo '<section id="' . $uniqueID . '" class="block wp-block-socialproofslider ' . $sc_settings['animationStyle'] . ' paddingoverride-'.$sc_settings['doPaddingOverride'].' ">';
 		echo '<div class="widget-wrap">';
-		echo '<div class="social-proof-slider-wrap ' . $textAlignStr . '" data-slick='.$slickData.'>';
+		if ( $slider_showarrows === "true" || $slider_showarrows === "1" ) {
+			echo '<button type="button" id="'.$uniqueID.'-arrow-left" class="slick-prev"><span class="fa fa-' . $slider_arrowstyle . '-left"></span></button>';
+		}
+		echo '<div class="social-proof-slider-wrap ' . $textAlignStr . ' ' . $alignStr . '" data-slick='.$slickData.'>';
 		echo $items;
 		echo '</div><!-- // .social-proof-slider-wrap // -->';
+		if ( $slider_showarrows === "true" || $slider_showarrows === "1" ) {
+			echo '<button type="button" id="'.$uniqueID.'-arrow-right" class="slick-next"><span class="fa fa-' . $slider_arrowstyle . '-right"></span></button>';
+		}
 
 		//* Output styles
 		$uniqueID = '#' . $uniqueID;
 		echo '<style>'."\n";
-		echo $uniqueID . ' .social-proof-slider-wrap button.slick-arrow { width: 30px; padding: 0; position: absolute; top: 50%; margin-top: -20px; z-index: 1; font-size: 32px; line-height: 32px; transition: all .3s ease; }';
-		echo $uniqueID . ' .social-proof-slider-wrap button.slick-arrow, ' . $uniqueID . ' .social-proof-slider-wrap button.slick-arrow:hover, ' . $uniqueID . ' .social-proof-slider-wrap button.slick-arrow:focus, ' . $uniqueID . ' .social-proof-slider-wrap button.slick-arrow:active { background: transparent; outline: 0; border: 0; }';
-		echo $uniqueID . ' .social-proof-slider-wrap button.slick-prev { left: 10px; }';
-		echo $uniqueID . ' .social-proof-slider-wrap button.slick-next { right: 10px; }';
 
-		echo $uniqueID . ' .social-proof-slider-wrap{ background-color:' . $style_bgcolor . '; '.$contentPaddingStr.' }'."\n";
+		if ( ! $slider_arrowcolor ) {
+			echo $uniqueID . ' button.slick-arrow { color: #000 !important; }'."\n";
+			echo $uniqueID . ' button.slick-arrow:hover { opacity: 0.5; }'."\n";
+		}
+
+		echo $uniqueID . ' .social-proof-slider-wrap { background-color:' . $style_bgcolor . '; '.$contentPaddingStr.' }'."\n";
 
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img { '.$imgMarginStr.' }'."\n";
 
@@ -724,6 +748,7 @@ class Social_Proof_Slider_Public {
 		echo '</style>'."\n";
 
 		echo '</div><!-- // .widget-wrap // -->';
+
 		echo '</section>';
 		echo '<!-- // ********** // END SOCIAL PROOF SLIDER // ********** // -->';
 
@@ -796,8 +821,10 @@ class Social_Proof_Slider_Public {
 			$settings .= 'displaytime="' . $atts['displaytime'] . '" ';
 			$settings .= 'animationstyle="' . $atts['animationstyle'] . '" ';
 			$settings .= 'showarrows="' . $atts['showarrows'] . '" ';
+			$settings .= 'arrowstyle="' . $atts['arrowstyle'] . '" ';
 			$settings .= 'showdots="' . $atts['showdots'] . '" ';
 			$settings .= 'adaptiveheight="' . $atts['adaptiveheight'] . '" ';
+			$settings .= 'verticalalign="' . $atts['verticalalign'] . '" ';
 
 			// Margin & Padding
 			$settings .= 'paddingunit="' . $atts['paddingunit'] . '" ';
@@ -851,11 +878,17 @@ class Social_Proof_Slider_Public {
 				'showarrows' => [
 					'default' => false
 				],
+				'arrowstyle' => [
+					'default' => 'angle'
+				],
 				'showdots' => [
 					'default' => false
 				],
 				'adaptiveheight' => [
 					'default' => false
+				],
+				'verticalalign' => [
+					'default' => 'align_middle'
 				],
 				'showfeaturedimages' => [
 					'default' => false

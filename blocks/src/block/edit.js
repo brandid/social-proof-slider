@@ -6,7 +6,7 @@
 const { registerBlockType } = wp.blocks;
 
 // React.createElement
-const { Component, createElement } = wp.element;
+const { Component, createElement, Fragment } = wp.element;
 
 // Import __ from i18n internationalization library
 const { __ } = wp.i18n;
@@ -16,16 +16,19 @@ const { AlignmentToolbar, BlockControls, InspectorControls, PanelColorSettings }
 
 // Import components
 const {
-    Icon,
+    Button,
+    ButtonGroup,
     ColorPicker,
-    TextControl,
-    SelectControl,
-    ToggleControl,
-    ServerSideRender,
+    Icon,
     PanelBody,
     PanelRow,
     RadioControl,
-    RangeControl
+    RangeControl,
+    SelectControl,
+    ServerSideRender,
+    TextControl,
+    ToggleControl,
+    Tooltip
     } = wp.components;
 
 /**
@@ -33,6 +36,7 @@ const {
  */
 import Margin from './margin';
 import Padding from './padding';
+import map from 'lodash/map';
 
 const customEvent = new Event( 'gutenbergSlick' );
 
@@ -137,6 +141,24 @@ class SPTestimonialsSlider extends Component {
 			{ value: 'em', label: __( 'Em (em)', 'socialproofslider' ) }
         ];
 
+        let selectedStyle = 1;
+
+		if ( attributes.arrowstyle ) {
+			selectedStyle = parseInt( attributes.arrowstyle.toString() );
+		}
+
+        const arrowStyles = [
+            { name: __( 'Style 1', 'socialproofslider' ), key: 'angle'  },
+            { name: __( 'Style 2', 'socialproofslider' ), key: 'angle-double'  },
+            { name: __( 'Style 3', 'socialproofslider' ), key: 'arrow-circle'  },
+            { name: __( 'Style 4', 'socialproofslider' ), key: 'arrow-circle-o'  },
+            { name: __( 'Style 5', 'socialproofslider' ), key: 'arrow'  },
+            { name: __( 'Style 6', 'socialproofslider' ), key: 'caret'  },
+            { name: __( 'Style 7', 'socialproofslider' ), key: 'caret-square-o'  },
+            { name: __( 'Style 8', 'socialproofslider' ), key: 'chevron-circle'  },
+            { name: __( 'Style 9', 'socialproofslider' ), key: 'chevron'  }
+        ];
+
         /* ------------------------------------------------------------------ */
 
         // Display block preview and UI
@@ -155,7 +177,7 @@ class SPTestimonialsSlider extends Component {
                         } }
                     />
                 </BlockControls>
-                <InspectorControls>
+                <InspectorControls key="inspector">
                     <PanelBody
                         title={ __( 'Post Settings', 'socialproofslider' ) }
                         initialOpen={ false }
@@ -188,6 +210,7 @@ class SPTestimonialsSlider extends Component {
             					value={ attributes.displaytime }
             					min={ 1 }
             					max={ 10 }
+                                step={ 0.5 }
                                 initialPosition={ 3 }
             					onChange={ ( value ) => this.props.setAttributes({ displaytime: value }) }
                                 allowReset={ true }
@@ -196,6 +219,7 @@ class SPTestimonialsSlider extends Component {
                             :
                             null
                         }
+                        <hr />
                         <PanelRow>
                             <RadioControl
                                 label={ __( 'Animation Style', 'socialproofslider' ) }
@@ -208,6 +232,7 @@ class SPTestimonialsSlider extends Component {
                                 selected={ attributes.animationstyle }
                             />
                         </PanelRow>
+                        <hr />
                         <PanelRow>
                             <ToggleControl
                             label={ __( 'Show Arrows', 'socialproofslider' ) }
@@ -216,6 +241,51 @@ class SPTestimonialsSlider extends Component {
                             help={ this.getShowArrowsHelp }
                             />
                         </PanelRow>
+                        { attributes.showarrows ?
+                            <Fragment>
+								<p><strong>{ __( 'Arrows Style', 'socialproofslider' ) }</strong></p>
+								<ButtonGroup aria-label={ __( 'Arrows Style', 'socialproofslider' ) }>
+									{ map( arrowStyles, ({ name, key }) => (
+										<Tooltip text={ name } key={ key }>
+											{
+                                                attributes.arrowstyle == key ?
+
+                                                <Button
+    												key={ key }
+    												className="spslider-arrow-selector-button selected"
+    												isSmall
+    												onClick={ () => {
+    													this.props.setAttributes({ arrowstyle: key });
+    													// this.setState({ 'arrowstyle': false });
+    												} }
+    											>
+                                                <span className={"icon icon-" + key }><i class={ "fa fa-" + key + "-left" }></i> <i class={ "fa fa-" + key + "-right" }></i></span>
+    											</Button>
+
+                                                :
+
+                                                <Button
+    												key={ key }
+    												className="spslider-arrow-selector-button"
+    												isSmall
+    												onClick={ () => {
+    													this.props.setAttributes({ arrowstyle: key });
+    													// this.setState({ 'arrowstyle': false });
+    												} }
+    											>
+                                                <span className={"icon icon-" + key }><i class={ "fa fa-" + key + "-left" }></i> <i class={ "fa fa-" + key + "-right" }></i></span>
+    											</Button>
+
+                                            }
+										</Tooltip>
+									) ) }
+								</ButtonGroup>
+								<p><i>{ __( 'Change the style of the slider arrows.', 'socialproofslider' ) }</i></p>
+							</Fragment>
+                            :
+                            null
+                        }
+                        <hr />
                         <PanelRow>
                             <ToggleControl
                             label={ __( 'Show Dots', 'socialproofslider' ) }
@@ -224,6 +294,7 @@ class SPTestimonialsSlider extends Component {
                             help={ this.getShowDotsHelp }
                             />
                         </PanelRow>
+                        <hr />
                         <PanelRow>
                             <ToggleControl
                             label={ __( 'Adaptive Height', 'socialproofslider' ) }
@@ -232,6 +303,21 @@ class SPTestimonialsSlider extends Component {
                             help={ this.getAdaptiveHeightHelp }
                             />
                         </PanelRow>
+                        { ! attributes.adaptiveheight ?
+                            <RadioControl
+                                label={ __( 'Vertical Align', 'socialproofslider' ) }
+                                help={ __( 'Choose how to vertically align each slide.', 'socialproofslider' ) }
+                                options={ [
+                                    { label: __( 'Top', 'socialproofslider' ), value: 'align_top' },
+                                    { label: __( 'Middle', 'socialproofslider' ), value: 'align_middle' },
+                                    { label: __( 'Bottom', 'socialproofslider' ), value: 'align_bottom' },
+                                ] }
+                                onChange={ ( value ) => this.props.setAttributes({ verticalalign: value }) }
+                                selected={ attributes.verticalalign }
+                            />
+                            :
+                            null
+                        }
                     </PanelBody>
                     <PanelBody
     					title={ __( 'Margin and Padding', 'socialproofslider' ) }

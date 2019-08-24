@@ -37,10 +37,6 @@ registerBlockType('social-proof-slider/main', {
         textalign: {
     		type: 'string',
     	},
-        showarrows: {
-    		type: 'boolean',
-            default: false,
-    	},
         autoplay: {
     		type: 'boolean',
             default: true,
@@ -53,6 +49,14 @@ registerBlockType('social-proof-slider/main', {
     		type: 'string',
             default: 'fade',
     	},
+        showarrows: {
+    		type: 'boolean',
+            default: false,
+    	},
+        arrowstyle: {
+    		type: 'string',
+            default: 'angle',
+    	},
         showdots: {
     		type: 'boolean',
             default: false,
@@ -60,6 +64,10 @@ registerBlockType('social-proof-slider/main', {
         adaptiveheight: {
     		type: 'boolean',
             default: false,
+    	},
+        verticalalign: {
+    		type: 'string',
+            default: 'align_middle',
     	},
         showfeaturedimages: {
     		type: 'boolean',
