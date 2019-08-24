@@ -15,7 +15,7 @@ const { __ } = wp.i18n;
 const { AlignmentToolbar, BlockControls, InspectorControls, PanelColorSettings } = wp.editor;
 
 // Import components
-const { Icon, ColorPicker, TextControl, SelectControl, ToggleControl, ServerSideRender, PanelBody, PanelRow } = wp.components;
+const { Icon, ColorPicker, TextControl, SelectControl, ToggleControl, ServerSideRender, PanelBody, PanelRow, RangeControl } = wp.components;
 
 /**
  * Internal dependencies.
@@ -88,6 +88,12 @@ class SPTestimonialsSlider extends Component {
         const setAttributes = this.props.setAttributes;
 
         document.dispatchEvent( customEvent )
+
+        // Update DisplayTime attr
+        function updateDisplayTime(value) {
+            setAttributes({ displaytime: value });
+            document.dispatchEvent( customEvent )
+        }
 
         // Update BG Color attr
         function updateBGColor(value) {
@@ -162,6 +168,21 @@ class SPTestimonialsSlider extends Component {
                             help={ this.getAutoplayHelp }
                             />
                         </PanelRow>
+                        { attributes.autoplay ?
+                            <RangeControl
+            					label={ __( 'Display Time (seconds)', 'socialproofslider' ) }
+                                beforeIcon={ 'clock' }
+            					value={ attributes.displaytime }
+            					min={ 0 }
+            					max={ 10 }
+                                initialPosition={ 3 }
+            					onChange={ ( value ) => this.props.setAttributes({ displaytime: value }) }
+                                allowReset={ true }
+                                help={ __( 'How long to display each slide before advancing to the next.', 'socialproofslider' ) }
+            				/>
+                            :
+                            null
+                        }
                         <PanelRow>
                             <ToggleControl
                             label={ __( 'Show Arrows', 'socialproofslider' ) }

@@ -45,6 +45,10 @@ registerBlockType('social-proof-slider/main', {
     		type: 'boolean',
             default: true,
     	},
+        displaytime: {
+    		type: 'number',
+            default: 3,
+    	},
         showdots: {
     		type: 'boolean',
             default: false,

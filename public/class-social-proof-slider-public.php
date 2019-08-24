@@ -432,6 +432,7 @@ class Social_Proof_Slider_Public {
 		$defaults['blockalign'] = 'center';
 		$defaults['showfeaturedimages'] = false;
 		$defaults['autoplay'] = true;
+		$defaults['displaytime'] = 3;
 		$defaults['showarrows'] = false;
 		$defaults['showdots'] = false;
 		$defaults['adaptiveheight'] = false;
@@ -470,6 +471,11 @@ class Social_Proof_Slider_Public {
 			$slider_autoplay = $defaults['autoplay'];
 		}
 
+		$slider_displaytime = $atts['displaytime'];
+		if ( empty( $slider_displaytime ) ) {
+			$slider_displaytime = $defaults['displaytime'];
+		}
+
 		$slider_showarrows = $atts['showarrows'];
 		if ( empty( $slider_showarrows ) ) {
 			$slider_showarrows = $defaults['showarrows'];
@@ -485,7 +491,6 @@ class Social_Proof_Slider_Public {
 			$slider_adaptiveheight = $defaults['adaptiveheight'];
 		}
 		/*
-		Auto Play > Display Time - Range: 0-10, Step: 0.25, Default: 3
 		Animation Style - Select: Slide, Fade
 		Adaptive Height > Vertical Align - Radio Buttons: Top, Middle, Bottom
 		Show Arrows > Arrow Style - Radio Buttons
@@ -614,9 +619,21 @@ class Social_Proof_Slider_Public {
 		$slickData = "'{";
 
 		if ( $slider_autoplay === "true" || $slider_autoplay === "1" ) {
+
 			$slickData .= '"autoplay":true';
+
+			if ( ! empty( $slider_displaytime ) ) {
+
+				$displayTimeNumber = intval($slider_displaytime) * 1000;
+
+				$slickData .= ',"autoplaySpeed":'.$displayTimeNumber;
+
+			}
+
 		} else {
+
 			$slickData .= '"autoplay":false';
+
 		}
 
 		$slickData .= ",";
@@ -764,6 +781,7 @@ class Social_Proof_Slider_Public {
 
 			// Slider settings
 			$settings .= 'autoplay="' . $atts['autoplay'] . '" ';
+			$settings .= 'displaytime="' . $atts['displaytime'] . '" ';
 			$settings .= 'showarrows="' . $atts['showarrows'] . '" ';
 			$settings .= 'showdots="' . $atts['showdots'] . '" ';
 			$settings .= 'adaptiveheight="' . $atts['adaptiveheight'] . '" ';
@@ -810,6 +828,9 @@ class Social_Proof_Slider_Public {
 				],
 				'autoplay' => [
 					'default' => true
+				],
+				'displaytime' => [
+					'default' => 3
 				],
 				'showarrows' => [
 					'default' => false
