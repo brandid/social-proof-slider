@@ -58,7 +58,7 @@ export default function Margin( props ) {
 		<Fragment>
 			{ marginEnableTop && (
 				<RangeControl
-					label={ marginTopLabel ? marginTopLabel : __( 'Margin Top', 'atomic-blocks' ) }
+					label={ marginTopLabel ? marginTopLabel : __( 'Margin Top', 'socialproofslider' ) }
 					value={ marginTop }
 					min={ marginTopMin }
 					max={ marginTopMax }
@@ -67,7 +67,7 @@ export default function Margin( props ) {
 			) }
 			{ marginEnableRight && (
 				<RangeControl
-					label={ marginRightLabel ? marginRightLabel : __( 'Margin Right', 'atomic-blocks' ) }
+					label={ marginRightLabel ? marginRightLabel : __( 'Margin Right', 'socialproofslider' ) }
 					value={ marginRight }
 					min={ marginRightMin }
 					max={ marginRightMax }
@@ -76,7 +76,7 @@ export default function Margin( props ) {
 			) }
 			{ marginEnableBottom && (
 				<RangeControl
-					label={ marginBottomLabel ? marginBottomLabel : __( 'Margin Bottom', 'atomic-blocks' ) }
+					label={ marginBottomLabel ? marginBottomLabel : __( 'Margin Bottom', 'socialproofslider' ) }
 					value={ marginBottom }
 					min={ marginBottomMin }
 					max={ marginBottomMax }
@@ -85,7 +85,7 @@ export default function Margin( props ) {
 			) }
 			{ marginEnableLeft && (
 				<RangeControl
-					label={ marginLeftLabel ? marginLeftLabel : __( 'Margin Left', 'atomic-blocks' ) }
+					label={ marginLeftLabel ? marginLeftLabel : __( 'Margin Left', 'socialproofslider' ) }
 					value={ marginLeft }
 					min={ marginLeftMin }
 					max={ marginLeftMax }
@@ -94,7 +94,7 @@ export default function Margin( props ) {
 			) }
 			{ marginEnableVertical && (
 				<RangeControl
-					label={ marginVerticalLabel ? marginVerticalLabel : __( 'Margin Vertical', 'atomic-blocks' ) }
+					label={ marginVerticalLabel ? marginVerticalLabel : __( 'Margin Vertical', 'socialproofslider' ) }
 					value={ marginVertical }
 					min={ marginVerticalMin }
 					max={ marginVerticalMax }
@@ -103,7 +103,7 @@ export default function Margin( props ) {
 			) }
 			{ marginEnableHorizontal && (
 				<RangeControl
-					label={ marginHorizontalLabel ? marginHorizontalLabel : __( 'Margin Horizontal', 'atomic-blocks' ) }
+					label={ marginHorizontalLabel ? marginHorizontalLabel : __( 'Margin Horizontal', 'socialproofslider' ) }
 					value={ marginHorizontal }
 					min={ marginHorizontalMin }
 					max={ marginHorizontalMax }

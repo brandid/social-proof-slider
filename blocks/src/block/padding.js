@@ -61,7 +61,7 @@ export default function Padding( props ) {
 		<Fragment>
 			{ paddingEnable && (
 				<RangeControl
-					label={ paddingTitle ? paddingTitle : __( 'Padding', 'atomic-blocks' ) }
+					label={ paddingTitle ? paddingTitle : __( 'Padding', 'socialproofslider' ) }
 					help={ paddingHelp ? paddingHelp : null }
 					value={ padding }
 					min={ paddingMin }
@@ -71,7 +71,7 @@ export default function Padding( props ) {
 			) }
 			{ paddingEnableTop && (
 				<RangeControl
-					label={ __( 'Padding Top', 'atomic-blocks' ) }
+					label={ __( 'Padding Top', 'socialproofslider' ) }
 					value={ paddingTop }
 					min={ paddingTopMin }
 					max={ paddingTopMax }
@@ -80,7 +80,7 @@ export default function Padding( props ) {
 			) }
 			{ paddingEnableRight && (
 				<RangeControl
-					label={ __( 'Padding Right', 'atomic-blocks' ) }
+					label={ __( 'Padding Right', 'socialproofslider' ) }
 					value={ paddingRight }
 					min={ paddingRightMin }
 					max={ paddingRightMax }
@@ -89,7 +89,7 @@ export default function Padding( props ) {
 			) }
 			{ paddingEnableBottom && (
 				<RangeControl
-					label={ __( 'Padding Bottom', 'atomic-blocks' ) }
+					label={ __( 'Padding Bottom', 'socialproofslider' ) }
 					value={ paddingBottom }
 					min={ paddingBottomMin }
 					max={ paddingBottomMax }
@@ -98,7 +98,7 @@ export default function Padding( props ) {
 			) }
 			{ paddingEnableLeft && (
 				<RangeControl
-					label={ __( 'Padding Left', 'atomic-blocks' ) }
+					label={ __( 'Padding Left', 'socialproofslider' ) }
 					value={ paddingLeft }
 					min={ paddingLeftMin }
 					max={ paddingLeftMax }
@@ -107,7 +107,7 @@ export default function Padding( props ) {
 			) }
 			{ paddingEnableVertical && (
 				<RangeControl
-					label={ __( 'Padding Vertical', 'atomic-blocks' ) }
+					label={ __( 'Padding Vertical', 'socialproofslider' ) }
 					value={ paddingVertical }
 					min={ paddingVerticalMin }
 					max={ paddingVerticalMax }
@@ -116,7 +116,7 @@ export default function Padding( props ) {
 			) }
 			{ paddingEnableHorizontal && (
 				<RangeControl
-					label={ __( 'Padding Horizontal', 'atomic-blocks' ) }
+					label={ __( 'Padding Horizontal', 'socialproofslider' ) }
 					value={ paddingHorizontal }
 					min={ paddingHorizontalMin }
 					max={ paddingHorizontalMax }
