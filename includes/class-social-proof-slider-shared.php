@@ -92,11 +92,11 @@ class Social_Proof_Slider_Shared {
 		$return = '';
 
 		if ( !empty($taxSlug) ) {
-			// limit by category
+			// Limit by category.
 			$args = $this->set_args( $params, "", "", $taxSlug );
 
 		} else if ( !empty($limitIDs) ) {
-			// Including/Excluding
+			// Limit by post ID.
 			if ( !empty($postLimit) ) {
 				// Exclude
 				$args 	= $this->set_args( $params, $postLimit, $limitIDs, "" );

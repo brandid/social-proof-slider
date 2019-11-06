@@ -37,6 +37,10 @@ registerBlockType('social-proof-slider/main', {
         textalign: {
     		type: 'string',
     	},
+		sortpostsby: {
+			type: 'string',
+			default: 'desc',
+		},
         autoplay: {
     		type: 'boolean',
             default: true,

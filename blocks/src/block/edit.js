@@ -134,6 +134,13 @@ class SPTestimonialsSlider extends Component {
             document.dispatchEvent( customEvent )
         }
 
+        /* Sort By options. */
+		const sortByOptions = [
+			{ value: 'RAND', label: __( 'Random', 'socialproofslider' ) },
+			{ value: 'DESC', label: __( 'Date DESC', 'socialproofslider' ) },
+			{ value: 'ASC', label: __( 'Date ASC', 'socialproofslider' ) }
+        ];
+
         /* CSS Units. */
 		const cssUnits = [
 			{ value: 'px', label: __( 'Pixel (px)', 'socialproofslider' ) },
@@ -182,6 +189,16 @@ class SPTestimonialsSlider extends Component {
                         title={ __( 'Post Settings', 'socialproofslider' ) }
                         initialOpen={ false }
                         className={ 'spslider-inspector-panel' }>
+                        <PanelRow>
+                            <SelectControl
+                                label={ __( 'Sort Posts By:', 'socialproofslider' ) }
+                                help={ __( 'Choose between Random, Date DESC, or Date ASC.', 'socialproofslider' ) }
+                                options={ sortByOptions }
+                                value={ attributes.sortpostsby }
+                                onChange={ ( value ) => this.props.setAttributes({ sortpostsby: value }) }
+                            />
+                        </PanelRow>
+                        <hr />
                         <PanelRow>
                             <ToggleControl
                             label={ __( 'Show Featured Images', 'socialproofslider' ) }
