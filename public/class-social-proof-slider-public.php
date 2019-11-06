@@ -428,8 +428,10 @@ class Social_Proof_Slider_Public {
 
 		ob_start();
 
-		// Declare defaults
+		/* Declare defaults
+		-------------------------------------------- */
 		$defaults['blockalign'] = 'center';
+		$defaults['sortpostsby'] = 'DESC';
 		$defaults['showfeaturedimages'] = false;
 		$defaults['autoplay'] = true;
 		$defaults['displaytime'] = 3;
@@ -442,19 +444,50 @@ class Social_Proof_Slider_Public {
 		$defaults['exclude'] = '';
 		$defaults['category'] = '';
 
-		// Get Block Settings
+		/* Function to assign default value if attr is empty
+		 *
+		 * string	$propName	name of the property to check
+		 * return	$returnVal	return value
+		 */
+		function getAttsOrDefault( $propName, $atts = array(), $defaults = array() ) {
+
+			$returnVal1 = ( array_key_exists($propName, $atts) && !empty( $atts[$propName] ) )
+		         ? $atts[$propName]
+		         : 'non-existent or empty in "atts"';
+
+			$returnVal2 = ( array_key_exists($propName, $defaults) && !empty( $defaults[$propName] ) )
+			     ? $defaults[$propName]
+			     : 'non-existent or empty in "defaults"';
+
+			// if ( ! empty( $atts[$propName] ) ) {
+			// 	$returnVal = $atts[$propName];
+			// }else {
+			// 	$returnVal = $defaults[$propName];
+			// }
+
+			return " <br> " . $returnVal1 . " <br> " . $returnVal2;
+		}
+
+		/* Get Block Settings
+		-------------------------------------------- */
 		$block_textalign = $atts['textalign'];
 		if ( empty( $block_textalign ) ) {
 			$block_textalign = $defaults['blockalign'];
 		}
 
-		// Get Post Settings
+		/* Get Post Settings
+		-------------------------------------------- */
 		$posts_showfeaturedimages = $atts['showfeaturedimages'];
 		if ( $posts_showfeaturedimages === "true" ) {
 			$posts_showfeaturedimages = 1;
 		}
 		if ( empty( $posts_showfeaturedimages ) ) {
 			$posts_showfeaturedimages = $defaults['showfeaturedimages'];
+		}
+
+		$posts_sortby = $atts['sortpostsby'];
+		if ( empty( $posts_sortby ) ) {
+			$posts_sortby = $defaults['sortpostsby'];
 		}
 		/*
 		Sort Posts By - Select: Random, Date DESC, Date ASC
@@ -467,11 +500,14 @@ class Social_Proof_Slider_Public {
 		Show Featured Image Border > Featured Image Border Size - Range: 0-10
 		*/
 
-		// Get Slider Settings
+		/* Get Slider Settings
+		-------------------------------------------- */
 		$slider_autoplay = $atts['autoplay'];
 		if ( empty( $slider_autoplay ) ) {
 			$slider_autoplay = $defaults['autoplay'];
 		}
+
+		// echo '<h3>autoplay: ' . getAttsOrDefault('autoplay') . '</h3>';
 
 		$slider_displaytime = $atts['displaytime'];
 		if ( empty( $slider_displaytime ) ) {
@@ -507,11 +543,9 @@ class Social_Proof_Slider_Public {
 		if ( empty( $slider_verticalalign ) ) {
 			$slider_verticalalign = $defaults['verticalalign'];
 		}
-		/*
-		Show Arrows > Arrow Style - Radio Buttons
-		*/
 
-		// Get Margin & Padding Settings
+		/* Get Margin & Padding Settings
+		-------------------------------------------- */
 		$paddingunit = $atts['paddingunit'];
 		$paddingsync = $atts['paddingsync'];
 		$contentPaddingStr = '';
@@ -531,7 +565,8 @@ class Social_Proof_Slider_Public {
 		Dots Margin Top - Range: 0-100 | Default: 10px
 		*/
 
-		// Get Color Settings
+		/* Get Color Settings
+		-------------------------------------------- */
 		$style_bgcolor = $atts['bgcolor'];
 		$style_testimonialcolor = $atts['testimonialtextcolor'];
 		$style_authornamecolor = $atts['authornamecolor'];
@@ -539,8 +574,9 @@ class Social_Proof_Slider_Public {
 		/*
 		Image Border Color - Color Picker | Default: #000000
 		Arrows Color - Color Picker | Default: #000000
-		Arrows Hover Color - Color Picker | Default: #000000
+		Arrows Hover Color - Color Picker | Default: #666666
 		Dots Color - Color Picker | Default: #000000
+		Dots Hover Color - Color Picker | Default: #666666
 		*/
 
 		$shared = new Social_Proof_Slider_Shared( $this->plugin_name, $this->version );
@@ -552,14 +588,14 @@ class Social_Proof_Slider_Public {
 		$sc_atts = shortcode_atts( $defaults, $atts, 'social-proof-slider' );
 
 		// Determine ORDERBY and ORDER args
-		$sortbysetting = $sc_settings['sortby'];
+		$sortbysetting = $posts_sortby;
 		if ( $sortbysetting == "RAND" ) {
 			$queryargs = array(
 				'orderby' => 'rand',
 			);
 		} else {
 			$queryargs = array(
-				'order' => $sc_settings['sortby'],
+				'order' => $posts_sortby,
 				'orderby' => 'ID',
 			);
 		}
@@ -815,6 +851,7 @@ class Social_Proof_Slider_Public {
 
 			// Post settings
 			$settings .= 'showfeaturedimages="' . $atts['showfeaturedimages'] . '" ';
+			$settings .= 'sortpostsby="' . $atts['sortpostsby'] . '" ';
 
 			// Slider settings
 			$settings .= 'autoplay="' . $atts['autoplay'] . '" ';
@@ -865,6 +902,9 @@ class Social_Proof_Slider_Public {
 			'attributes' => [
 				'textalign' => [
 					'default' => ''
+				],
+				'sortpostsby' => [
+					'default' => 'DESC'
 				],
 				'autoplay' => [
 					'default' => true
