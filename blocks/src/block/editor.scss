@@ -1,29 +1,17 @@
 @import '../common';
 
-.gutenberg { // This may need to be .wp-block in WordPress 5+
+.spslider-inspector-panel .components-panel__row {
+    margin-bottom: 14px;
+}
 
-  .container {
-    border: 1px solid $gray;
-    padding: 1rem;
-  }
+.edit-post-settings-sidebar__panel-block .components-panel__body.spslider-inspector-panel .components-base-control:last-child {
+    margin-bottom: 0;
+}
 
-  .button-container {
-    text-align: center;
-    padding: 22% 0;
-    background: $off-white;
-    border: 1px solid $gray;
-    border-radius: 2px;
-    margin: 0 0 1.2rem 0;
-  }
+.spslider-inspector-panel .components-base-control .components-base-control__help {
+    margin-top: 0;
+}
 
-  .heading {
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  .image {
-    height: 15.7rem;
-    width: 100%;
-    object-fit: cover;
-  }
+.spslider-inspector-panel .components-base-control .components-base-control__help:last-of-type {
+    margin-bottom: 0;
 }
