@@ -67,6 +67,10 @@ registerBlockType('social-proof-slider/main', {
     		type: 'boolean',
             default: false,
     	},
+        imageborderradius: {
+    		type: 'number',
+            default: 25,
+    	},
         showquotemarks: {
             type: 'boolean',
             default: false,

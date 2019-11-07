@@ -440,6 +440,7 @@ class Social_Proof_Slider_Public {
 		$defaults['postidorcatslug'] = '';
 		$defaults['showfeaturedimages'] = false;
 		$defaults['showimageborder'] = false;
+		// $defaults['imageborderradius'] = 25;
 		$defaults['showquotemarks'] = false;
 		$defaults['autoplay'] = true;
 		$defaults['displaytime'] = 3;
@@ -528,14 +529,17 @@ class Social_Proof_Slider_Public {
 			$posts_showimageborder = $defaults['showimageborder'];
 		}
 
+		$posts_imageborderradius = $atts['imageborderradius'];
+		if ( empty( $posts_imageborderradius ) ) {
+			$posts_imageborderradius = 0;
+		}
+
 		$posts_showquotes = $atts['showquotemarks'];
 		if ( empty( $posts_showquotes ) ) {
 			$posts_showquotes = $defaults['showquotemarks'];
 		}
 		/*
-		Show Featured Image Border - Toggle
-		Show Featured Image Border > Image Border Radius - Text Input
-		Show Featured Image Border > Featured Image Border Size - Range: 0-10
+		Show Featured Image Border > Featured Image Border Size - Range: 0-50 - default: 5
 		*/
 
 		/* Get Slider Settings
@@ -594,7 +598,7 @@ class Social_Proof_Slider_Public {
 			$contentPaddingStr .= 'padding-left: ' . $atts['paddingleft'] . $paddingunit . ';';
 		}
 		/*
-		Featured Image Border Padding - (synced) - Range: 0-50 | Default: 4px
+		Featured Image Border Padding - Range: 0-50 | Default: 4px
 		Featured Image Margin Bottom - Range: 0-100 | Default: 20px
 		Testimonial Text Container Margin Bottom - Range: 0-100 | Default: 30px
 		Quote Text Margin Bottom - Range: 0-100 | Default: 30px
@@ -803,10 +807,10 @@ class Social_Proof_Slider_Public {
 
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img { '.$imgMarginStr.' }'."\n";
 
-		if ( $sc_settings['imageBorderRadius'] === 0 ){
+		if ( empty( $posts_imageborderradius ) || ( $posts_imageborderradius === 0 ) || ( $posts_imageborderradius === false ) ) {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius: 0; }'."\n";
 		} else {
-			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius:' . $sc_settings['imageBorderRadius'] . '; }'."\n";
+			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius: ' . $posts_imageborderradius . '%; }'."\n";
 		}
 
 		if ( $showImageBorder === "true" || $showImageBorder === "1" ) {
@@ -906,6 +910,7 @@ class Social_Proof_Slider_Public {
 			$settings .= 'catslug="' . $atts['catslug'] . '" ';
 			$settings .= 'showfeaturedimages="' . $atts['showfeaturedimages'] . '" ';
 			$settings .= 'showimageborder="' . $atts['showimageborder'] . '" ';
+			$settings .= 'imageborderradius="' . $atts['imageborderradius'] . '" ';
 			$settings .= 'showquotemarks="' . $atts['showquotemarks'] . '" ';
 
 			// Slider settings
@@ -981,6 +986,9 @@ class Social_Proof_Slider_Public {
 				],
 				'showimageborder' => [
 					'default' => false
+				],
+				'imageborderradius' => [
+					'default' => 25
 				],
 				'showquotemarks' => [
 					'default' => false

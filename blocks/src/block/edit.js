@@ -282,8 +282,19 @@ class SPTestimonialsSlider extends Component {
                         </PanelRow>
                         { attributes.showfeaturedimages ?
                             <Fragment>
+                                <RangeControl
+                                    label={ __( 'Image Border Radius (%)', 'socialproofslider' ) }
+                                    value={ attributes.imageborderradius }
+                                    min={ 0 }
+                                    max={ 50 }
+                                    step={ 1 }
+                                    initialPosition={ 25 }
+                                    onChange={ ( value ) => this.props.setAttributes({ imageborderradius: value }) }
+                                    allowReset={ true }
+                                    help={ __( 'Define the image border radius.', 'socialproofslider' ) }
+                                />
                                 <ToggleControl
-                                label={ __( 'Show Image Border', 'socialproofslider' ) }
+                                label={ __( 'Image Border', 'socialproofslider' ) }
                                 checked={ !! attributes.showimageborder }
                                 onChange={ this.toggleShowFeaturedImageBorder }
                                 help={ this.getShowImageBorderHelp }
