@@ -348,7 +348,7 @@ class Social_Proof_Slider_Shared {
 				            'taxonomy' => 'category',
 				            'field' => 'slug',
 				            'terms' => $taxSlug,
-							'operator' => 'NOT EXISTS'
+							'operator' => 'NOT IN'
 				        )
 				    )
 				);
