@@ -337,6 +337,9 @@ class Social_Proof_Slider_Shared {
 		// Limit by category.
 		if ( ! empty ( $taxSlug ) ) {
 
+			// Create array of the Category slugs
+			$catArray = explode(',', $taxSlug);
+
 			// Hide posts from this category.
 			if ( ! empty( $postLimit ) ) {
 
@@ -347,7 +350,7 @@ class Social_Proof_Slider_Shared {
 				        array(
 				            'taxonomy' => 'category',
 				            'field' => 'slug',
-				            'terms' => $taxSlug,
+				            'terms' => $catArray,
 							'operator' => 'NOT IN'
 				        )
 				    )
@@ -363,7 +366,7 @@ class Social_Proof_Slider_Shared {
 				        array(
 				            'taxonomy' => 'category',
 				            'field' => 'slug',
-				            'terms' => $taxSlug
+				            'terms' => $catArray
 				        )
 				    )
 				);
