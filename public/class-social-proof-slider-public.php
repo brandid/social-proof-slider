@@ -433,12 +433,13 @@ class Social_Proof_Slider_Public {
 		/* Declare defaults
 		-------------------------------------------- */
 		$defaults['blockalign'] = 'center';
-		$defaults['showfeaturedimages'] = false;
 		$defaults['sortpostsby'] = 'DESC';
 		$defaults['filterposts'] = false;
 		$defaults['filtershowhide'] = 'show';
 		$defaults['filterby'] = 'postid';
 		$defaults['postidorcatslug'] = '';
+		$defaults['showfeaturedimages'] = false;
+		$defaults['showimageborder'] = false;
 		$defaults['showquotemarks'] = false;
 		$defaults['autoplay'] = true;
 		$defaults['displaytime'] = 3;
@@ -484,14 +485,6 @@ class Social_Proof_Slider_Public {
 
 		/* Get Post Settings
 		-------------------------------------------- */
-		$posts_showfeaturedimages = $atts['showfeaturedimages'];
-		if ( $posts_showfeaturedimages === "true" ) {
-			$posts_showfeaturedimages = 1;
-		}
-		if ( empty( $posts_showfeaturedimages ) ) {
-			$posts_showfeaturedimages = $defaults['showfeaturedimages'];
-		}
-
 		$posts_sortby = $atts['sortpostsby'];
 		if ( empty( $posts_sortby ) ) {
 			$posts_sortby = $defaults['sortpostsby'];
@@ -520,6 +513,19 @@ class Social_Proof_Slider_Public {
 		$posts_catslug = $atts['catslug'];
 		if ( empty( $posts_catslug ) ) {
 			$posts_catslug = $defaults['catslug'];
+		}
+
+		$posts_showfeaturedimages = $atts['showfeaturedimages'];
+		if ( $posts_showfeaturedimages === "true" ) {
+			$posts_showfeaturedimages = 1;
+		}
+		if ( empty( $posts_showfeaturedimages ) ) {
+			$posts_showfeaturedimages = $defaults['showfeaturedimages'];
+		}
+
+		$posts_showimageborder = $atts['showimageborder'];
+		if ( empty( $posts_showimageborder ) ) {
+			$posts_showimageborder = $defaults['showimageborder'];
 		}
 
 		$posts_showquotes = $atts['showquotemarks'];
@@ -665,7 +671,7 @@ class Social_Proof_Slider_Public {
 
 		}
 
-		$showImageBorder = $sc_settings['showImageBorder'];
+		$showImageBorder = $posts_showimageborder;
 		$imageBorderColor = $sc_settings['imageBorderColor'];
 		$imageBorderThickness = $sc_settings['imageBorderThickness'];
 		$imageBorderPadding = $sc_settings['imageBorderPadding'];
@@ -803,7 +809,7 @@ class Social_Proof_Slider_Public {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius:' . $sc_settings['imageBorderRadius'] . '; }'."\n";
 		}
 
-		if ( $showImageBorder == '1' ) {
+		if ( $showImageBorder === "true" || $showImageBorder === "1" ) {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img { border: ' . $imageBorderThickness . ' solid ' . $imageBorderColor . ' !important; padding: ' . $imageBorderPadding . ' }'."\n";
 		}
 
@@ -892,13 +898,14 @@ class Social_Proof_Slider_Public {
 			}
 
 			// Post settings
-			$settings .= 'showfeaturedimages="' . $atts['showfeaturedimages'] . '" ';
 			$settings .= 'sortpostsby="' . $atts['sortpostsby'] . '" ';
 			$settings .= 'filterposts="' . $atts['filterposts'] . '" ';
 			$settings .= 'filtershowhide="' . $atts['filtershowhide'] . '" ';
 			$settings .= 'filterby="' . $atts['filterby'] . '" ';
 			$settings .= 'postids="' . $atts['postids'] . '" ';
 			$settings .= 'catslug="' . $atts['catslug'] . '" ';
+			$settings .= 'showfeaturedimages="' . $atts['showfeaturedimages'] . '" ';
+			$settings .= 'showimageborder="' . $atts['showimageborder'] . '" ';
 			$settings .= 'showquotemarks="' . $atts['showquotemarks'] . '" ';
 
 			// Slider settings
@@ -969,6 +976,12 @@ class Social_Proof_Slider_Public {
 				'catslug' => [
 					'default' => ''
 				],
+				'showfeaturedimages' => [
+					'default' => false
+				],
+				'showimageborder' => [
+					'default' => false
+				],
 				'showquotemarks' => [
 					'default' => false
 				],
@@ -995,9 +1008,6 @@ class Social_Proof_Slider_Public {
 				],
 				'verticalalign' => [
 					'default' => 'align_middle'
-				],
-				'showfeaturedimages' => [
-					'default' => false
 				],
 				'paddingsync' => [
 					'default' => true

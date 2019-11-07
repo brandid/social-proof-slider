@@ -49,9 +49,10 @@ class SPTestimonialsSlider extends Component {
 		// Create toggles for each attribute; we create them here rather than
 		// passing `this.createToggleAttribute( 'showarrows' )` directly to
 		// `onChange` to avoid re-renders.
-        this.toggleShowFeaturedImages = this.createToggleAttribute( 'showfeaturedimages' );
         this.toggleFilterPosts = this.createToggleAttribute( 'filterposts' );
+        this.toggleShowFeaturedImages = this.createToggleAttribute( 'showfeaturedimages' );
         this.toggleShowQuotes = this.createToggleAttribute( 'showquotemarks' );
+        this.toggleShowFeaturedImageBorder = this.createToggleAttribute( 'showimageborder' );
 
         this.toggleAutoplay = this.createToggleAttribute( 'autoplay' );
 		this.toggleShowArrows = this.createToggleAttribute( 'showarrows' );
@@ -74,19 +75,29 @@ class SPTestimonialsSlider extends Component {
     /* TOOLTIPS
     --------------------------------------------------------------------- */
 
-    // Tooltip - Slider - Autoplay
-    getAutoplayHelp( checked ) {
-        return checked ? __( 'Autplay is enabled.', 'socialproofslider' ) : __( 'Toggle to advance the slides automatically.', 'socialproofslider' );
-    }
-
     // Tooltip - Slider - Filter Posts
     getFilterPostsHelp( checked ) {
         return checked ? __( 'Testimonials will be filtered.', 'socialproofslider' ) : __( 'Enable this setting to filter the testimonials.', 'socialproofslider' );
     }
 
+    // Tooltip - Slider - Featured Images
+    getShowFeaturedImagesHelp( checked ) {
+        return checked ? __( 'Showing the Featured Images.', 'socialproofslider' ) : __( 'Toggle to show the Featured Image for each testimonial.', 'socialproofslider' );
+    }
+
     // Tooltip - Slider - Show Quotation Marks
     getShowQuotesHelp( checked ) {
         return checked ? __( 'Showing quotation marks.', 'socialproofslider' ) : __( 'Toggle to show quotation marks around the testimonial text.', 'socialproofslider' );
+    }
+
+    // Tooltip - Slider - Show Quotation Marks
+    getShowImageBorderHelp( checked ) {
+        return checked ? __( 'Showing a border around featured images.', 'socialproofslider' ) : __( 'Toggle to show a border around the featured images.', 'socialproofslider' );
+    }
+
+    // Tooltip - Slider - Autoplay
+    getAutoplayHelp( checked ) {
+        return checked ? __( 'Autplay is enabled.', 'socialproofslider' ) : __( 'Toggle to advance the slides automatically.', 'socialproofslider' );
     }
 
     // Tooltip - Slider - Show Arrows
@@ -102,11 +113,6 @@ class SPTestimonialsSlider extends Component {
     // Tooltip - Slider - Adaptive Height
     getAdaptiveHeightHelp( checked ) {
         return checked ? __( 'The slider will dynamically adjust height based on each slide\'s height.', 'socialproofslider' ) : __( 'Toggle to dynamically adjust slider height based on each slide\'s height.', 'socialproofslider' );
-    }
-
-    // Tooltip - Slider - Adaptive Height
-    getShowFeaturedImagesHelp( checked ) {
-        return checked ? __( 'Showing the Featured Images.', 'socialproofslider' ) : __( 'Toggle to show the Featured Image for each testimonial.', 'socialproofslider' );
     }
 
     render() {
@@ -202,15 +208,6 @@ class SPTestimonialsSlider extends Component {
                         initialOpen={ false }
                         className={ 'spslider-inspector-panel' }>
                         <PanelRow>
-                            <ToggleControl
-                            label={ __( 'Show Featured Images', 'socialproofslider' ) }
-                            checked={ !! attributes.showfeaturedimages }
-                            onChange={ this.toggleShowFeaturedImages }
-                            help={ this.getShowFeaturedImagesHelp }
-                            />
-                        </PanelRow>
-                        <hr />
-                        <PanelRow>
                             <SelectControl
                                 label={ __( 'Sort Posts By:', 'socialproofslider' ) }
                                 help={ __( 'Choose between Random, Date DESC, or Date ASC.', 'socialproofslider' ) }
@@ -270,6 +267,27 @@ class SPTestimonialsSlider extends Component {
                                     :
                                     null
                                 }
+                            </Fragment>
+                            :
+                            null
+                        }
+                        <hr />
+                        <PanelRow>
+                            <ToggleControl
+                            label={ __( 'Show Featured Images', 'socialproofslider' ) }
+                            checked={ !! attributes.showfeaturedimages }
+                            onChange={ this.toggleShowFeaturedImages }
+                            help={ this.getShowFeaturedImagesHelp }
+                            />
+                        </PanelRow>
+                        { attributes.showfeaturedimages ?
+                            <Fragment>
+                                <ToggleControl
+                                label={ __( 'Show Image Border', 'socialproofslider' ) }
+                                checked={ !! attributes.showimageborder }
+                                onChange={ this.toggleShowFeaturedImageBorder }
+                                help={ this.getShowImageBorderHelp }
+                                />
                             </Fragment>
                             :
                             null

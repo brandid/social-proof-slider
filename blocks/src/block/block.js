@@ -59,6 +59,14 @@ registerBlockType('social-proof-slider/main', {
         catslug: {
             type: 'string',
         },
+        showfeaturedimages: {
+    		type: 'boolean',
+            default: false,
+    	},
+        showimageborder: {
+    		type: 'boolean',
+            default: false,
+    	},
         showquotemarks: {
             type: 'boolean',
             default: false,
@@ -94,10 +102,6 @@ registerBlockType('social-proof-slider/main', {
         verticalalign: {
     		type: 'string',
             default: 'align_middle',
-    	},
-        showfeaturedimages: {
-    		type: 'boolean',
-            default: false,
     	},
         paddingsync: {
 			type: 'boolean',
