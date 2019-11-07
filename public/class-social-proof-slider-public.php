@@ -440,7 +440,6 @@ class Social_Proof_Slider_Public {
 		$defaults['postidorcatslug'] = '';
 		$defaults['showfeaturedimages'] = false;
 		$defaults['showimageborder'] = false;
-		// $defaults['imageborderradius'] = 25;
 		$defaults['showquotemarks'] = false;
 		$defaults['autoplay'] = true;
 		$defaults['displaytime'] = 3;
@@ -534,13 +533,15 @@ class Social_Proof_Slider_Public {
 			$posts_imageborderradius = 0;
 		}
 
+		$posts_imagebordersize = $atts['imagebordersize'];
+		if ( empty( $posts_imagebordersize ) ) {
+			$posts_imagebordersize = 0;
+		}
+
 		$posts_showquotes = $atts['showquotemarks'];
 		if ( empty( $posts_showquotes ) ) {
 			$posts_showquotes = $defaults['showquotemarks'];
 		}
-		/*
-		Show Featured Image Border > Featured Image Border Size - Range: 0-50 - default: 5
-		*/
 
 		/* Get Slider Settings
 		-------------------------------------------- */
@@ -677,7 +678,7 @@ class Social_Proof_Slider_Public {
 
 		$showImageBorder = $posts_showimageborder;
 		$imageBorderColor = $sc_settings['imageBorderColor'];
-		$imageBorderThickness = $sc_settings['imageBorderThickness'];
+		$imageBorderThickness = $posts_imagebordersize;
 		$imageBorderPadding = $sc_settings['imageBorderPadding'];
 
 		// $smartQuotes = $sc_settings['surroundWithQuotes'];
@@ -814,7 +815,7 @@ class Social_Proof_Slider_Public {
 		}
 
 		if ( $showImageBorder === "true" || $showImageBorder === "1" ) {
-			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img { border: ' . $imageBorderThickness . ' solid ' . $imageBorderColor . ' !important; padding: ' . $imageBorderPadding . ' }'."\n";
+			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img { border: ' . $imageBorderThickness . 'px solid ' . $imageBorderColor . ' !important; padding: ' . $imageBorderPadding . ' }'."\n";
 		}
 
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text{ '.$textPaddingStr.' }'."\n";
@@ -911,6 +912,7 @@ class Social_Proof_Slider_Public {
 			$settings .= 'showfeaturedimages="' . $atts['showfeaturedimages'] . '" ';
 			$settings .= 'showimageborder="' . $atts['showimageborder'] . '" ';
 			$settings .= 'imageborderradius="' . $atts['imageborderradius'] . '" ';
+			$settings .= 'imagebordersize="' . $atts['imagebordersize'] . '" ';
 			$settings .= 'showquotemarks="' . $atts['showquotemarks'] . '" ';
 
 			// Slider settings
@@ -989,6 +991,9 @@ class Social_Proof_Slider_Public {
 				],
 				'imageborderradius' => [
 					'default' => 25
+				],
+				'imagebordersize' => [
+					'default' => 5
 				],
 				'showquotemarks' => [
 					'default' => false

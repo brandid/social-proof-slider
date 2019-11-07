@@ -299,6 +299,21 @@ class SPTestimonialsSlider extends Component {
                                 onChange={ this.toggleShowFeaturedImageBorder }
                                 help={ this.getShowImageBorderHelp }
                                 />
+                                { attributes.showimageborder ?
+                                    <RangeControl
+                                        label={ __( 'Border Size (px)', 'socialproofslider' ) }
+                                        value={ attributes.imagebordersize }
+                                        min={ 0 }
+                                        max={ 50 }
+                                        step={ 1 }
+                                        initialPosition={ 5 }
+                                        onChange={ ( value ) => this.props.setAttributes({ imagebordersize: value }) }
+                                        allowReset={ true }
+                                        help={ __( 'Define the thickness of the border.', 'socialproofslider' ) }
+                                    />
+                                    :
+                                    null
+                                }
                             </Fragment>
                             :
                             null
