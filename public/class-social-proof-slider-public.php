@@ -428,10 +428,16 @@ class Social_Proof_Slider_Public {
 
 		ob_start();
 
+		$requestor = 'block';
+
 		/* Declare defaults
 		-------------------------------------------- */
 		$defaults['blockalign'] = 'center';
 		$defaults['sortpostsby'] = 'DESC';
+		$defaults['filterposts'] = false;
+		$defaults['filtershowhide'] = 'show';
+		$defaults['filterby'] = 'postid';
+		$defaults['postidorcatslug'] = '';
 		$defaults['showfeaturedimages'] = false;
 		$defaults['autoplay'] = true;
 		$defaults['displaytime'] = 3;
@@ -489,12 +495,39 @@ class Social_Proof_Slider_Public {
 		if ( empty( $posts_sortby ) ) {
 			$posts_sortby = $defaults['sortpostsby'];
 		}
+
+		$posts_filterposts = $atts['filterposts'];
+		if ( empty( $posts_filterposts ) ) {
+			$posts_filterposts = $defaults['filterposts'];
+		}
+
+		$posts_filtershowhide = $atts['filtershowhide'];
+		if ( empty( $posts_filtershowhide ) ) {
+			$posts_filtershowhide = $defaults['filtershowhide'];
+		}
+
+		$posts_filterby = $atts['filterby'];
+		if ( empty( $posts_filterby ) ) {
+			$posts_filterby = $defaults['filterby'];
+		}
+
+		$posts_postids = $atts['postids'];
+		if ( empty( $posts_postids ) ) {
+			$posts_postids = $defaults['postids'];
+		}
+
+		$posts_catslug = $atts['catslug'];
+		if ( empty( $posts_catslug ) ) {
+			$posts_catslug = $defaults['catslug'];
+		}
 		/*
-		Sort Posts By - Select: Random, Date DESC, Date ASC
-		Limit Testimonials - Select: Limit by Category, Limit by ID
-		Limit Testimonials > Limit by IDs - Text Input
-		Limit Testimonials > Limit by Category - Text Input
+		Filter Testimonials - Toggle
+		Filter Testimonials - On - Select: Show / Hide
+		Filter Testimonials - On - Select: by ID / by Category
+		Filter Testimonials - On - Text Input (ID or category)
+
 		Add Quotation Marks - Toggle
+
 		Show Featured Image Border - Toggle
 		Show Featured Image Border > Image Border Radius - Text Input
 		Show Featured Image Border > Featured Image Border Size - Range: 0-10
@@ -600,25 +633,37 @@ class Social_Proof_Slider_Public {
 			);
 		}
 
-		$taxSlug = "";
-		// Use category, if present
-		if ( !empty( $sc_atts['category'] ) ) {
-			$taxSlug = $sc_atts['category'];
-		}
+		$posts_filter_ids = '';
+		$posts_filter_taxslug = '';
+		$posts_filter_hide = '';
 
-		$postLimiter = "";
-		$limiterIDs = "";
-		// Use Exclude/Include and IDs attributes, if present
-		if ( !empty( $sc_atts['ids'] ) ) {
+		// Filter posts.
+		if ( $posts_filterposts === "true" || $posts_filterposts === "1" ) {
 
-			$limiterIDs = $sc_atts['ids'];
+			// Determine whether to show or hide.
+			$filtershowhidesetting = $posts_filtershowhide;
 
-			if ( !empty( $sc_atts['exclude'] ) ) {
-				// EXCLUDING
-				$postLimiter = $sc_atts['exclude'];
-			} else {
-				// INCLUDING
-				$postLimiter = "";
+			// Hide posts.
+			if ( 'hide' === $filtershowhidesetting ) {
+				$posts_filter_hide = '1';
+			}
+
+			// Show posts.
+			if ( 'show' === $filtershowhidesetting ) {
+				$posts_filter_hide = '';
+			}
+
+			// Determine whether to limit by Post ID or by Category Slug.
+			$filterbysetting = $posts_filterby;
+
+			// Use Post IDs.
+			if ( $filterbysetting == "postid" ) {
+				$posts_filter_ids = $posts_postids;
+			}
+
+			// Use category.
+			if ( $filterbysetting == "cat" ) {
+				$posts_filter_taxslug = $posts_catslug;
 			}
 
 		}
@@ -661,7 +706,7 @@ class Social_Proof_Slider_Public {
 
 		// Create 'items' object with all testimonials
 		$items = '';
-		$items = $shared->get_testimonials( $queryargs, 'shortcode', $postLimiter, $limiterIDs, $posts_showfeaturedimages, $smartQuotes, $taxSlug );
+		$items = $shared->get_testimonials( $queryargs, 'shortcode', $posts_filter_hide, $posts_filter_ids, $posts_showfeaturedimages, $smartQuotes, $posts_filter_taxslug, $requestor );
 
 		// Generate Unique ID for this block
 		$uniqueID = uniqid('spslider_block_');
@@ -852,6 +897,11 @@ class Social_Proof_Slider_Public {
 			// Post settings
 			$settings .= 'showfeaturedimages="' . $atts['showfeaturedimages'] . '" ';
 			$settings .= 'sortpostsby="' . $atts['sortpostsby'] . '" ';
+			$settings .= 'filterposts="' . $atts['filterposts'] . '" ';
+			$settings .= 'filtershowhide="' . $atts['filtershowhide'] . '" ';
+			$settings .= 'filterby="' . $atts['filterby'] . '" ';
+			$settings .= 'postids="' . $atts['postids'] . '" ';
+			$settings .= 'catslug="' . $atts['catslug'] . '" ';
 
 			// Slider settings
 			$settings .= 'autoplay="' . $atts['autoplay'] . '" ';
@@ -905,6 +955,21 @@ class Social_Proof_Slider_Public {
 				],
 				'sortpostsby' => [
 					'default' => 'DESC'
+				],
+				'filterposts' => [
+					'default' => false
+				],
+				'filtershowhide' => [
+					'default' => 'show'
+				],
+				'filterby' => [
+					'default' => 'postid'
+				],
+				'postids' => [
+					'default' => ''
+				],
+				'catslug' => [
+					'default' => ''
 				],
 				'autoplay' => [
 					'default' => true

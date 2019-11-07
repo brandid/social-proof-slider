@@ -50,6 +50,7 @@ class SPTestimonialsSlider extends Component {
 		// passing `this.createToggleAttribute( 'showarrows' )` directly to
 		// `onChange` to avoid re-renders.
         this.toggleShowFeaturedImages = this.createToggleAttribute( 'showfeaturedimages' );
+        this.toggleFilterPosts = this.createToggleAttribute( 'filterposts' );
 
         this.toggleAutoplay = this.createToggleAttribute( 'autoplay' );
 		this.toggleShowArrows = this.createToggleAttribute( 'showarrows' );
@@ -75,6 +76,11 @@ class SPTestimonialsSlider extends Component {
     // Tooltip - Slider - Autoplay
     getAutoplayHelp( checked ) {
         return checked ? __( 'Autplay is enabled.', 'socialproofslider' ) : __( 'Toggle to advance the slides automatically.', 'socialproofslider' );
+    }
+
+    // Tooltip - Slider - Filter Posts
+    getFilterPostsHelp( checked ) {
+        return checked ? __( 'Testimonials will be filtered.', 'socialproofslider' ) : __( 'Enable this setting to filter the testimonials.', 'socialproofslider' );
     }
 
     // Tooltip - Slider - Show Arrows
@@ -134,7 +140,7 @@ class SPTestimonialsSlider extends Component {
             document.dispatchEvent( customEvent )
         }
 
-        /* Sort By options. */
+        /* Sort Posts By options. */
 		const sortByOptions = [
 			{ value: 'RAND', label: __( 'Random', 'socialproofslider' ) },
 			{ value: 'DESC', label: __( 'Date DESC', 'socialproofslider' ) },
@@ -190,6 +196,15 @@ class SPTestimonialsSlider extends Component {
                         initialOpen={ false }
                         className={ 'spslider-inspector-panel' }>
                         <PanelRow>
+                            <ToggleControl
+                            label={ __( 'Show Featured Images', 'socialproofslider' ) }
+                            checked={ !! attributes.showfeaturedimages }
+                            onChange={ this.toggleShowFeaturedImages }
+                            help={ this.getShowFeaturedImagesHelp }
+                            />
+                        </PanelRow>
+                        <hr />
+                        <PanelRow>
                             <SelectControl
                                 label={ __( 'Sort Posts By:', 'socialproofslider' ) }
                                 help={ __( 'Choose between Random, Date DESC, or Date ASC.', 'socialproofslider' ) }
@@ -201,12 +216,56 @@ class SPTestimonialsSlider extends Component {
                         <hr />
                         <PanelRow>
                             <ToggleControl
-                            label={ __( 'Show Featured Images', 'socialproofslider' ) }
-                            checked={ !! attributes.showfeaturedimages }
-                            onChange={ this.toggleShowFeaturedImages }
-                            help={ this.getShowFeaturedImagesHelp }
+                            label={ __( 'Filter Posts', 'socialproofslider' ) }
+                            checked={ !! attributes.filterposts }
+                            onChange={ this.toggleFilterPosts }
+                            help={ this.getFilterPostsHelp }
                             />
                         </PanelRow>
+                        { attributes.filterposts ?
+                            <Fragment>
+                                <RadioControl
+                                    label={ __( 'Show or Hide', 'socialproofslider' ) }
+                                    help={ __( 'Choose to show or hide specific testimonials.', 'socialproofslider' ) }
+                                    options={ [
+                                        { label: __( 'Show Only These Testimonials', 'socialproofslider' ), value: 'show' },
+                                        { label: __( 'Hide These Testimonials', 'socialproofslider' ), value: 'hide' },
+                                    ] }
+                                    onChange={ ( value ) => this.props.setAttributes({ filtershowhide: value }) }
+                                    selected={ attributes.filtershowhide }
+                                />
+                                <RadioControl
+                                    label={ __( 'Filter By', 'socialproofslider' ) }
+                                    help={ __( 'Choose how to filter the testimonials.', 'socialproofslider' ) }
+                                    options={ [
+                                        { label: __( 'Post ID', 'socialproofslider' ), value: 'postid' },
+                                        { label: __( 'Category', 'socialproofslider' ), value: 'cat' },
+                                    ] }
+                                    onChange={ ( value ) => this.props.setAttributes({ filterby: value }) }
+                                    selected={ attributes.filterby }
+                                />
+                                { attributes.filterby == 'postid' ?
+                                    <TextControl
+                                        label="Post IDs"
+                                        value={ attributes.postids }
+                                        onChange={ ( value ) => this.props.setAttributes({ postids: value }) }
+                                    />
+                                    :
+                                    null
+                                }
+                                { attributes.filterby == 'cat' ?
+                                    <TextControl
+                                        label="Category Slug"
+                                        value={ attributes.catslug }
+                                        onChange={ ( value ) => this.props.setAttributes({ catslug: value }) }
+                                    />
+                                    :
+                                    null
+                                }
+                            </Fragment>
+                            :
+                            null
+                        }
                     </PanelBody>
                     <PanelBody
                         title={ __( 'Slider Settings', 'socialproofslider' ) }

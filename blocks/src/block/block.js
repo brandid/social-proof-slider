@@ -41,6 +41,24 @@ registerBlockType('social-proof-slider/main', {
 			type: 'string',
 			default: 'desc',
 		},
+        filterposts: {
+			type: 'boolean',
+			default: false,
+		},
+        filtershowhide: {
+			type: 'string',
+			default: 'show',
+		},
+        filterby: {
+			type: 'string',
+			default: 'postid',
+		},
+        postids: {
+            type: 'string',
+        },
+        catslug: {
+            type: 'string',
+        },
         autoplay: {
     		type: 'boolean',
             default: true,
