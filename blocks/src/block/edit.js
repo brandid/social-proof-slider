@@ -51,6 +51,7 @@ class SPTestimonialsSlider extends Component {
 		// `onChange` to avoid re-renders.
         this.toggleShowFeaturedImages = this.createToggleAttribute( 'showfeaturedimages' );
         this.toggleFilterPosts = this.createToggleAttribute( 'filterposts' );
+        this.toggleShowQuotes = this.createToggleAttribute( 'showquotemarks' );
 
         this.toggleAutoplay = this.createToggleAttribute( 'autoplay' );
 		this.toggleShowArrows = this.createToggleAttribute( 'showarrows' );
@@ -81,6 +82,11 @@ class SPTestimonialsSlider extends Component {
     // Tooltip - Slider - Filter Posts
     getFilterPostsHelp( checked ) {
         return checked ? __( 'Testimonials will be filtered.', 'socialproofslider' ) : __( 'Enable this setting to filter the testimonials.', 'socialproofslider' );
+    }
+
+    // Tooltip - Slider - Show Quotation Marks
+    getShowQuotesHelp( checked ) {
+        return checked ? __( 'Showing quotation marks.', 'socialproofslider' ) : __( 'Toggle to show quotation marks around the testimonial text.', 'socialproofslider' );
     }
 
     // Tooltip - Slider - Show Arrows
@@ -246,8 +252,9 @@ class SPTestimonialsSlider extends Component {
                                 />
                                 { attributes.filterby == 'postid' ?
                                     <TextControl
-                                        label="Post IDs"
+                                        label="Post ID"
                                         value={ attributes.postids }
+                                        help={ __( 'Can be a comma separated list.', 'socialproofslider' ) }
                                         onChange={ ( value ) => this.props.setAttributes({ postids: value }) }
                                     />
                                     :
@@ -257,6 +264,7 @@ class SPTestimonialsSlider extends Component {
                                     <TextControl
                                         label="Category Slug"
                                         value={ attributes.catslug }
+                                        help={ __( 'Can be a comma separated list.', 'socialproofslider' ) }
                                         onChange={ ( value ) => this.props.setAttributes({ catslug: value }) }
                                     />
                                     :
@@ -266,6 +274,15 @@ class SPTestimonialsSlider extends Component {
                             :
                             null
                         }
+                        <hr />
+                        <PanelRow>
+                            <ToggleControl
+                            label={ __( 'Show Quotation Marks', 'socialproofslider' ) }
+                            checked={ !! attributes.showquotemarks }
+                            onChange={ this.toggleShowQuotes }
+                            help={ this.getShowQuotesHelp }
+                            />
+                        </PanelRow>
                     </PanelBody>
                     <PanelBody
                         title={ __( 'Slider Settings', 'socialproofslider' ) }

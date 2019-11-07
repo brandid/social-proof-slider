@@ -59,6 +59,10 @@ registerBlockType('social-proof-slider/main', {
         catslug: {
             type: 'string',
         },
+        showquotemarks: {
+            type: 'boolean',
+            default: false,
+        },
         autoplay: {
     		type: 'boolean',
             default: true,

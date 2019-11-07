@@ -186,7 +186,7 @@ class Social_Proof_Slider_Shared {
 					// Vars
 					$testimonialtext = $meta['socialproofslider_testimonial_text'][0];
 
-					if ( (int)$smartquotes == 1 ) {
+					if ( $smartquotes === "true" || $smartquotes === "1" ) {
 
 						$quoteTextStart = "“";
 						$quoteTextEnd = "”";

@@ -433,12 +433,13 @@ class Social_Proof_Slider_Public {
 		/* Declare defaults
 		-------------------------------------------- */
 		$defaults['blockalign'] = 'center';
+		$defaults['showfeaturedimages'] = false;
 		$defaults['sortpostsby'] = 'DESC';
 		$defaults['filterposts'] = false;
 		$defaults['filtershowhide'] = 'show';
 		$defaults['filterby'] = 'postid';
 		$defaults['postidorcatslug'] = '';
-		$defaults['showfeaturedimages'] = false;
+		$defaults['showquotemarks'] = false;
 		$defaults['autoplay'] = true;
 		$defaults['displaytime'] = 3;
 		$defaults['animationstyle'] = 'fade';
@@ -520,14 +521,12 @@ class Social_Proof_Slider_Public {
 		if ( empty( $posts_catslug ) ) {
 			$posts_catslug = $defaults['catslug'];
 		}
+
+		$posts_showquotes = $atts['showquotemarks'];
+		if ( empty( $posts_showquotes ) ) {
+			$posts_showquotes = $defaults['showquotemarks'];
+		}
 		/*
-		Filter Testimonials - Toggle
-		Filter Testimonials - On - Select: Show / Hide
-		Filter Testimonials - On - Select: by ID / by Category
-		Filter Testimonials - On - Text Input (ID or category)
-
-		Add Quotation Marks - Toggle
-
 		Show Featured Image Border - Toggle
 		Show Featured Image Border > Image Border Radius - Text Input
 		Show Featured Image Border > Featured Image Border Size - Range: 0-10
@@ -539,8 +538,6 @@ class Social_Proof_Slider_Public {
 		if ( empty( $slider_autoplay ) ) {
 			$slider_autoplay = $defaults['autoplay'];
 		}
-
-		// echo '<h3>autoplay: ' . getAttsOrDefault('autoplay') . '</h3>';
 
 		$slider_displaytime = $atts['displaytime'];
 		if ( empty( $slider_displaytime ) ) {
@@ -673,7 +670,7 @@ class Social_Proof_Slider_Public {
 		$imageBorderThickness = $sc_settings['imageBorderThickness'];
 		$imageBorderPadding = $sc_settings['imageBorderPadding'];
 
-		$smartQuotes = $sc_settings['surroundWithQuotes'];
+		// $smartQuotes = $sc_settings['surroundWithQuotes'];
 
 		// $doPaddingOverride = $sc_settings['doPaddingOverride'];
 		// $contentPaddingTop = $sc_settings['contentPaddingTop'];
@@ -706,7 +703,7 @@ class Social_Proof_Slider_Public {
 
 		// Create 'items' object with all testimonials
 		$items = '';
-		$items = $shared->get_testimonials( $queryargs, 'shortcode', $posts_filter_hide, $posts_filter_ids, $posts_showfeaturedimages, $smartQuotes, $posts_filter_taxslug, $requestor );
+		$items = $shared->get_testimonials( $queryargs, 'shortcode', $posts_filter_hide, $posts_filter_ids, $posts_showfeaturedimages, $posts_showquotes, $posts_filter_taxslug, $requestor );
 
 		// Generate Unique ID for this block
 		$uniqueID = uniqid('spslider_block_');
@@ -902,6 +899,7 @@ class Social_Proof_Slider_Public {
 			$settings .= 'filterby="' . $atts['filterby'] . '" ';
 			$settings .= 'postids="' . $atts['postids'] . '" ';
 			$settings .= 'catslug="' . $atts['catslug'] . '" ';
+			$settings .= 'showquotemarks="' . $atts['showquotemarks'] . '" ';
 
 			// Slider settings
 			$settings .= 'autoplay="' . $atts['autoplay'] . '" ';
@@ -970,6 +968,9 @@ class Social_Proof_Slider_Public {
 				],
 				'catslug' => [
 					'default' => ''
+				],
+				'showquotemarks' => [
+					'default' => false
 				],
 				'autoplay' => [
 					'default' => true
