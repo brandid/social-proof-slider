@@ -88,11 +88,7 @@ class Social_Proof_Slider_Shared {
 	 *
 	 * @return 	string 		A string of HTML to output
 	 */
-	public function get_testimonials( $params, $src, $postLimit, $limitIDs, $featimgs, $smartquotes, $taxSlug, $requestor ){
-
-		if ( empty( $requestor ) ) {
-			$requestor = 'default';
-		}
+	public function get_testimonials( $params, $src, $postLimit, $limitIDs, $featimgs, $smartquotes, $taxSlug, $requestor = 'default' ) {
 
 		$return = '';
 
