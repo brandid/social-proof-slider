@@ -448,32 +448,33 @@ class Social_Proof_Slider_Public {
 		$defaults['arrowstyle'] = 'angle';
 		$defaults['showdots'] = false;
 		$defaults['adaptiveheight'] = false;
-		$defaults['ids'] = '';
-		$defaults['exclude'] = '';
-		$defaults['category'] = '';
 
-		/* Function to assign default value if attr is empty
-		 *
-		 * string	$propName	name of the property to check
-		 * return	$returnVal	return value
-		 */
-		function getAttsOrDefault( $propName, $atts = array(), $defaults = array() ) {
+		if ( !function_exists( 'getAttsOrDefault' ) ) {
 
-			$returnVal1 = ( array_key_exists($propName, $atts) && !empty( $atts[$propName] ) )
-		         ? $atts[$propName]
-		         : 'non-existent or empty in "atts"';
+			/* Function to assign default value if attr is empty
+			 *
+			 * string	$propName	name of the property to check
+			 * return	$returnVal	return value
+			 */
+			function getAttsOrDefault( $propName, $atts = array(), $defaults = array() ) {
 
-			$returnVal2 = ( array_key_exists($propName, $defaults) && !empty( $defaults[$propName] ) )
-			     ? $defaults[$propName]
-			     : 'non-existent or empty in "defaults"';
+				$returnVal1 = ( array_key_exists($propName, $atts) && !empty( $atts[$propName] ) )
+			         ? $atts[$propName]
+			         : 'non-existent or empty in "atts"';
 
-			// if ( ! empty( $atts[$propName] ) ) {
-			// 	$returnVal = $atts[$propName];
-			// }else {
-			// 	$returnVal = $defaults[$propName];
-			// }
+				$returnVal2 = ( array_key_exists($propName, $defaults) && !empty( $defaults[$propName] ) )
+				     ? $defaults[$propName]
+				     : 'non-existent or empty in "defaults"';
 
-			return " <br> " . $returnVal1 . " <br> " . $returnVal2;
+				// if ( ! empty( $atts[$propName] ) ) {
+				// 	$returnVal = $atts[$propName];
+				// }else {
+				// 	$returnVal = $defaults[$propName];
+				// }
+
+				return " <br> " . $returnVal1 . " <br> " . $returnVal2;
+			}
+
 		}
 
 		/* Get Block Settings
@@ -598,9 +599,14 @@ class Social_Proof_Slider_Public {
 			$contentPaddingStr .= 'padding-bottom: ' . $atts['paddingbottom'] . $paddingunit . '; ';
 			$contentPaddingStr .= 'padding-left: ' . $atts['paddingleft'] . $paddingunit . ';';
 		}
+
+		$padding_imageborderpadding = $atts['imageborderpadding'];
+		if ( empty( $padding_imageborderpadding ) ) {
+			$padding_imageborderpadding = 0;
+		}
 		/*
-		Featured Image Border Padding - Range: 0-50 | Default: 4px
-		Featured Image Margin Bottom - Range: 0-100 | Default: 20px
+		Image Border Padding - Range: 0-50 | Default: 4px
+		Image Margin Bottom - Range: 0-100 | Default: 20px
 		Testimonial Text Container Margin Bottom - Range: 0-100 | Default: 30px
 		Quote Text Margin Bottom - Range: 0-100 | Default: 30px
 		Dots Margin Top - Range: 0-100 | Default: 10px
@@ -679,7 +685,7 @@ class Social_Proof_Slider_Public {
 		$showImageBorder = $posts_showimageborder;
 		$imageBorderColor = $sc_settings['imageBorderColor'];
 		$imageBorderThickness = $posts_imagebordersize;
-		$imageBorderPadding = $sc_settings['imageBorderPadding'];
+		$imageBorderPadding = $padding_imageborderpadding;
 
 		// $smartQuotes = $sc_settings['surroundWithQuotes'];
 
@@ -815,7 +821,7 @@ class Social_Proof_Slider_Public {
 		}
 
 		if ( $showImageBorder === "true" || $showImageBorder === "1" ) {
-			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img { border: ' . $imageBorderThickness . 'px solid ' . $imageBorderColor . ' !important; padding: ' . $imageBorderPadding . ' }'."\n";
+			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img { border: ' . $imageBorderThickness . 'px solid ' . $imageBorderColor . ' !important; padding: ' . $imageBorderPadding . 'px; }'."\n";
 		}
 
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text{ '.$textPaddingStr.' }'."\n";
@@ -933,6 +939,7 @@ class Social_Proof_Slider_Public {
 			$settings .= 'paddingright="' . $atts['paddingright'] . '" ';
 			$settings .= 'paddingbottom="' . $atts['paddingbottom'] . '" ';
 			$settings .= 'paddingleft="' . $atts['paddingleft'] . '" ';
+			$settings .= 'imageborderpadding="' . $atts['imageborderpadding'] . '" ';
 
 			// Colors
 			if ( $atts['bgcolor'] ) {
@@ -1042,6 +1049,9 @@ class Social_Proof_Slider_Public {
 				],
 				'paddingleft' => [
 					'default' => 0
+				],
+				'imageborderpadding' => [
+					'default' => 4
 				],
 				'bgcolor' => [
 					'default' => ''

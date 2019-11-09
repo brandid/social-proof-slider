@@ -457,7 +457,7 @@ class SPTestimonialsSlider extends Component {
                         }
                     </PanelBody>
                     <PanelBody
-    					title={ __( 'Margin and Padding', 'socialproofslider' ) }
+    					title={ __( 'Padding', 'socialproofslider' ) }
     					initialOpen={ false }
                         className={ 'spslider-inspector-panel' }>
                         <SelectControl
@@ -512,7 +512,25 @@ class SPTestimonialsSlider extends Component {
                                 paddingMax="200"
                                 onChangePadding={ padding => setAttributes({ padding }) }
                             />
-                    }
+                        }
+                        { attributes.showimageborder ?
+                            <Fragment>
+                                <hr />
+                                <RangeControl
+                                    label={ __( 'Image Border Padding (px)', 'socialproofslider' ) }
+                                    value={ attributes.imageborderpadding }
+                                    min={ 1 }
+                                    max={ 100 }
+                                    step={ 1 }
+                                    initialPosition={ 4 }
+                                    onChange={ ( value ) => this.props.setAttributes({ imageborderpadding: value }) }
+                                    allowReset={ true }
+                                    help={ __( 'Padding between the featured image and its border.', 'socialproofslider' ) }
+                                />
+                            </Fragment>
+                            :
+                            null
+                        }
                     </PanelBody>
                     <PanelBody
                         title={ __( 'Colors', 'socialproofslider' ) }

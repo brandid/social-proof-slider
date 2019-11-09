@@ -113,32 +113,36 @@ registerBlockType('social-proof-slider/main', {
     	},
         paddingsync: {
 			type: 'boolean',
-			default: true
+			default: true,
 		},
 		paddingunit: {
 			type: 'string',
-			default: 'px'
+			default: 'px',
 		},
 		padding: {
 			type: 'number',
-			default: 50
+			default: 50,
 		},
 		paddingtop: {
 			type: 'number',
-			default: 0
+			default: 0,
 		},
 		paddingright: {
 			type: 'number',
-			default: 0
+			default: 0,
 		},
 		paddingbottom: {
 			type: 'number',
-			default: 0
+			default: 0,
 		},
 		paddingleft: {
 			type: 'number',
-			default: 0
+			default: 0,
 		},
+        imageborderpadding: {
+            type: 'number',
+            default: 4,
+        },
         bgcolor: {
             type: 'string',
         },
