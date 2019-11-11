@@ -12,7 +12,7 @@ const { Component, createElement, Fragment } = wp.element;
 const { __ } = wp.i18n;
 
 // Import controls from block building library
-const { AlignmentToolbar, BlockControls, InspectorControls, PanelColorSettings } = wp.editor;
+const { AlignmentToolbar, BlockControls, InspectorControls, PanelColorSettings } = wp.blockEditor;
 
 // Import components
 const {
