@@ -620,6 +620,8 @@ class Social_Proof_Slider_Public {
 		$style_authortitlecolor = $atts['authortitlecolor'];
 		$style_arrowscolor = $atts['arrowscolor'];
 		$style_arrowshovercolor = $atts['arrowshovercolor'];
+		$style_dotscolor = $atts['dotscolor'];
+		$style_dotshovercolor = $atts['dotshovercolor'];
 		/*
 		Image Border Color - Color Picker | Default: #000000
 		Dots Color - Color Picker | Default: #000000
@@ -824,6 +826,24 @@ class Social_Proof_Slider_Public {
 			echo $uniqueID . '.wp-block-socialproofslider .widget-wrap > button.slick-arrow:hover span{ color:' . $style_arrowshovercolor . '; }'."\n";
 		}
 
+		// Assign dots margin.
+		echo $uniqueID . ' .social-proof-slider-wrap ul.slick-dots{ '.$dotsMarginStr.' }'."\n";
+
+		// Assign dots color.
+		if ( ! $style_dotscolor ) {
+			$style_dotscolor = '#000';
+		}
+		echo $uniqueID . '.wp-block-socialproofslider .social-proof-slider-wrap .slick-dots li button { color:' . $style_dotscolor . ' !important; }'."\n";
+
+		// Assign dots hover color.
+		if ( ! $style_dotshovercolor ) {
+			// Use default opacity 50%.
+			echo $uniqueID . '.wp-block-socialproofslider .social-proof-slider-wrap .slick-dots li button:hover { opacity: 0.5 !important; }'."\n";
+		} else {
+			// Use selected color.
+			echo $uniqueID . '.wp-block-socialproofslider .social-proof-slider-wrap .slick-dots li button:hover { color:' . $style_dotshovercolor . ' !important; }'."\n";
+		}
+
 		// Assign featured image margin.
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img { '.$imgMarginStr.' }'."\n";
 
@@ -853,10 +873,6 @@ class Social_Proof_Slider_Public {
 		if ( ! empty( $style_authortitlecolor ) ) {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .author > .author-title { color:' . $style_authortitlecolor . '; }'."\n";
 		}
-
-		// Assign dots colors.
-		echo $uniqueID . ' .social-proof-slider-wrap ul.slick-dots{ '.$dotsMarginStr.' }'."\n";
-		echo $uniqueID . ' .social-proof-slider-wrap ul.slick-dots li button::before, #_socialproofslider-shortcode .slick-dots li.slick-active button:before { color:' . $sc_settings['dotsColor'] . ' }'."\n";
 
 		echo '</style>'."\n";
 
@@ -970,6 +986,14 @@ class Social_Proof_Slider_Public {
 
 			if ( $atts['arrowshovercolor'] ) {
 				$settings .= 'arrowshovercolor="' . $atts['arrowshovercolor'] . '" ';
+			}
+
+			if ( $atts['dotscolor'] ) {
+				$settings .= 'dotscolor="' . $atts['dotscolor'] . '" ';
+			}
+
+			if ( $atts['dotshovercolor'] ) {
+				$settings .= 'dotshovercolor="' . $atts['dotshovercolor'] . '" ';
 			}
 
 			if ( $atts['testimonialtextcolor'] ) {
@@ -1086,6 +1110,12 @@ class Social_Proof_Slider_Public {
 					'default' => ''
 				],
 				'arrowshovercolor' => [
+					'default' => ''
+				],
+				'dotscolor' => [
+					'default' => ''
+				],
+				'dotshovercolor' => [
 					'default' => ''
 				],
 				'testimonialtextcolor' => [

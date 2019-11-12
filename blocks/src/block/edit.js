@@ -146,6 +146,18 @@ class SPTestimonialsSlider extends Component {
             document.dispatchEvent( customEvent )
         }
 
+        // Update Dots Color
+        function updateDotsColor(value) {
+            setAttributes({ dotscolor: value });
+            document.dispatchEvent( customEvent )
+        }
+
+        // Update Dots Hover Color
+        function updateDotsHoverColor(value) {
+            setAttributes({ dotshovercolor: value });
+            document.dispatchEvent( customEvent )
+        }
+
         // Update Testimonials Text Color
         function updateTestimonialTextColor(value) {
             setAttributes({ testimonialtextcolor: value });
@@ -570,6 +582,16 @@ class SPTestimonialsSlider extends Component {
                             value: attributes.arrowshovercolor,
                             onChange: updateArrowsHoverColor,
                             label: __( 'Arrows Hover Color', 'socialproofslider' ),
+                            },
+                            {
+                            value: attributes.dotscolor,
+                            onChange: updateDotsColor,
+                            label: __( 'Dots Color', 'socialproofslider' ),
+                            },
+                            {
+                            value: attributes.dotshovercolor,
+                            onChange: updateDotsHoverColor,
+                            label: __( 'Dots Hover Color', 'socialproofslider' ),
                             },
                         ]}
                         />
