@@ -9,7 +9,7 @@ Seeing is believing. And one of the strongest ways to communicate your expertise
 IMPORTANT: Please note -- the plugin now uses a new code base that was rewritten from the ground up to be more compatible with future WordPress updates. When upgrading from a version prior to 2.0.0, you may lose your custom SPSlider Settings and the existing Social Proof Slider widgets under Appearance > Widgets, but your testimonial posts will remain saved in the database. We recommend backing up your site, taking screenshots of your SPSlider and Widget settings, and disabling the plugin before upgrading.
 
 For more info, please visit:
-https://thebrandidthemes.com/product/social-proof-testimonial-slider/
+https://buildmybrandid.com/product/social-proof-testimonial-slider/
 
 ## Installation
 
@@ -37,10 +37,11 @@ Follow these steps:
 ## Frequently Asked Questions
 
 ### Can I use the Social Proof Slider with the Gutenberg block editor?
-Yes! You can use a Shortcode block to display the Social Proof Slider - use the following shortcode: `social-proof-slider`
+Yes! We've added Block Editor support to the plugin - just search for 'SP Testimonials Slider' or find it under the 'Common Blocks' category in the list of Blocks.
+Alternatively, you can use a Shortcode block to display the Social Proof Slider - use the following shortcode: `social-proof-slider`
 
 ### Can I show testimonials by category?
-Yes! We've added the ability to create Categories and assign them to your testimonials. Use the Category slug in the shortcode or widget settings to only display testimonials assigned to that category.
+Yes! We've added the ability to create Categories and assign them to your testimonials. In the Block, there is a setting to Filter Posts. Use the Category slug in the block/shortcode/widget settings to hide or show only testimonials assigned to that category.
 
 ### How do I create a slider without using the Custom Post Type?
 You can easily create a new slider on any page by using shortcodes. You will need to wrap each testimonial item in a shortcode: `[spslider-item]Your Testimonial Text Here[/spslider-item]`. Then you will need to wrap ALL your testimonial items with the manual slider shortcode:
@@ -57,11 +58,15 @@ Please see the Screenshots for an example.
 Please open an Issue on the GitHub project:
 https://github.com/brandid/social-proof-slider/issues
 
-### Somethinge Else?
-Please see the following page for support:
-https://thebrandidthemes.com/forum/support/plugins/social-proof-testimonial-slider/
+### Something Else?
+Please use our Support Forum if you need help:
+https://buildmybrandid.com/forum/support/plugins/social-proof-testimonial-slider/
 
 ## Changelog
+
+### 2.2.0 - (Nov 12, 2019)
+* Added: New SP Slider Block: Easily place a 'SP Testimonials Slider' block anywhere on your page and visually configure its display settings in real-time using the Block Editor.
+* Update: Compatible with WordPress 5.3
 
 ### 2.1.2 - (Aug 9, 2019)
 * Added: Categories to the testimonials CPT
