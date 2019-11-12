@@ -5,7 +5,7 @@ Author URI: https://thebrandidthemes.com/product/social-proof-testimonial-slider
 Donate link: https://thebrandid.com/
 Tags: awards, carousel, content slider, custom post type, features, feedback, jquery, portfolio, responsive, reviews, quotes, sidebar, slider, slideshow, social, testimonial, video, vimeo, widget, youtube
 Requires at least: 4.5
-Tested up to: 5.2.2
+Tested up to: 5.3
 Stable tag: 2.1.2
 Version: 2.1.2
 License: GPLv2 or later
