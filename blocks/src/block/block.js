@@ -146,6 +146,12 @@ registerBlockType('social-proof-slider/main', {
         bgcolor: {
             type: 'string',
         },
+        arrowscolor: {
+            type: 'string',
+        },
+        arrowshovercolor: {
+            type: 'string',
+        },
         testimonialtextcolor: {
             type: 'string',
         },

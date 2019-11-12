@@ -134,6 +134,18 @@ class SPTestimonialsSlider extends Component {
             document.dispatchEvent( customEvent )
         }
 
+        // Update Arrows Color
+        function updateArrowsColor(value) {
+            setAttributes({ arrowscolor: value });
+            document.dispatchEvent( customEvent )
+        }
+
+        // Update Arrows Hover Color
+        function updateArrowsHoverColor(value) {
+            setAttributes({ arrowshovercolor: value });
+            document.dispatchEvent( customEvent )
+        }
+
         // Update Testimonials Text Color
         function updateTestimonialTextColor(value) {
             setAttributes({ testimonialtextcolor: value });
@@ -544,6 +556,22 @@ class SPTestimonialsSlider extends Component {
                             onChange: updateBGColor,
                             label: __( 'Slider Background Color', 'socialproofslider' )
                         }]}
+                        />
+                        <PanelColorSettings
+                        title={ __('Slider Colors') }
+                        initialOpen={ false }
+                        colorSettings={[
+                            {
+                            value: attributes.arrowscolor,
+                            onChange: updateArrowsColor,
+                            label: __( 'Arrows Color', 'socialproofslider' ),
+                            },
+                            {
+                            value: attributes.arrowshovercolor,
+                            onChange: updateArrowsHoverColor,
+                            label: __( 'Arrows Hover Color', 'socialproofslider' ),
+                            },
+                        ]}
                         />
                         <PanelColorSettings
                         title={ __('Text Colors') }
