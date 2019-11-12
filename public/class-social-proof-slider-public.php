@@ -248,7 +248,7 @@ class Social_Proof_Slider_Public {
 		$thisWidgetJS .= '		infinite: true,'."\n";
 		// $thisWidgetJS .= '		adaptiveHeight: true'."\n";
 		$thisWidgetJS .= '	});'."\n";
-		$thisWidgetJS .= 'console.log("I\'m loaded!");'."\n";
+		// $thisWidgetJS .= 'console.log("I\'m loaded!");'."\n";
 		$thisWidgetJS .= '});'."\n";
 		$thisWidgetJS .= '</script>'."\n";
 		echo  $thisWidgetJS;
