@@ -430,8 +430,7 @@ class Social_Proof_Slider_Public {
 
 		$requestor = 'block';
 
-		/* Declare defaults
-		-------------------------------------------- */
+		// Declare defaults.
 		$defaults['blockalign'] = 'center';
 		$defaults['sortpostsby'] = 'DESC';
 		$defaults['filterposts'] = false;
@@ -477,15 +476,13 @@ class Social_Proof_Slider_Public {
 
 		}
 
-		/* Get Block Settings
-		-------------------------------------------- */
+		// Get Block Settings.
 		$block_textalign = $atts['textalign'];
 		if ( empty( $block_textalign ) ) {
 			$block_textalign = $defaults['blockalign'];
 		}
 
-		/* Get Post Settings
-		-------------------------------------------- */
+		// Get Post Settings.
 		$posts_sortby = $atts['sortpostsby'];
 		if ( empty( $posts_sortby ) ) {
 			$posts_sortby = $defaults['sortpostsby'];
@@ -544,8 +541,7 @@ class Social_Proof_Slider_Public {
 			$posts_showquotes = $defaults['showquotemarks'];
 		}
 
-		/* Get Slider Settings
-		-------------------------------------------- */
+		// Get Slider Settings.
 		$slider_autoplay = $atts['autoplay'];
 		if ( empty( $slider_autoplay ) ) {
 			$slider_autoplay = $defaults['autoplay'];
@@ -586,8 +582,7 @@ class Social_Proof_Slider_Public {
 			$slider_verticalalign = $defaults['verticalalign'];
 		}
 
-		/* Get Margin & Padding Settings
-		-------------------------------------------- */
+		// Get Margin & Padding Settings.
 		$paddingunit = $atts['paddingunit'];
 		$paddingsync = $atts['paddingsync'];
 		$contentPaddingStr = '';
@@ -612,8 +607,7 @@ class Social_Proof_Slider_Public {
 		Dots Margin Top - Range: 0-100 | Default: 10px
 		*/
 
-		/* Get Color Settings
-		-------------------------------------------- */
+		// Get Color Settings.
 		$style_bgcolor = $atts['bgcolor'];
 		$style_testimonialcolor = $atts['testimonialtextcolor'];
 		$style_authornamecolor = $atts['authornamecolor'];
@@ -622,21 +616,17 @@ class Social_Proof_Slider_Public {
 		$style_arrowshovercolor = $atts['arrowshovercolor'];
 		$style_dotscolor = $atts['dotscolor'];
 		$style_dotshovercolor = $atts['dotshovercolor'];
-		/*
-		Image Border Color - Color Picker | Default: #000000
-		Dots Color - Color Picker | Default: #000000
-		Dots Hover Color - Color Picker | Default: rgba(0,0,0,0.5)
-		*/
+		$style_imagebordercolor = $atts['imagebordercolor'];
 
 		$shared = new Social_Proof_Slider_Shared( $this->plugin_name, $this->version );
 
-		// Get Shortcode Settings
+		// Get Shortcode Settings.
 		$sc_settings = $shared->get_shortcode_settings();
 
-		// Get Attributes inside the manually-entered Shortcode
+		// Get Attributes inside the manually-entered Shortcode.
 		$sc_atts = shortcode_atts( $defaults, $atts, 'social-proof-slider' );
 
-		// Determine ORDERBY and ORDER args
+		// Determine ORDERBY and ORDER args.
 		$sortbysetting = $posts_sortby;
 		if ( $sortbysetting == "RAND" ) {
 			$queryargs = array(
@@ -685,11 +675,9 @@ class Social_Proof_Slider_Public {
 		}
 
 		$showImageBorder = $posts_showimageborder;
-		$imageBorderColor = $sc_settings['imageBorderColor'];
+		$imageBorderColor = $style_imagebordercolor;
 		$imageBorderThickness = $posts_imagebordersize;
 		$imageBorderPadding = $padding_imageborderpadding;
-
-		// $smartQuotes = $sc_settings['surroundWithQuotes'];
 
 		// $doPaddingOverride = $sc_settings['doPaddingOverride'];
 		// $contentPaddingTop = $sc_settings['contentPaddingTop'];
@@ -715,22 +703,17 @@ class Social_Proof_Slider_Public {
 		// 	$dotsMarginStr = "margin-top: ".$dotsMarginTop.";";
 		// }
 
-		// $alignStr = '';	// default
-		// if ( $sc_settings['doAutoHeight'] != 'true' ) {
-		// 	$alignStr = ' valign-' . $sc_settings['verticalalign'];
-		// }
-
-		// Create 'items' object with all testimonials
+		// Create 'items' object with all testimonials.
 		$items = '';
 		$items = $shared->get_testimonials( $queryargs, 'shortcode', $posts_filter_hide, $posts_filter_ids, $posts_showfeaturedimages, $posts_showquotes, $posts_filter_taxslug, $requestor );
 
-		// Generate Unique ID for this block
+		// Generate a Unique ID for this block.
 		$uniqueID = uniqid('spslider_block_');
 
-		// Build data attr string for Slick settings
+		// Build the data attr string for Slick settings.
 		$slickData = "'{";
 
-		// Autoplay
+		// Define Autoplay setting.
 		if ( $slider_autoplay === "true" || $slider_autoplay === "1" ) {
 			$slickData .= '"autoplay":true';
 			// Autoplay - Display Time
@@ -744,7 +727,7 @@ class Social_Proof_Slider_Public {
 
 		$slickData .= ",";
 
-		// Animation Style
+		// Define the Animation Style.
 		if ( $slider_animationstyle === "fade" ) {
 			$slickData .= '"fade":true';
 		} else {
@@ -753,7 +736,7 @@ class Social_Proof_Slider_Public {
 
 		$slickData .= ",";
 
-		// Show Arrows
+		// Show the Arrows.
 		if ( $slider_showarrows === "true" || $slider_showarrows === "1" ) {
 			$slickData .= '"arrows":true';
 		} else {
@@ -762,13 +745,13 @@ class Social_Proof_Slider_Public {
 
 		$slickData .= ",";
 
-		// Arrows Style
+		// Define the Arrows Style.
 		$slickData .= '"prevArrow":"#'.$uniqueID.'-arrow-left",';
 		$slickData .= '"nextArrow":"#'.$uniqueID.'-arrow-right"';
 
 		$slickData .= ",";
 
-		// Show Dots
+		// Show the Dots.
 		if ( $slider_showdots === "true" || $slider_showdots === "1" ) {
 			$slickData .= '"dots":true';
 		} else {
@@ -777,19 +760,23 @@ class Social_Proof_Slider_Public {
 
 		$slickData .= ",";
 
-		// Adaptive Height
+		// Use the Adaptive Height setting.
 		if ( $slider_adaptiveheight === "true" || $slider_adaptiveheight === "1" ) {
 			$slickData .= '"adaptiveHeight":true';
 		} else {
 			$slickData .= '"adaptiveHeight":false';
 		}
 
+		// End Slick JS settings.
 		$slickData .= "}'";
 
+		// Assign text alignment.
 		$textAlignStr = "align_" . $block_textalign;
 
+		// Assign vertical alignment.
 		$alignStr = "valign-".$atts['verticalalign'];
 
+		// Start output of the Slider.
 		echo '<!-- // ********** SOCIAL PROOF SLIDER ********** // -->';
 		echo '<section id="' . $uniqueID . '" class="block wp-block-socialproofslider ' . $sc_settings['animationStyle'] . ' paddingoverride-'.$sc_settings['doPaddingOverride'].' ">';
 		echo '<div class="widget-wrap">';
@@ -803,67 +790,67 @@ class Social_Proof_Slider_Public {
 			echo '<button type="button" id="'.$uniqueID.'-arrow-right" class="slick-next"><span class="fa fa-' . $slider_arrowstyle . '-right"></span></button>';
 		}
 
-		// Output styles.
+		// Output CSS styles.
 		$uniqueID = '#' . $uniqueID;
 		echo '<style>' . "\n";
 
-		// Assign bg color and container padding.
+		// Assign the BG Color and Container padding.
 		echo $uniqueID . ' .social-proof-slider-wrap { background-color:' . $style_bgcolor . '; '.$contentPaddingStr.' }'."\n";
 
-		// Assign arrows color.
+		// Assign the Arrows Color.
 		if ( ! $style_arrowscolor ) {
 			// Use default color.
 			$style_arrowscolor = '#000';
 		}
 		echo $uniqueID . '.wp-block-socialproofslider .widget-wrap > button.slick-arrow { color:' . $style_arrowscolor . ' !important; }'."\n";
 
-		// Assign arrows hover color.
+		// Assign Arrows Hover Color.
 		if ( ! $style_arrowshovercolor ) {
-			// Use default opacity 50%.
+			// Use default = opacity 50%.
 			echo $uniqueID . '.wp-block-socialproofslider .widget-wrap > button.slick-arrow:hover span{ opacity: 0.5; }'."\n";
 		} else {
 			// Use selected color.
 			echo $uniqueID . '.wp-block-socialproofslider .widget-wrap > button.slick-arrow:hover span{ color:' . $style_arrowshovercolor . '; }'."\n";
 		}
 
-		// Assign dots margin.
+		// Assign the Dots margin.
 		echo $uniqueID . ' .social-proof-slider-wrap ul.slick-dots{ '.$dotsMarginStr.' }'."\n";
 
-		// Assign dots color.
+		// Assign the Dots Color.
 		if ( ! $style_dotscolor ) {
 			$style_dotscolor = '#000';
 		}
 		echo $uniqueID . '.wp-block-socialproofslider .social-proof-slider-wrap .slick-dots li button { color:' . $style_dotscolor . ' !important; }'."\n";
 
-		// Assign dots hover color.
+		// Assign the Dots Hover Color.
 		if ( ! $style_dotshovercolor ) {
-			// Use default opacity 50%.
+			// Use default = opacity 50%.
 			echo $uniqueID . '.wp-block-socialproofslider .social-proof-slider-wrap .slick-dots li button:hover { opacity: 0.5 !important; }'."\n";
 		} else {
 			// Use selected color.
 			echo $uniqueID . '.wp-block-socialproofslider .social-proof-slider-wrap .slick-dots li button:hover { color:' . $style_dotshovercolor . ' !important; }'."\n";
 		}
 
-		// Assign featured image margin.
+		// Assign the Featured Image margin.
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img { '.$imgMarginStr.' }'."\n";
 
-		// Assign featured image border radius.
+		// Assign the Featured Image border radius.
 		if ( empty( $posts_imageborderradius ) || ( $posts_imageborderradius === 0 ) || ( $posts_imageborderradius === false ) ) {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius: 0; }'."\n";
 		} else {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius: ' . $posts_imageborderradius . '%; }'."\n";
 		}
 
-		// Show image border.
+		// Show the Featured Image Border.
 		if ( $showImageBorder === "true" || $showImageBorder === "1" ) {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img { border: ' . $imageBorderThickness . 'px solid ' . $imageBorderColor . ' !important; padding: ' . $imageBorderPadding . 'px; }'."\n";
 		}
 
-		// Assign text padding and margin.
+		// Assign the Text padding and margin.
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text{ '.$textPaddingStr.' }'."\n";
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .quote { '.$quoteMarginStr.' }'."\n";
 
-		// Assign text colors.
+		// Assign the Text Colors.
 		if ( ! empty( $style_testimonialcolor ) ) {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .quote p { color:' . $style_testimonialcolor . '; }'."\n";
 		}
@@ -874,17 +861,23 @@ class Social_Proof_Slider_Public {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .author > .author-title { color:' . $style_authortitlecolor . '; }'."\n";
 		}
 
+		// End styles.
 		echo '</style>'."\n";
 
+		// End Slides wrapper.
 		echo '</div><!-- // .widget-wrap // -->';
 
+		// End Slider.
 		echo '</section>';
 		echo '<!-- // ********** // END SOCIAL PROOF SLIDER // ********** // -->';
 
+		// Put contents into a var.
 		$output = ob_get_contents();
 
+		// Clear the memory.
 		ob_end_clean();
 
+		// Output everything.
 		return $output;
 
 	} // spslider_block_shortcode()
@@ -994,6 +987,10 @@ class Social_Proof_Slider_Public {
 
 			if ( $atts['dotshovercolor'] ) {
 				$settings .= 'dotshovercolor="' . $atts['dotshovercolor'] . '" ';
+			}
+
+			if ( $atts['imagebordercolor'] ) {
+				$settings .= 'imagebordercolor="' . $atts['imagebordercolor'] . '" ';
 			}
 
 			if ( $atts['testimonialtextcolor'] ) {
@@ -1116,6 +1113,9 @@ class Social_Proof_Slider_Public {
 					'default' => ''
 				],
 				'dotshovercolor' => [
+					'default' => ''
+				],
+				'imagebordercolor' => [
 					'default' => ''
 				],
 				'testimonialtextcolor' => [

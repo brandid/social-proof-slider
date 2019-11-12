@@ -158,6 +158,12 @@ class SPTestimonialsSlider extends Component {
             document.dispatchEvent( customEvent )
         }
 
+        // Update Image Border Color
+        function updateImageBorderColor(value) {
+            setAttributes({ imagebordercolor: value });
+            document.dispatchEvent( customEvent )
+        }
+
         // Update Testimonials Text Color
         function updateTestimonialTextColor(value) {
             setAttributes({ testimonialtextcolor: value });
@@ -592,6 +598,11 @@ class SPTestimonialsSlider extends Component {
                             value: attributes.dotshovercolor,
                             onChange: updateDotsHoverColor,
                             label: __( 'Dots Hover Color', 'socialproofslider' ),
+                            },
+                            {
+                            value: attributes.imagebordercolor,
+                            onChange: updateImageBorderColor,
+                            label: __( 'Image Border Color', 'socialproofslider' ),
                             },
                         ]}
                         />

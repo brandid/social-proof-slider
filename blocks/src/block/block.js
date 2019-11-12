@@ -158,6 +158,9 @@ registerBlockType('social-proof-slider/main', {
         dotshovercolor: {
             type: 'string',
         },
+        imagebordercolor: {
+            type: 'string',
+        },
         testimonialtextcolor: {
             type: 'string',
         },
