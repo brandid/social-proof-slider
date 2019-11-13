@@ -778,7 +778,7 @@ class Social_Proof_Slider_Public {
 
 		// Start output of the Slider.
 		echo '<!-- // ********** SOCIAL PROOF SLIDER ********** // -->';
-		echo '<section id="' . $uniqueID . '" class="block wp-block-socialproofslider ' . $sc_settings['animationStyle'] . ' paddingoverride-'.$sc_settings['doPaddingOverride'].' ">';
+		echo '<section id="' . $uniqueID . '" class="block wp-block-socialproofslider ' . $slider_animationstyle . ' ">';
 		echo '<div class="widget-wrap">';
 		if ( $slider_showarrows === "true" || $slider_showarrows === "1" ) {
 			echo '<button type="button" id="'.$uniqueID.'-arrow-left" class="slick-prev"><span class="fa fa-' . $slider_arrowstyle . '-left"></span></button>';
