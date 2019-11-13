@@ -84,7 +84,7 @@ class Social_Proof_Slider {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
+		$this->define_shared_hooks();
 		$this->define_widget_hooks();
 		$this->define_metabox_hooks();
 
@@ -192,6 +192,10 @@ class Social_Proof_Slider {
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_setting' );
 		$this->loader->add_filter( 'manage_socialproofslider_posts_columns', $plugin_admin, 'set_custom_edit_socialproofslider_columns' );
 		$this->loader->add_action( 'manage_socialproofslider_posts_custom_column' , $plugin_admin, 'custom_socialproofslider_column', 10, 2 );
+
+		// Enqueue Slick JS for Block Editor
+		$this->loader->add_action( 'enqueue_block_assets', $plugin_admin, 'spslider_block_scripts' );
+		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'spslider_admin_block_styles' );
 	}
 
 	/**
@@ -209,6 +213,7 @@ class Social_Proof_Slider {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
+		$this->loader->add_action( 'init', $plugin_public, 'spslider_register_gutenberg_block' );
 
 	}
 

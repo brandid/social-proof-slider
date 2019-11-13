@@ -83,29 +83,64 @@ class Social_Proof_Slider_Shared {
 	 * @param 	string 		$src 			String to determine if gathering posts for a shortcode or widget
 	 * @param 	bool 		$featimgs 		Display featured images
 	 * @param 	bool 		$smartquotes 	Display smart quotes
-	 * @param 	string 		$taxSlug 	Category/taxonomy slug to limit testimonials
+	 * @param 	string 		$taxSlug 		Category/taxonomy slug to filter testimonials
+	 * @param 	string 		$requestor		Which object is requesting the testimonials (default, block)
 	 *
 	 * @return 	string 		A string of HTML to output
 	 */
-	public function get_testimonials( $params, $src, $postLimit, $limitIDs, $featimgs, $smartquotes, $taxSlug ){
+	public function get_testimonials( $params, $src, $postLimit, $limitIDs, $featimgs, $smartquotes, $taxSlug, $requestor = 'default' ) {
 
 		$return = '';
 
-		if ( !empty($taxSlug) ) {
-			// limit by category
-			$args = $this->set_args( $params, "", "", $taxSlug );
+		// If we are showing a Block...
+		if ( 'block' == $requestor ) {
 
-		} else if ( !empty($limitIDs) ) {
-			// Including/Excluding
-			if ( !empty($postLimit) ) {
-				// Exclude
-				$args 	= $this->set_args( $params, $postLimit, $limitIDs, "" );
+			if ( ( ! empty( $postLimit ) ) && ( ! empty( $taxSlug ) ) ) {
+
+				// Hide posts from this category.
+				$args = $this->set_args( $params, $postLimit, '', $taxSlug );
+
 			} else {
-				// Include
-				$args 	= $this->set_args( $params, "", $limitIDs, "" );
+
+				if ( !empty($taxSlug) ) {
+					// Limit by category.
+					$args = $this->set_args( $params, "", "", $taxSlug );
+
+				} else if ( !empty($limitIDs) ) {
+					// Limit by post ID.
+					if ( !empty($postLimit) ) {
+						// Exclude
+						$args 	= $this->set_args( $params, $postLimit, $limitIDs, "" );
+					} else {
+						// Include
+						$args 	= $this->set_args( $params, "", $limitIDs, "" );
+					}
+				} else {
+					$args 	= $this->set_args( $params, "", "", "" );
+				}
+
 			}
+
 		} else {
-			$args 	= $this->set_args( $params, "", "", "" );
+			// Not a block. Display default.
+
+			if ( !empty($taxSlug) ) {
+				// Limit by category.
+				$args = $this->set_args( $params, "", "", $taxSlug );
+
+			} else if ( !empty($limitIDs) ) {
+				// Limit by post ID.
+				if ( !empty($postLimit) ) {
+					// Exclude
+					$args 	= $this->set_args( $params, $postLimit, $limitIDs, "" );
+				} else {
+					// Include
+					$args 	= $this->set_args( $params, "", $limitIDs, "" );
+				}
+			} else {
+				$args 	= $this->set_args( $params, "", "", "" );
+			}
+
 		}
 
 		$query 	= new WP_Query( $args );
@@ -147,7 +182,7 @@ class Social_Proof_Slider_Shared {
 					// Vars
 					$testimonialtext = $meta['socialproofslider_testimonial_text'][0];
 
-					if ( (int)$smartquotes == 1 ) {
+					if ( $smartquotes === "true" || $smartquotes === "1" ) {
 
 						$quoteTextStart = "“";
 						$quoteTextEnd = "”";
@@ -295,21 +330,44 @@ class Social_Proof_Slider_Shared {
 		$limitByCat = false;
 		$limitedPosts = false;
 
-		// Setting a category in the shortcode will override the 'Sort By' setting.
-		// This enables users to specify a slug to only show posts assigned to that category.
-		if ( !empty ( $taxSlug ) ) {
+		// Limit by category.
+		if ( ! empty ( $taxSlug ) ) {
 
-			$limitByCat = true;
+			// Create array of the Category slugs
+			$catArray = explode(',', $taxSlug);
 
-			$category_array = array(
-			    'tax_query' => array(
-			        array(
-			            'taxonomy' => 'category',
-			            'field' => 'slug',
-			            'terms' => $taxSlug
-			        )
-			    )
-			);
+			// Hide posts from this category.
+			if ( ! empty( $postLimit ) ) {
+
+				$limitByCat = true;
+
+				$category_array = array(
+				    'tax_query' => array(
+				        array(
+				            'taxonomy' => 'category',
+				            'field' => 'slug',
+				            'terms' => $catArray,
+							'operator' => 'NOT IN'
+				        )
+				    )
+				);
+
+			} else {
+				// Show only the posts from this category.
+
+				$limitByCat = true;
+
+				$category_array = array(
+				    'tax_query' => array(
+				        array(
+				            'taxonomy' => 'category',
+				            'field' => 'slug',
+				            'terms' => $catArray
+				        )
+				    )
+				);
+
+			}
 
 		}
 
@@ -556,7 +614,6 @@ class Social_Proof_Slider_Shared {
 		return $args;
 
 	}
-
 
 	/**
 	 * Registers widgets with WordPress

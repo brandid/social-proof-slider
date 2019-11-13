@@ -1,13 +1,12 @@
 === Social Proof (Testimonial) Slider ===
 Contributors: alexmustin
 Author: brandiD
-Author URI: https://thebrandidthemes.com/product/social-proof-testimonial-slider/
-Donate link: https://thebrandid.com/
+Author URI: https://buildmybrandid.com/product/social-proof-testimonial-slider/
 Tags: awards, carousel, content slider, custom post type, features, feedback, jquery, portfolio, responsive, reviews, quotes, sidebar, slider, slideshow, social, testimonial, video, vimeo, widget, youtube
 Requires at least: 4.5
-Tested up to: 5.2.2
-Stable tag: 2.1.2
-Version: 2.1.2
+Tested up to: 5.3
+Stable tag: 2.2.0
+Version: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,7 +16,7 @@ Showcase your expertise with an easy-to-customize responsive carousel slider of 
 
 Seeing is believing. And one of the strongest ways to communicate your expertise is with a visual portfolio of bona fides scrolling along your website. With each click, a slide appears sharing testimonials, logos of awards, reviews, sites you've appeared in or been featured on, or links to your guest posts on popular blogs. It's a quick, seamless way to communicate your online authority, credibility, and skill set through social proof. And it's easy to populate, update, and customize on your WordPress site. As the Social Proof Slider scrolls, your authority grows.
 
-For more info, please visit: https://thebrandidthemes.com/product/social-proof-testimonial-slider/
+For more info, please visit: https://buildmybrandid.com/product/social-proof-testimonial-slider/
 
 == Installation ==
 
@@ -30,35 +29,67 @@ This section describes how to install the plugin and get it working.
 5. To configure Shortcode display settings, use the Settings->Social Proof Slider screen. For widgets, you will see the settings panel for each Social Proof Slider widget individually.
 6. Easily embed responsive YouTube or Vimeo videos! Enter your video code into the "Testimonial Text" field in the following format: `https://www.youtube.com/watch?v=abcde123456` or `https://vimeo.com/12345678` and the rest is done automatically! *Note:* It is recommended to disable the "Auto-play" feature when embedding videos.
 
+== Development ==
+
+To compile the plugin code on your local development environment, you will need to have `Node.js` and `npm` installed.
+
+Follow these steps:
+
+1. Fork the plugin repo into your own GitHub account, then clone it to a folder on your computer.
+2. Open the Terminal and navigate to the plugin directory.
+3. Install the dependencies by typing: `npm install`
+4. Run Webpack: `npx webpack`
+5. You should see the project compile - you're ready to develop!
+
 == Frequently Asked Questions ==
 
-= Can I use the Social Proof Slider with Gutenberg? =
-Yes! You can use a Shortcode block to display the Social Proof Slider - use the following shortcode: `social-proof-slider`
+= Can I use the Social Proof Slider with the Block Editor? =
+Yes! We've added Block Editor support to the plugin - just search for 'SP Testimonials Slider' or find it under the 'Common Blocks' category in the list of Blocks.
+Alternatively, you can use a Shortcode block to display the Social Proof Slider - use the following shortcode: `social-proof-slider`
 
-= Can I show testimonials by Category? =
-Yes! We've added the ability to create Categories and assign them to your testimonials. Use the Category slug in the shortcode or widget settings to only display testimonials assigned to that category.
+= Can I filter testimonials by category? =
+Yes! We've added the ability to create Categories and assign them to your testimonials. In the Block, there is a setting to Filter Posts. Use the Category slug in the block/shortcode/widget settings to hide or show only testimonials assigned to that category.
 
-= How do I create a Manual Slider? =
-You can easily create a new slider on any page by using shortcodes. You will need to wrap each testimonial item in a shortcode: `[spslider-item]Your Testimonial Text Here[/spslider-item]`. Then you will need to wrap ALL your testimonial items with the manual slider shortcode: `[spslider-manual]Your Testimonial Items Inside Here[/spslider-manual]`. Please see the Screenshots for an example.
+= How do I create a slider without using the Custom Post Type? =
+You can easily create a new slider on any page by using shortcodes. You will need to wrap each testimonial item in a shortcode: `[spslider-item]Your Testimonial Text Here[/spslider-item]`. Then you will need to wrap ALL your testimonial items with the manual slider shortcode:
+```
+[spslider-manual]
+[spslider-item]Your Testimonial Text Here[/spslider-item]
+[spslider-item]Your Testimonial Text Here[/spslider-item]
+[spslider-item]Your Testimonial Text Here[/spslider-item]
+[/spslider-manual]
+```
+Please see the Screenshots for an example.
+
+= How do I report a bug or request a feature? =
+Please open an Issue on the GitHub project:
+https://github.com/brandid/social-proof-slider/issues
 
 = Something Else? =
-Please see the following page for support: https://thebrandidthemes.com/forum/support/plugins/social-proof-testimonial-slider/
+Please use our Support Forum if you need help:
+https://buildmybrandid.com/forum/support/plugins/social-proof-testimonial-slider/
 
 == Screenshots ==
 
 1. Social Proof Testimonials Slider
-2. Entering Testimonial Content
-3. Shortcode Settings
-4. Widget Settings
-5. Display Testimonials in a Widget
-6. Use the Customizer for a Live Preview of Widgets
-7. Embed Videos into Testimonial Content
-8. Video Testimonials
-9. For Manual sliders, use shortcode: `spslider-item` to wrap each testimonial, then use `spslider-manual` to wrap them all
-10. A Manual Slider created with shortcodes
-11. Limit Testimonials by Category
+2. SP Slider Block
+3. SP Slider Block Settings
+4. Entering Testimonial Content
+5. Shortcode Settings
+6. Widget Settings
+7. Display Testimonials in a Widget
+8. Use the Customizer for a Live Preview of Widgets
+9. Embed Videos into Testimonial Content
+10. Video Testimonials
+11. For Manual sliders, use shortcode: `spslider-item` to wrap each testimonial, then use `spslider-manual` to wrap them all
+12. A Manual Slider created with shortcodes
+13. Limit Testimonials by Category
 
 == Changelog ==
+
+= 2.2.0 - (Nov 12, 2019) =
+* Added: New SP Slider Block: Easily place a 'SP Testimonials Slider' block anywhere on your page and visually configure its display settings in real-time using the Block Editor.
+* Update: Compatible with WordPress 5.3
 
 = 2.1.2 - (Aug 9, 2019) =
 * Added: Categories to the testimonials CPT

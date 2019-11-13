@@ -122,6 +122,26 @@ class Social_Proof_Slider_Admin {
 	}
 
 	/**
+	 * Enqueue Slick JS for the Block.
+	 *
+	 * @since    2.1.2
+	 */
+	public function spslider_block_scripts() {
+		wp_enqueue_script( 'slick-js', '//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js', array( 'jquery' ), '1.8.1', true );
+		wp_enqueue_script( 'slick-spslider-block-js', plugin_dir_url( __FILE__ ) . 'js/slick-block-editor.js', array( 'jquery', 'slick-js' ), $this->version, true );
+		wp_enqueue_style( 'slick-spslider-block-css', '//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css', array(), '1.8.1', 'all' );
+	}
+
+	/**
+	 * Enqueue Admin CSS for the Block.
+	 *
+	 * @since    2.1.2
+	 */
+	public function spslider_admin_block_styles() {
+		wp_enqueue_style( 'spslider-admin-block-css', plugin_dir_url( __FILE__ ) . 'css/sp-slider-testimonials-block.css', array(), $this->version, 'all' );
+	}
+
+	/**
 	 * Adds a link to the plugin settings page
 	 *
 	 * @since 		2.0.0
@@ -261,7 +281,7 @@ class Social_Proof_Slider_Admin {
 			'manage_options',
 			$this->plugin_name,
 			array( $this, 'display_spslider_options_page' )
-			);
+		);
 
 	}
 

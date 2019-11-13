@@ -29,10 +29,15 @@
 			echo '<h3>' . __( 'Shortcode Instructions', 'social-proof-slider' ) . '</h3>';
 			echo '<p><b>' . __( 'Default Display', 'social-proof-slider' ) . '</b><br>' . __( 'To display the Social Proof Slider with a shortcode, use the following format:', 'social-proof-slider' ) . '</p>';
 			echo '<pre>[social-proof-slider]</pre>';
-			echo '<p><b>' . __( 'Show Only Specific Testimonials', 'social-proof-slider' ) . '</b><br>' . __( 'To display ONLY specific testimonials, simply provide a list of testimonial post IDs:', 'social-proof-slider' ) . '</p>';
+			echo '<h3>' . __( 'Filter Posts', 'social-proof-slider' ) . '</h3>';
+			echo '<p><b>' . __( 'Show Only Testimonials by ID', 'social-proof-slider' ) . '</b><br>' . __( 'To display ONLY testimonials by ID, simply provide one or more testimonial post IDs:', 'social-proof-slider' ) . '</p>';
 			echo '<pre>[social-proof-slider ids="1,2,3"]</pre>';
-			echo '<p><b>' . __( 'Exclude Specific Testimonials', 'social-proof-slider' ) . '</b><br>' . __( 'To Exclude specific testimonials, use the', 'social-proof-slider' ) . ' <span class="code">exclude="true"</span> ' . __( 'attribute, along with a list of testimonial post IDs:', 'social-proof-slider' ) . '</p>';
+			echo '<p><b>' . __( 'Exclude Testimonials by ID', 'social-proof-slider' ) . '</b><br>' . __( 'To Exclude testimonials by ID, use the', 'social-proof-slider' ) . ' <span class="code">exclude="true"</span> ' . __( 'attribute, along with one or more testimonial post IDs:', 'social-proof-slider' ) . '</p>';
 			echo '<pre>[social-proof-slider exclude="true" ids="99,100"]</pre>';
+			echo '<p><b>' . __( 'Show Only Testimonials by Category', 'social-proof-slider' ) . '</b><br>' . __( 'To display ONLY testimonials in a category, simply provide one or more category slugs:', 'social-proof-slider' ) . '</p>';
+			echo '<pre>[social-proof-slider category="quotes,movies"]</pre>';
+			echo '<p><b>' . __( 'Exclude Testimonials by Category', 'social-proof-slider' ) . '</b><br>' . __( 'To Exclude testimonials by category, use the ', 'social-proof-slider' ) . ' <span class="code">exclude="true"</span> ' . __( 'attribute, along with one or more testimonial category slugs:', 'social-proof-slider' ) . '</p>';
+			echo '<pre>[social-proof-slider exclude="true" category="quotes,movies"]</pre>';
 		?>
 	</div>
 

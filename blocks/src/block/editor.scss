@@ -1,0 +1,17 @@
+@import '../common';
+
+.spslider-inspector-panel .components-panel__row {
+    margin-bottom: 14px;
+}
+
+.edit-post-settings-sidebar__panel-block .components-panel__body.spslider-inspector-panel .components-base-control:last-child {
+    margin-bottom: 0;
+}
+
+.spslider-inspector-panel .components-base-control .components-base-control__help {
+    margin-top: 0;
+}
+
+.spslider-inspector-panel .components-base-control .components-base-control__help:last-of-type {
+    margin-bottom: 0;
+}

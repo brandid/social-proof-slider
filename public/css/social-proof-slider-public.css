@@ -3,6 +3,10 @@
 	margin: 30px 0;
 }
 
+.wp-block-socialproofslider .widget-wrap {
+	position: relative;
+}
+
 .social-proof-slider-wrap[class*="valign-"] .slick-track {
     display: flex;
 }
@@ -19,33 +23,41 @@
     align-items: flex-end;
 }
 
-.social-proof-slider-wrap button.slick-arrow {
-	width: 30px;
+.social-proof-slider-wrap button.slick-arrow,
+.wp-block-socialproofslider .widget-wrap > button.slick-arrow {
+	width: 32px;
+	height: 32px;
 	padding: 0;
 	position: absolute;
 	top: 50%;
-	margin-top: -20px;
+	margin-top: -16px;
 	z-index: 1;
 	font-size: 32px;
 	line-height: 32px;
-	transition: all .3s ease;
+	transition: all .2s ease;
 }
 
 .social-proof-slider-wrap button.slick-arrow,
 .social-proof-slider-wrap button.slick-arrow:hover,
 .social-proof-slider-wrap button.slick-arrow:focus,
-.social-proof-slider-wrap button.slick-arrow:active{
+.social-proof-slider-wrap button.slick-arrow:active,
+.wp-block-socialproofslider .widget-wrap > button.slick-arrow,
+.wp-block-socialproofslider .widget-wrap > button.slick-arrow:hover,
+.wp-block-socialproofslider .widget-wrap > button.slick-arrow:focus,
+.wp-block-socialproofslider .widget-wrap > button.slick-arrow:active{
 	background: transparent;
 	outline: 0;
 	border: 0;
 }
 
-.social-proof-slider-wrap button.slick-prev {
-	left: 10px;
+.social-proof-slider-wrap button.slick-prev,
+.wp-block-socialproofslider .widget-wrap > button.slick-prev {
+	left: 0;
 }
 
-.social-proof-slider-wrap button.slick-next {
-	right: 10px;
+.social-proof-slider-wrap button.slick-next,
+.wp-block-socialproofslider .widget-wrap > button.slick-next {
+	right: 0;
 }
 
 .social-proof-slider-wrap ul.slick-dots {
@@ -171,11 +183,11 @@
 }
 
 .social-proof-slider-wrap .testimonial-item .testimonial-text {
-	padding: 50px 0;
+	padding: 20px 0;
 }
 
 .social-proof-slider-wrap .testimonial-item.no-featured .testimonial-text {
-	padding: 0 0 50px 0;
+	padding: 0 0 30px 0;
 }
 
 .social-proof-slider-wrap .testimonial-item .testimonial-text .quote {
