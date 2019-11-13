@@ -22,7 +22,7 @@
 .wp-block-socialproofslider .widget-wrap > button.slick-arrow:hover,
 .wp-block-socialproofslider .widget-wrap > button.slick-arrow:focus,
 .wp-block-socialproofslider .widget-wrap > button.slick-arrow:active{
-	background: transparent;
+	background-color: transparent !important;
 	outline: 0;
 	border: 0;
 }
