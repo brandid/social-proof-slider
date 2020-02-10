@@ -431,24 +431,35 @@ class Social_Proof_Slider_Public {
 		$requestor = 'block';
 
 		// Declare defaults.
-		$defaults['blockalign'] = 'center';
-		$defaults['sortpostsby'] = 'DESC';
-		$defaults['filterposts'] = false;
-		$defaults['filtershowhide'] = 'show';
-		$defaults['filterby'] = 'postid';
-		$defaults['postidorcatslug'] = '';
-		$defaults['showfeaturedimages'] = false;
-		$defaults['showimageborder'] = false;
-		$defaults['showquotemarks'] = false;
-		$defaults['autoplay'] = true;
-		$defaults['displaytime'] = 3;
-		$defaults['animationstyle'] = 'fade';
-		$defaults['showarrows'] = false;
-		$defaults['arrowstyle'] = 'angle';
-		$defaults['showdots'] = false;
-		$defaults['adaptiveheight'] = false;
+		$defaults['blockalign']           = 'center';
+		$defaults['sortpostsby']          = 'DESC';
+		$defaults['filterposts']          = false;
+		$defaults['filtershowhide']       = 'show';
+		$defaults['filterby']             = 'postid';
+		$defaults['postidorcatslug']      = '';
+		$defaults['postids']              = '';
+		$defaults['catslug']              = '';
+		$defaults['showfeaturedimages']   = false;
+		$defaults['showimageborder']      = false;
+		$defaults['showquotemarks']       = false;
+		$defaults['autoplay']             = true;
+		$defaults['displaytime']          = 3;
+		$defaults['animationstyle']       = 'fade';
+		$defaults['showarrows']           = false;
+		$defaults['arrowstyle']           = 'angle';
+		$defaults['showdots']             = false;
+		$defaults['adaptiveheight']       = false;
+		$defaults['bgcolor']              = 'transparent';
+		$defaults['testimonialtextcolor'] = '';
+		$defaults['authornamecolor']      = '';
+		$defaults['authortitlecolor']     = '';
+		$defaults['arrowscolor']          = '#000000';
+		$defaults['arrowshovercolor']     = '';
+		$defaults['dotscolor']            = '#000000';
+		$defaults['dotshovercolor']       = '';
+		$defaults['imagebordercolor']     = '';
 
-		if ( !function_exists( 'getAttsOrDefault' ) ) {
+		if ( ! function_exists( 'getAttsOrDefault' ) ) {
 
 			/* Function to assign default value if attr is empty
 			 *
@@ -477,114 +488,42 @@ class Social_Proof_Slider_Public {
 		}
 
 		// Get Block Settings.
-		$block_textalign = $atts['textalign'];
-		if ( empty( $block_textalign ) ) {
-			$block_textalign = $defaults['blockalign'];
-		}
+		$block_textalign = ! empty( $atts['textalign'] ) ? $atts['textalign'] : $defaults['blockalign'];
 
 		// Get Post Settings.
-		$posts_sortby = $atts['sortpostsby'];
-		if ( empty( $posts_sortby ) ) {
-			$posts_sortby = $defaults['sortpostsby'];
-		}
-
-		$posts_filterposts = $atts['filterposts'];
-		if ( empty( $posts_filterposts ) ) {
-			$posts_filterposts = $defaults['filterposts'];
-		}
-
-		$posts_filtershowhide = $atts['filtershowhide'];
-		if ( empty( $posts_filtershowhide ) ) {
-			$posts_filtershowhide = $defaults['filtershowhide'];
-		}
-
-		$posts_filterby = $atts['filterby'];
-		if ( empty( $posts_filterby ) ) {
-			$posts_filterby = $defaults['filterby'];
-		}
-
-		$posts_postids = $atts['postids'];
-		if ( empty( $posts_postids ) ) {
-			$posts_postids = $defaults['postids'];
-		}
-
-		$posts_catslug = $atts['catslug'];
-		if ( empty( $posts_catslug ) ) {
-			$posts_catslug = $defaults['catslug'];
-		}
+		$posts_sortby         = ! empty( $atts['sortpostsby'] ) ? $atts['sortpostsby'] : $defaults['sortpostsby'];
+		$posts_filterposts    = ! empty( $atts['filterposts'] ) ? $atts['filterposts'] : $defaults['filterposts'];
+		$posts_filtershowhide = ! empty( $atts['filtershowhide'] ) ? $atts['filtershowhide'] : $defaults['filtershowhide'];
+		$posts_filterby       = ! empty( $atts['filterby'] ) ? $atts['filterby'] : $defaults['filterby'];
+		$posts_postids        = ! empty( $atts['postids'] ) ? $atts['postids'] : $defaults['postids'];
+		$posts_catslug        = ! empty( $atts['catslug'] ) ? $atts['catslug'] : $defaults['catslug'];
 
 		$posts_showfeaturedimages = $atts['showfeaturedimages'];
-		if ( $posts_showfeaturedimages === "true" ) {
+		if ( 'true' === $posts_showfeaturedimages ) {
 			$posts_showfeaturedimages = 1;
 		}
 		if ( empty( $posts_showfeaturedimages ) ) {
 			$posts_showfeaturedimages = $defaults['showfeaturedimages'];
 		}
 
-		$posts_showimageborder = $atts['showimageborder'];
-		if ( empty( $posts_showimageborder ) ) {
-			$posts_showimageborder = $defaults['showimageborder'];
-		}
-
-		$posts_imageborderradius = $atts['imageborderradius'];
-		if ( empty( $posts_imageborderradius ) ) {
-			$posts_imageborderradius = 0;
-		}
-
-		$posts_imagebordersize = $atts['imagebordersize'];
-		if ( empty( $posts_imagebordersize ) ) {
-			$posts_imagebordersize = 0;
-		}
-
-		$posts_showquotes = $atts['showquotemarks'];
-		if ( empty( $posts_showquotes ) ) {
-			$posts_showquotes = $defaults['showquotemarks'];
-		}
+		$posts_showimageborder   = ! empty( $atts['showimageborder'] ) ? $atts['showimageborder'] : $defaults['showimageborder'];
+		$posts_imageborderradius = ! empty( $atts['imageborderradius'] ) ? $atts['imageborderradius'] : 0;
+		$posts_imagebordersize   = ! empty( $atts['imagebordersize'] ) ? $atts['imagebordersize'] : 0;
+		$posts_showquotes        = ! empty( $atts['showquotemarks'] ) ? $atts['showquotemarks'] : $defaults['showquotemarks'];
 
 		// Get Slider Settings.
-		$slider_autoplay = $atts['autoplay'];
-		if ( empty( $slider_autoplay ) ) {
-			$slider_autoplay = $defaults['autoplay'];
-		}
-
-		$slider_displaytime = $atts['displaytime'];
-		if ( empty( $slider_displaytime ) ) {
-			$slider_displaytime = $defaults['displaytime'];
-		}
-
-		$slider_animationstyle = $atts['animationstyle'];
-		if ( empty( $slider_animationstyle ) ) {
-			$slider_animationstyle = $defaults['animationstyle'];
-		}
-
-		$slider_showarrows = $atts['showarrows'];
-		if ( empty( $slider_showarrows ) ) {
-			$slider_showarrows = $defaults['showarrows'];
-		}
-
-		$slider_arrowstyle = $atts['arrowstyle'];
-		if ( empty( $slider_arrowstyle ) ) {
-			$slider_arrowstyle = $defaults['arrowstyle'];
-		}
-
-		$slider_showdots = $atts['showdots'];
-		if ( empty( $slider_showdots ) ) {
-			$slider_showdots = $defaults['showdots'];
-		}
-
-		$slider_adaptiveheight = $atts['adaptiveheight'];
-		if ( empty( $slider_adaptiveheight ) ) {
-			$slider_adaptiveheight = $defaults['adaptiveheight'];
-		}
-
-		$slider_verticalalign = $atts['verticalalign'];
-		if ( empty( $slider_verticalalign ) ) {
-			$slider_verticalalign = $defaults['verticalalign'];
-		}
+		$slider_autoplay       = ! empty( $atts['autoplay'] ) ? $atts['autoplay'] : $defaults['autoplay'];
+		$slider_displaytime    = ! empty( $atts['displaytime'] ) ? $atts['displaytime'] : $defaults['displaytime'];
+		$slider_animationstyle = ! empty( $atts['animationstyle'] ) ? $atts['animationstyle'] : $defaults['animationstyle'];
+		$slider_showarrows     = ! empty( $atts['showarrows'] ) ? $atts['showarrows'] : $defaults['showarrows'];
+		$slider_arrowstyle     = ! empty( $atts['arrowstyle'] ) ? $atts['arrowstyle'] : $defaults['arrowstyle'];
+		$slider_showdots       = ! empty( $atts['showdots'] ) ? $atts['showdots'] : $defaults['showdots'];
+		$slider_adaptiveheight = ! empty( $atts['adaptiveheight'] ) ? $atts['adaptiveheight'] : $defaults['adaptiveheight'];
+		$slider_verticalalign  = ! empty( $atts['verticalalign'] ) ? $atts['verticalalign'] : $defaults['verticalalign'];
 
 		// Get Margin & Padding Settings.
-		$paddingunit = $atts['paddingunit'];
-		$paddingsync = $atts['paddingsync'];
+		$paddingunit       = $atts['paddingunit'];
+		$paddingsync       = $atts['paddingsync'];
 		$contentPaddingStr = '';
 		if ( $paddingsync === "true" || $paddingsync === "1" ) {
 			$contentPaddingStr = 'padding: ' . $atts['padding'] . $paddingunit . ';';
@@ -595,36 +534,26 @@ class Social_Proof_Slider_Public {
 			$contentPaddingStr .= 'padding-left: ' . $atts['paddingleft'] . $paddingunit . ';';
 		}
 
-		$padding_imageborderpadding = $atts['imageborderpadding'];
-		if ( empty( $padding_imageborderpadding ) ) {
-			$padding_imageborderpadding = 0;
-		}
-		/*
-		Image Border Padding - Range: 0-50 | Default: 4px
-		Image Margin Bottom - Range: 0-100 | Default: 20px
-		Testimonial Text Container Margin Bottom - Range: 0-100 | Default: 30px
-		Quote Text Margin Bottom - Range: 0-100 | Default: 30px
-		Dots Margin Top - Range: 0-100 | Default: 10px
-		*/
+		$padding_imageborderpadding = ! empty( $atts['imageborderpadding'] ) ? $atts['imageborderpadding'] : 0;
 
 		// Get Color Settings.
-		$style_bgcolor = $atts['bgcolor'];
-		$style_testimonialcolor = $atts['testimonialtextcolor'];
-		$style_authornamecolor = $atts['authornamecolor'];
-		$style_authortitlecolor = $atts['authortitlecolor'];
-		$style_arrowscolor = $atts['arrowscolor'];
-		$style_arrowshovercolor = $atts['arrowshovercolor'];
-		$style_dotscolor = $atts['dotscolor'];
-		$style_dotshovercolor = $atts['dotshovercolor'];
-		$style_imagebordercolor = $atts['imagebordercolor'];
+		$style_bgcolor          = ! empty( $atts['bgcolor'] ) ? $atts['bgcolor'] : $defaults['bgcolor'];
+		$style_testimonialcolor = ! empty( $atts['testimonialtextcolor'] ) ? $atts['testimonialtextcolor'] : $defaults['testimonialtextcolor'];
+		$style_authornamecolor  = ! empty( $atts['authornamecolor'] ) ? $atts['authornamecolor'] : $defaults['authornamecolor'];
+		$style_authortitlecolor = ! empty( $atts['authortitlecolor'] ) ? $atts['authortitlecolor'] : $defaults['authortitlecolor'];
+		$style_arrowscolor      = ! empty( $atts['arrowscolor'] ) ? $atts['arrowscolor'] : $defaults['arrowscolor'];
+		$style_arrowshovercolor = ! empty( $atts['arrowshovercolor'] ) ? $atts['arrowshovercolor'] : $defaults['arrowshovercolor'];
+		$style_dotscolor        = ! empty( $atts['dotscolor'] ) ? $atts['dotscolor'] : $defaults['dotscolor'];
+		$style_dotshovercolor   = ! empty( $atts['dotshovercolor'] ) ? $atts['dotshovercolor'] : $defaults['dotshovercolor'];
+		$style_imagebordercolor = ! empty( $atts['imagebordercolor'] ) ? $atts['imagebordercolor'] : $defaults['imagebordercolor'];
 
 		$shared = new Social_Proof_Slider_Shared( $this->plugin_name, $this->version );
 
 		// Get Shortcode Settings.
-		$sc_settings = $shared->get_shortcode_settings();
+		// $sc_settings = $shared->get_shortcode_settings();
 
 		// Get Attributes inside the manually-entered Shortcode.
-		$sc_atts = shortcode_atts( $defaults, $atts, 'social-proof-slider' );
+		// $sc_atts = shortcode_atts( $defaults, $atts, 'social-proof-slider' );
 
 		// Determine ORDERBY and ORDER args.
 		$sortbysetting = $posts_sortby;
@@ -639,9 +568,9 @@ class Social_Proof_Slider_Public {
 			);
 		}
 
-		$posts_filter_ids = '';
+		$posts_filter_ids     = '';
 		$posts_filter_taxslug = '';
-		$posts_filter_hide = '';
+		$posts_filter_hide    = '';
 
 		// Filter posts.
 		if ( $posts_filterposts === "true" || $posts_filterposts === "1" ) {
@@ -674,41 +603,22 @@ class Social_Proof_Slider_Public {
 
 		}
 
-		$showImageBorder = $posts_showimageborder;
-		$imageBorderColor = $style_imagebordercolor;
+		$showImageBorder      = $posts_showimageborder;
+		$imageBorderColor     = $style_imagebordercolor;
 		$imageBorderThickness = $posts_imagebordersize;
-		$imageBorderPadding = $padding_imageborderpadding;
+		$imageBorderPadding   = $padding_imageborderpadding;
 
-		// $doPaddingOverride = $sc_settings['doPaddingOverride'];
-		// $contentPaddingTop = $sc_settings['contentPaddingTop'];
-		// $contentPaddingBottom = $sc_settings['contentPaddingBottom'];
-		// $featImgMarginTop = $sc_settings['featImgMarginTop'];
-		// $featImgMarginBottom = $sc_settings['featImgMarginBottom'];
-		// $textPaddingTop = $sc_settings['textPaddingTop'];
-		// $textPaddingBottom = $sc_settings['textPaddingBottom'];
-		// $quoteMarginBottom = $sc_settings['quoteMarginBottom'];
-		// $dotsMarginTop = $sc_settings['dotsMarginTop'];
-
-		// $contentPaddingStr = 'padding: 50px;'; // default
-		$imgMarginStr = ''; // default
-		$textPaddingStr = ''; // default
-		$quoteMarginStr = ''; // default
-		$dotsMarginStr = ''; // default
-
-		// if ( $doPaddingOverride == 'true' ) {
-		// 	$contentPaddingStr = "padding-top: ".$contentPaddingTop."; padding-bottom: ".$contentPaddingBottom.";";
-		// 	$imgMarginStr = "margin-top:".$featImgMarginTop."; margin-bottom:".$featImgMarginBottom.";";
-		// 	$textPaddingStr = "padding-top: ".$textPaddingTop."; padding-bottom: ".$textPaddingBottom.";";
-		// 	$quoteMarginStr = "margin-bottom: ".$quoteMarginBottom.";";
-		// 	$dotsMarginStr = "margin-top: ".$dotsMarginTop.";";
-		// }
+		$imgMarginStr   = '';
+		$textPaddingStr = '';
+		$quoteMarginStr = '';
+		$dotsMarginStr  = '';
 
 		// Create 'items' object with all testimonials.
 		$items = '';
 		$items = $shared->get_testimonials( $queryargs, 'shortcode', $posts_filter_hide, $posts_filter_ids, $posts_showfeaturedimages, $posts_showquotes, $posts_filter_taxslug, $requestor );
 
 		// Generate a Unique ID for this block.
-		$uniqueID = uniqid('spslider_block_');
+		$uniqueID = uniqid( 'spslider_block_' );
 
 		// Build the data attr string for Slick settings.
 		$slickData = "'{";
@@ -798,14 +708,10 @@ class Social_Proof_Slider_Public {
 		echo $uniqueID . ' .social-proof-slider-wrap { background-color:' . $style_bgcolor . '; '.$contentPaddingStr.' }'."\n";
 
 		// Assign the Arrows Color.
-		if ( ! $style_arrowscolor ) {
-			// Use default color.
-			$style_arrowscolor = '#000';
-		}
 		echo $uniqueID . '.wp-block-socialproofslider .widget-wrap > button.slick-arrow { color:' . $style_arrowscolor . ' !important; }'."\n";
 
 		// Assign Arrows Hover Color.
-		if ( ! $style_arrowshovercolor ) {
+		if ( '' === $style_arrowshovercolor ) {
 			// Use default = opacity 50%.
 			echo $uniqueID . '.wp-block-socialproofslider .widget-wrap > button.slick-arrow:hover span{ opacity: 0.5; }'."\n";
 		} else {
@@ -817,13 +723,10 @@ class Social_Proof_Slider_Public {
 		echo $uniqueID . ' .social-proof-slider-wrap ul.slick-dots{ '.$dotsMarginStr.' }'."\n";
 
 		// Assign the Dots Color.
-		if ( ! $style_dotscolor ) {
-			$style_dotscolor = '#000';
-		}
 		echo $uniqueID . '.wp-block-socialproofslider .social-proof-slider-wrap .slick-dots li button { color:' . $style_dotscolor . ' !important; }'."\n";
 
 		// Assign the Dots Hover Color.
-		if ( ! $style_dotshovercolor ) {
+		if ( '' ===  $style_dotshovercolor ) {
 			// Use default = opacity 50%.
 			echo $uniqueID . '.wp-block-socialproofslider .social-proof-slider-wrap .slick-dots li button:hover { opacity: 0.5 !important; }'."\n";
 		} else {
@@ -835,14 +738,14 @@ class Social_Proof_Slider_Public {
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img { '.$imgMarginStr.' }'."\n";
 
 		// Assign the Featured Image border radius.
-		if ( empty( $posts_imageborderradius ) || ( $posts_imageborderradius === 0 ) || ( $posts_imageborderradius === false ) ) {
+		if ( empty( $posts_imageborderradius ) || ( 0 === $posts_imageborderradius ) || ( false === $posts_imageborderradius ) ) {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius: 0; }'."\n";
 		} else {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius: ' . $posts_imageborderradius . '%; }'."\n";
 		}
 
 		// Show the Featured Image Border.
-		if ( $showImageBorder === "true" || $showImageBorder === "1" ) {
+		if ( 'true' === $showImageBorder || '1' === $showImageBorder ) {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img { border: ' . $imageBorderThickness . 'px solid ' . $imageBorderColor . ' !important; padding: ' . $imageBorderPadding . 'px; }'."\n";
 		}
 
@@ -851,18 +754,18 @@ class Social_Proof_Slider_Public {
 		echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .quote { '.$quoteMarginStr.' }'."\n";
 
 		// Assign the Text Colors.
-		if ( ! empty( $style_testimonialcolor ) ) {
+		if ( '' === $style_testimonialcolor ) {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .quote p { color:' . $style_testimonialcolor . '; }'."\n";
 		}
-		if ( ! empty( $style_authornamecolor ) ) {
+		if ( '' === $style_authornamecolor ) {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .author > .author-name { color:' . $style_authornamecolor . '; }'."\n";
 		}
-		if ( ! empty( $style_authortitlecolor ) ) {
+		if ( '' === $style_authortitlecolor ) {
 			echo $uniqueID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .author > .author-title { color:' . $style_authortitlecolor . '; }'."\n";
 		}
 
 		// End styles.
-		echo '</style>'."\n";
+		echo '</style>' . "\n";
 
 		// End Slides wrapper.
 		echo '</div><!-- // .widget-wrap // -->';
