@@ -61,9 +61,13 @@ class Social_Proof_Slider_Public {
 	 */
 	public function enqueue_styles() {
 
-		wp_enqueue_style( 'slick-css', '//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css', array(), '1.8.1', 'all' );
+		// Slick CSS.
+		if ( ! wp_script_is( 'slick-css', 'enqueued' ) ) {
+			wp_enqueue_style( 'slick-css', plugin_dir_url( __FILE__ ) . '../slick/slick.css', array(), '1.8.1', 'all' );
+		}
+
+		// Default SP Slider styles.
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/social-proof-slider-public.css', array(), $this->version, 'all' );
-		// wp_enqueue_style( 'slick-css', plugin_dir_url( __FILE__ ) . 'css/slick.css', array(), '1.6.0', 'all' );
 
 		$fontawesome = 'fontawesome';
 		$font_awesome = 'font-awesome';
@@ -82,7 +86,10 @@ class Social_Proof_Slider_Public {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( 'slick-js', '//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js', array( 'jquery' ), '1.8.1', false );
+		// Slick JS.
+		if ( ! wp_script_is( 'slick-js', 'enqueued' ) ) {
+			wp_enqueue_script( 'slick-js', plugin_dir_url( __FILE__ ) . '../slick/slick.min.js', array( 'jquery' ), '1.8.1', false );
+		}
 
 	}
 

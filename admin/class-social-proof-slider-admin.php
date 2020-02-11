@@ -127,9 +127,20 @@ class Social_Proof_Slider_Admin {
 	 * @since    2.1.2
 	 */
 	public function spslider_block_scripts() {
-		wp_enqueue_script( 'slick-js', '//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js', array( 'jquery' ), '1.8.1', true );
+
+		// Slick JS.
+		if ( ! wp_script_is( 'slick-js', 'enqueued' ) ) {
+			wp_enqueue_script( 'slick-js', plugin_dir_url( __FILE__ ) . '../slick/slick.min.js', array( 'jquery' ), '1.8.1', false );
+		}
+
+		// Slick CSS.
+		if ( ! wp_script_is( 'slick-css', 'enqueued' ) ) {
+			wp_enqueue_style( 'slick-css', plugin_dir_url( __FILE__ ) . '../slick/slick.css', array(), '1.8.1', 'all' );
+		}
+
+		// Custom Block Editor JS.
 		wp_enqueue_script( 'slick-spslider-block-js', plugin_dir_url( __FILE__ ) . 'js/slick-block-editor.js', array( 'jquery', 'slick-js' ), $this->version, true );
-		wp_enqueue_style( 'slick-spslider-block-css', '//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css', array(), '1.8.1', 'all' );
+
 	}
 
 	/**
