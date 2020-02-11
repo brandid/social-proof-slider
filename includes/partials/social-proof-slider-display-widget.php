@@ -378,8 +378,8 @@ $thisWidgetJS .= '		adaptiveHeight: ' . $autoheight . ','."\n";
 $thisWidgetJS .= '		arrows: ' . $showarrows . ','."\n";
 if ( $showarrows == 'true' ) {
 
-	$prev_button = '<button type="button" class="slick-prev"><span class="fa ' . $arrow_left . '"></span></button>';
-	$next_button = '<button type="button" class="slick-next"><span class="fa ' . $arrow_right . '"></span></button>';
+	$prev_button = '<button type="button" aria-label="Previous" class="slick-prev"><span class="fa ' . $arrow_left . '"></span></button>';
+	$next_button = '<button type="button" aria-label="Next" class="slick-next"><span class="fa ' . $arrow_right . '"></span></button>';
 
 	$thisWidgetJS .= '		prevArrow: \'' . $prev_button . '\','."\n";
 	$thisWidgetJS .= '		nextArrow: \'' . $next_button . '\','."\n";

@@ -245,8 +245,8 @@ class Social_Proof_Slider_Public {
 		$thisWidgetJS .= '		arrows: ' . $sc_settings['showArrows'] . ','."\n";
 		if ( $sc_settings['showArrows'] == 'true' ) {
 
-			$prev_button = '<button type="button" class="slick-prev"><span class="fa ' . $sc_settings['arrowLeft'] . '"></span></button>';
-			$next_button = '<button type="button" class="slick-next"><span class="fa ' . $sc_settings['arrowRight'] . '"></span></button>';
+			$prev_button = '<button type="button" aria-label="Previous" class="slick-prev"><span class="fa ' . $sc_settings['arrowLeft'] . '"></span></button>';
+			$next_button = '<button type="button" aria-label="Next" class="slick-next"><span class="fa ' . $sc_settings['arrowRight'] . '"></span></button>';
 
 			$thisWidgetJS .= '		prevArrow: \'' . $prev_button . '\','."\n";
 			$thisWidgetJS .= '		nextArrow: \'' . $next_button . '\','."\n";
@@ -372,8 +372,8 @@ class Social_Proof_Slider_Public {
 		$thisWidgetJS .= '		arrows: ' . $sc_settings['showArrows'] . ','."\n";
 		if ( $sc_settings['showArrows'] == 'true' ) {
 
-			$prev_button = '<button type="button" class="slick-prev"><span class="fa ' . $sc_settings['arrowLeft'] . '"></span></button>';
-			$next_button = '<button type="button" class="slick-next"><span class="fa ' . $sc_settings['arrowRight'] . '"></span></button>';
+			$prev_button = '<button type="button" aria-label="Previous" class="slick-prev"><span class="fa ' . $sc_settings['arrowLeft'] . '"></span></button>';
+			$next_button = '<button type="button" aria-label="Next" class="slick-next"><span class="fa ' . $sc_settings['arrowRight'] . '"></span></button>';
 
 			$thisWidgetJS .= '		prevArrow: \'' . $prev_button . '\','."\n";
 			$thisWidgetJS .= '		nextArrow: \'' . $next_button . '\','."\n";
@@ -698,13 +698,13 @@ class Social_Proof_Slider_Public {
 		echo '<section id="' . $uniqueID . '" class="block wp-block-socialproofslider ' . $slider_animationstyle . ' ">';
 		echo '<div class="widget-wrap">';
 		if ( $slider_showarrows === "true" || $slider_showarrows === "1" ) {
-			echo '<button type="button" id="'.$uniqueID.'-arrow-left" class="slick-prev"><span class="fa fa-' . $slider_arrowstyle . '-left"></span></button>';
+			echo '<button type="button" aria-label="Previous" id="'.$uniqueID.'-arrow-left" class="slick-prev"><span class="fa fa-' . $slider_arrowstyle . '-left"></span></button>';
 		}
 		echo '<div class="social-proof-slider-wrap ' . $textAlignStr . ' ' . $alignStr . '" data-slick='.$slickData.'>';
 		echo $items;
 		echo '</div><!-- // .social-proof-slider-wrap // -->';
 		if ( $slider_showarrows === "true" || $slider_showarrows === "1" ) {
-			echo '<button type="button" id="'.$uniqueID.'-arrow-right" class="slick-next"><span class="fa fa-' . $slider_arrowstyle . '-right"></span></button>';
+			echo '<button type="button" aria-label="Next" id="'.$uniqueID.'-arrow-right" class="slick-next"><span class="fa fa-' . $slider_arrowstyle . '-right"></span></button>';
 		}
 
 		// Output CSS styles.
