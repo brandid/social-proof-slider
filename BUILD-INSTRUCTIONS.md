@@ -24,6 +24,9 @@ Have Webpack watch the files and compile as necessary:
 
 The files will be automatically updated for you.
 
+If you need to build a single time, you can use the command:
+`npx webpack`
+
 
 ## Base Tutorials
 

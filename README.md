@@ -6,11 +6,6 @@
 
 Seeing is believing. And one of the strongest ways to communicate your expertise is with a visual portfolio of bona fides scrolling along your website. With each click, a slide appears sharing testimonials, logos of awards, reviews, sites you've appeared in or been featured on, or links to your guest posts on popular blogs. It's a quick, seamless way to communicate your online authority, credibility, and skill set through social proof. And it's easy to populate, update, and customize on your WordPress site. As the Social Proof Slider scrolls, your authority grows.
 
-IMPORTANT: Please note -- the plugin now uses a new code base that was rewritten from the ground up to be more compatible with future WordPress updates. When upgrading from a version prior to 2.0.0, you may lose your custom SPSlider Settings and the existing Social Proof Slider widgets under Appearance > Widgets, but your testimonial posts will remain saved in the database. We recommend backing up your site, taking screenshots of your SPSlider and Widget settings, and disabling the plugin before upgrading.
-
-For more info, please visit:
-https://buildmybrandid.com/product/social-proof-testimonial-slider/
-
 ## Installation
 
 This section describes how to install the plugin and get it working.

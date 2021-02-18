@@ -16,8 +16,6 @@ Showcase your expertise with an easy-to-customize responsive carousel slider of 
 
 Seeing is believing. And one of the strongest ways to communicate your expertise is with a visual portfolio of bona fides scrolling along your website. With each click, a slide appears sharing testimonials, logos of awards, reviews, sites you've appeared in or been featured on, or links to your guest posts on popular blogs. It's a quick, seamless way to communicate your online authority, credibility, and skill set through social proof. And it's easy to populate, update, and customize on your WordPress site. As the Social Proof Slider scrolls, your authority grows.
 
-For more info, please visit: https://buildmybrandid.com/product/social-proof-testimonial-slider/
-
 == Installation ==
 
 This section describes how to install the plugin and get it working.
@@ -89,6 +87,7 @@ https://buildmybrandid.com/forum/support/plugins/social-proof-testimonial-slider
 
 = 2.2.1 - (Feb 16, 2021) =
 * Update: Compatible with WordPress 5.6.1
+* Fix: Updates Block code to replace older deprecated functions.
 
 = 2.2.0 - (Nov 12, 2019) =
 * Added: New SP Slider Block: Easily place a 'SP Testimonials Slider' block anywhere on your page and visually configure its display settings in real-time using the Block Editor.
