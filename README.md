@@ -64,6 +64,10 @@ https://buildmybrandid.com/forum/support/plugins/social-proof-testimonial-slider
 
 ## Changelog
 
+### 2.2.1 - (Feb 16, 2021)
+* Update: Compatible with WordPress 5.6.1
+* Fix: Updates Block code to replace older deprecated functions.
+
 ### 2.2.0 - (Nov 12, 2019)
 * Added: New SP Slider Block: Easily place a 'SP Testimonials Slider' block anywhere on your page and visually configure its display settings in real-time using the Block Editor.
 * Update: Compatible with WordPress 5.3

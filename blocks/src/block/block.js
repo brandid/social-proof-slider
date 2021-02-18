@@ -11,7 +11,9 @@ const { __ } = wp.i18n;
 const { AlignmentToolbar, BlockControls, InspectorControls, PanelColorSettings } = wp.blockEditor;
 
 // Import components
-const { Icon, ColorPicker, TextControl, SelectControl, ToggleControl, ServerSideRender, PanelBody, PanelRow } = wp.components;
+const { Icon, ColorPicker, TextControl, SelectControl, ToggleControl, PanelBody, PanelRow } = wp.components;
+
+const { serverSideRender: ServerSideRender } = wp;
 
 /**
  * Internal dependencies

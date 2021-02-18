@@ -476,113 +476,78 @@ class Social_Proof_Slider_Public {
 
 		}
 
-		// Get Block Settings.
-		$block_textalign = $atts['textalign'];
-		if ( empty( $block_textalign ) ) {
-			$block_textalign = $defaults['blockalign'];
-		}
+		// Get block Text Alignment setting.
+		$block_textalign = ( isset( $atts['textalign'] ) ) ? $atts['textalign'] : $defaults['blockalign'];
 
-		// Get Post Settings.
-		$posts_sortby = $atts['sortpostsby'];
-		if ( empty( $posts_sortby ) ) {
-			$posts_sortby = $defaults['sortpostsby'];
-		}
+		// ---------------------------------------------------------------------
 
-		$posts_filterposts = $atts['filterposts'];
-		if ( empty( $posts_filterposts ) ) {
-			$posts_filterposts = $defaults['filterposts'];
-		}
+		// POST SETTINGS.
 
-		$posts_filtershowhide = $atts['filtershowhide'];
-		if ( empty( $posts_filtershowhide ) ) {
-			$posts_filtershowhide = $defaults['filtershowhide'];
-		}
+		// Get the dropdown menu setting for 'Sort Posts by'.
+		$posts_sortby = ( isset( $atts['sortpostsby'] ) ) ? $atts['sortpostsby'] : $defaults['sortpostsby'];
 
-		$posts_filterby = $atts['filterby'];
-		if ( empty( $posts_filterby ) ) {
-			$posts_filterby = $defaults['filterby'];
-		}
+		// Get the setting for 'Filter Posts by'.
+		$posts_filterposts = ( isset( $atts['filterposts'] ) ) ? $atts['filterposts'] : $defaults['filterposts'];
 
-		$posts_postids = $atts['postids'];
-		if ( empty( $posts_postids ) ) {
-			$posts_postids = $defaults['postids'];
-		}
+		// Get the setting for 'Show or Hide These Testimonials'.
+		$posts_filtershowhide = ( isset( $atts['filtershowhide'] ) ) ? $atts['filtershowhide'] : $defaults['filtershowhide'];
 
-		$posts_catslug = $atts['catslug'];
-		if ( empty( $posts_catslug ) ) {
-			$posts_catslug = $defaults['catslug'];
-		}
+		// Get the setting for Filter by: 'Post ID' or 'Category'.
+		$posts_filterby = ( isset( $atts['filterby'] ) ) ? $atts['filterby'] : $defaults['filterby'];
 
-		$posts_showfeaturedimages = $atts['showfeaturedimages'];
-		if ( $posts_showfeaturedimages === "true" ) {
-			$posts_showfeaturedimages = 1;
-		}
-		if ( empty( $posts_showfeaturedimages ) ) {
-			$posts_showfeaturedimages = $defaults['showfeaturedimages'];
-		}
+		// Get the setting for 'Post IDs'.
+		$posts_postids = ( isset( $atts['postids'] ) ) ? $atts['postids'] : $defaults['postids'];
 
-		$posts_showimageborder = $atts['showimageborder'];
-		if ( empty( $posts_showimageborder ) ) {
-			$posts_showimageborder = $defaults['showimageborder'];
-		}
+		// Get the setting for 'Category Slug'.
+		$posts_catslug = ( isset( $atts['catslug'] ) ) ? $atts['catslug'] : $defaults['catslug'];
 
-		$posts_imageborderradius = $atts['imageborderradius'];
-		if ( empty( $posts_imageborderradius ) ) {
-			$posts_imageborderradius = 0;
-		}
+		// Get the setting for 'Show Featured Images'.
+		$posts_showfeaturedimages = ( isset( $atts['showfeaturedimages'] ) ) ? 1 : $defaults['showfeaturedimages'];
 
-		$posts_imagebordersize = $atts['imagebordersize'];
-		if ( empty( $posts_imagebordersize ) ) {
-			$posts_imagebordersize = 0;
-		}
+		// Get the setting for 'Show Image Border'.
+		$posts_showimageborder = ( isset( $atts['showimageborder'] ) ) ? $atts['showimageborder'] : $defaults['showimageborder'];
 
-		$posts_showquotes = $atts['showquotemarks'];
-		if ( empty( $posts_showquotes ) ) {
-			$posts_showquotes = $defaults['showquotemarks'];
-		}
+		// Get the setting for 'Image Border Radius'.
+		$posts_imageborderradius = ( isset( $atts['imageborderradius'] ) ) ? $atts['imageborderradius'] : 0;
 
-		// Get Slider Settings.
-		$slider_autoplay = $atts['autoplay'];
-		if ( empty( $slider_autoplay ) ) {
-			$slider_autoplay = $defaults['autoplay'];
-		}
+		// Get the setting for 'Image Border Size'.
+		$posts_imagebordersize = ( isset( $atts['imagebordersize'] ) ) ? $atts['imagebordersize'] : 0;
 
-		$slider_displaytime = $atts['displaytime'];
-		if ( empty( $slider_displaytime ) ) {
-			$slider_displaytime = $defaults['displaytime'];
-		}
+		// Get the setting for 'Show Quote Marks'.
+		$posts_showquotes = ( isset( $atts['showquotemarks'] ) ) ? $atts['showquotemarks'] : $defaults['showquotemarks'];
 
-		$slider_animationstyle = $atts['animationstyle'];
-		if ( empty( $slider_animationstyle ) ) {
-			$slider_animationstyle = $defaults['animationstyle'];
-		}
+		// ---------------------------------------------------------------------
 
-		$slider_showarrows = $atts['showarrows'];
-		if ( empty( $slider_showarrows ) ) {
-			$slider_showarrows = $defaults['showarrows'];
-		}
+		// SLIDER SETTINGS.
 
-		$slider_arrowstyle = $atts['arrowstyle'];
-		if ( empty( $slider_arrowstyle ) ) {
-			$slider_arrowstyle = $defaults['arrowstyle'];
-		}
+		// Get setting for 'Autoplay'.
+		$slider_autoplay = ( isset( $atts['autoplay'] ) ) ? $atts['autoplay'] : $defaults['autoplay'];
 
-		$slider_showdots = $atts['showdots'];
-		if ( empty( $slider_showdots ) ) {
-			$slider_showdots = $defaults['showdots'];
-		}
+		// Get setting for 'Display Time'.
+		$slider_displaytime = ( isset( $atts['displaytime'] ) ) ? $atts['displaytime'] : $defaults['displaytime'];
 
-		$slider_adaptiveheight = $atts['adaptiveheight'];
-		if ( empty( $slider_adaptiveheight ) ) {
-			$slider_adaptiveheight = $defaults['adaptiveheight'];
-		}
+		// Get setting for 'Animation Style'.
+		$slider_animationstyle = ( isset( $atts['animationstyle'] ) ) ? $atts['animationstyle'] : $defaults['animationstyle'];
 
-		$slider_verticalalign = $atts['verticalalign'];
-		if ( empty( $slider_verticalalign ) ) {
-			$slider_verticalalign = $defaults['verticalalign'];
-		}
+		// Get setting for 'Show Arrows'.
+		$slider_showarrows = ( isset( $atts['showarrows'] ) ) ? $atts['showarrows'] : $defaults['showarrows'];
 
-		// Get Margin & Padding Settings.
+		// Get setting for 'Arrow Style'.
+		$slider_arrowstyle = ( isset( $atts['arrowstyle'] ) ) ? $atts['arrowstyle'] : $defaults['arrowstyle'];
+
+		// Get setting for 'Show Dots'.
+		$slider_showdots = ( isset( $atts['showdots'] ) ) ? $atts['showdots'] : $defaults['showdots'];
+
+		// Get setting for 'Adaptive Height'.
+		$slider_adaptiveheight = ( isset( $atts['adaptiveheight'] ) ) ? $atts['adaptiveheight'] : $defaults['adaptiveheight'];
+
+		// Get setting for 'Vertical Align'.
+		$slider_verticalalign = ( isset( $atts['verticalalign'] ) ) ? $atts['verticalalign'] : $defaults['verticalalign'];
+
+		// ---------------------------------------------------------------------
+
+		// MARGIN & PADDING SETTINGS.
+
 		$paddingunit = $atts['paddingunit'];
 		$paddingsync = $atts['paddingsync'];
 		$contentPaddingStr = '';
@@ -607,16 +572,19 @@ class Social_Proof_Slider_Public {
 		Dots Margin Top - Range: 0-100 | Default: 10px
 		*/
 
-		// Get Color Settings.
-		$style_bgcolor = $atts['bgcolor'];
-		$style_testimonialcolor = $atts['testimonialtextcolor'];
-		$style_authornamecolor = $atts['authornamecolor'];
-		$style_authortitlecolor = $atts['authortitlecolor'];
-		$style_arrowscolor = $atts['arrowscolor'];
-		$style_arrowshovercolor = $atts['arrowshovercolor'];
-		$style_dotscolor = $atts['dotscolor'];
-		$style_dotshovercolor = $atts['dotshovercolor'];
-		$style_imagebordercolor = $atts['imagebordercolor'];
+		// ---------------------------------------------------------------------
+
+		// COLOR SETTINGS.
+
+		$style_bgcolor = ( isset( $atts['bgcolor'] ) ) ? $atts['bgcolor'] : '';
+		$style_testimonialcolor = ( isset( $atts['testimonialtextcolor'] ) ) ? $atts['testimonialtextcolor'] : '';
+		$style_authornamecolor = ( isset( $atts['authornamecolor'] ) ) ? $atts['authornamecolor'] : '';
+		$style_authortitlecolor = ( isset( $atts['authortitlecolor'] ) ) ? $atts['authortitlecolor'] : '';
+		$style_arrowscolor = ( isset( $atts['arrowscolor'] ) ) ? $atts['arrowscolor'] : '';
+		$style_arrowshovercolor = ( isset( $atts['arrowshovercolor'] ) ) ? $atts['arrowshovercolor'] : '';
+		$style_dotscolor = ( isset( $atts['dotscolor'] ) ) ? $atts['dotscolor'] : '';
+		$style_dotshovercolor = ( isset( $atts['dotshovercolor'] ) ) ? $atts['dotshovercolor'] : '';
+		$style_imagebordercolor = ( isset( $atts['imagebordercolor'] ) ) ? $atts['imagebordercolor'] : '';
 
 		$shared = new Social_Proof_Slider_Shared( $this->plugin_name, $this->version );
 
@@ -1013,118 +981,154 @@ class Social_Proof_Slider_Public {
 		register_block_type('social-proof-slider/main', array(
 			'editor_script' => 'spslider-block',
 			'editor_style' => 'spslider-block-edit-style',
-			'style' => 'spslider-block-edit-style',
 			'render_callback' => 'spslider_render_gutenberg_block',
 			'attributes' => [
 				'textalign' => [
+					'type' => 'string',
 					'default' => ''
 				],
 				'sortpostsby' => [
+					'type' => 'string',
 					'default' => 'DESC'
 				],
 				'filterposts' => [
+					'type' => 'boolean',
 					'default' => false
 				],
 				'filtershowhide' => [
+					'type' => 'string',
 					'default' => 'show'
 				],
 				'filterby' => [
+					'type' => 'string',
 					'default' => 'postid'
 				],
 				'postids' => [
+					'type' => 'string',
 					'default' => ''
 				],
 				'catslug' => [
+					'type' => 'string',
 					'default' => ''
 				],
 				'showfeaturedimages' => [
+					'type' => 'boolean',
 					'default' => false
 				],
 				'showimageborder' => [
+					'type' => 'boolean',
 					'default' => false
 				],
 				'imageborderradius' => [
+					'type' => 'number',
 					'default' => 25
 				],
 				'imagebordersize' => [
+					'type' => 'number',
 					'default' => 5
 				],
 				'showquotemarks' => [
+					'type' => 'boolean',
 					'default' => false
 				],
 				'autoplay' => [
+					'type' => 'boolean',
 					'default' => true
 				],
 				'displaytime' => [
+					'type' => 'number',
 					'default' => 3
 				],
 				'animationstyle' => [
+					'type' => 'string',
 					'default' => 'fade'
 				],
 				'showarrows' => [
+					'type' => 'boolean',
 					'default' => false
 				],
 				'arrowstyle' => [
+					'type' => 'string',
 					'default' => 'angle'
 				],
 				'showdots' => [
+					'type' => 'boolean',
 					'default' => false
 				],
 				'adaptiveheight' => [
+					'type' => 'boolean',
 					'default' => false
 				],
 				'verticalalign' => [
+					'type' => 'string',
 					'default' => 'align_middle'
 				],
 				'paddingsync' => [
+					'type' => 'boolean',
 					'default' => true
 				],
 				'paddingunit' => [
+					'type' => 'string',
 					'default' => 'px'
 				],
 				'padding' => [
+					'type' => 'number',
 					'default' => 50
 				],
 				'paddingtop' => [
+					'type' => 'number',
 					'default' => 0
 				],
 				'paddingright' => [
+					'type' => 'number',
 					'default' => 0
 				],
 				'paddingbottom' => [
+					'type' => 'number',
 					'default' => 0
 				],
 				'paddingleft' => [
+					'type' => 'number',
 					'default' => 0
 				],
 				'imageborderpadding' => [
+					'type' => 'number',
 					'default' => 4
 				],
 				'bgcolor' => [
+					'type' => 'string',
 					'default' => ''
 				],
 				'arrowscolor' => [
+					'type' => 'string',
 					'default' => ''
 				],
 				'arrowshovercolor' => [
+					'type' => 'string',
 					'default' => ''
 				],
 				'dotscolor' => [
+					'type' => 'string',
 					'default' => ''
 				],
 				'dotshovercolor' => [
+					'type' => 'string',
 					'default' => ''
 				],
 				'imagebordercolor' => [
+					'type' => 'string',
 					'default' => ''
 				],
 				'testimonialtextcolor' => [
+					'type' => 'string',
 					'default' => ''
 				],
 				'authornamecolor' => [
+					'type' => 'string',
 					'default' => ''
 				],
 				'authortitlecolor' => [
+					'type' => 'string',
 					'default' => ''
 				],
 			]

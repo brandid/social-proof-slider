@@ -15,7 +15,7 @@
  * Plugin Name:       Social Proof (Testimonials) Slider
  * Plugin URI:        https://wordpress.org/plugins/social-proof-testimonials-slider/
  * Description:       Showcase a carousel slider of testimonials on your WordPress website! Use the included shortcode or widget. This plugin adds a new Custom Post Type called "Testimonials," and includes a Settings screen to control the display options. Created by brandiD.
- * Version:           2.2.0
+ * Version:           2.2.1
  * Author:            brandiD
  * Author URI:        https://thebrandiD.com
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! defined( 'SOCIAL_PROOF_SLIDER_FILE' ) ) {
 }
 
 // Define Constants
-define( 'SPSLIDER_PLUGIN_VERSION', '2.2.0');
+define( 'SPSLIDER_PLUGIN_VERSION', '2.2.1');
 
 /**
  * The code that runs during plugin activation.

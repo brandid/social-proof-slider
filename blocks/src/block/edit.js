@@ -25,11 +25,12 @@ const {
     RadioControl,
     RangeControl,
     SelectControl,
-    ServerSideRender,
     TextControl,
     ToggleControl,
     Tooltip
     } = wp.components;
+
+const { serverSideRender: ServerSideRender } = wp;
 
 /**
  * Internal dependencies.

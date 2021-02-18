@@ -1,6 +1,6 @@
 {
   "name": "social-proof-slider",
-  "version": "2.1.2",
+  "version": "2.2.1",
   "description": "> Showcase your expertise with an easy-to-customize responsive carousel slider of your featured testimonials.",
   "main": "index.js",
   "scripts": {
