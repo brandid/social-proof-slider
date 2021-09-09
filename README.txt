@@ -4,7 +4,7 @@ Author: brandiD
 Author URI: https://buildmybrandid.com/product/social-proof-testimonial-slider/
 Tags: awards, carousel, content slider, custom post type, features, feedback, jquery, portfolio, responsive, reviews, quotes, sidebar, slider, slideshow, social, testimonial, video, vimeo, widget, youtube
 Requires at least: 4.5
-Tested up to: 5.6.1
+Tested up to: 5.8.1
 Stable tag: 2.2.1
 Version: 2.2.1
 License: GPLv2 or later
@@ -64,8 +64,11 @@ Please open an Issue on the GitHub project:
 https://github.com/brandid/social-proof-slider/issues
 
 = Something Else? =
-Please use our Support Forum if you need help:
-https://buildmybrandid.com/forum/support/plugins/social-proof-testimonial-slider/
+Please review our Support resources for further information:
+https://buildmybrandid.com/support/
+
+If you are still stuck, please use our Product Support Form:
+https://buildmybrandid.com/product-support/
 
 == Screenshots ==
 
@@ -84,6 +87,9 @@ https://buildmybrandid.com/forum/support/plugins/social-proof-testimonial-slider
 13. Limit Testimonials by Category
 
 == Changelog ==
+
+= 2.2.1 - (Sept 9, 2021) =
+* Update: Compatible with WordPress 5.8.1
 
 = 2.2.1 - (Feb 16, 2021) =
 * Update: Compatible with WordPress 5.6.1

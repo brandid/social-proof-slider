@@ -51,13 +51,19 @@ Please see the Screenshots for an example.
 
 ### How do I report a bug or request a feature?
 Please open an Issue on the GitHub project:
-https://github.com/brandid/social-proof-slider/issues
+[Report an Issue on GitHub](https://github.com/brandid/social-proof-slider/issues)
 
 ### Something Else?
-Please use our Support Forum if you need help:
-https://buildmybrandid.com/forum/support/plugins/social-proof-testimonial-slider/
+Please review our Support resources for further information:
+[View Support resources](https://buildmybrandid.com/support/)
+
+If you are still stuck, please use our Product Support Form:
+[Get Product Support](https://buildmybrandid.com/product-support/)
 
 ## Changelog
+
+### 2.2.1 - (Sept 9, 2021)
+* Update: Compatible with WordPress 5.8.1
 
 ### 2.2.1 - (Feb 16, 2021)
 * Update: Compatible with WordPress 5.6.1
