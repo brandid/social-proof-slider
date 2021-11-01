@@ -23,6 +23,12 @@
     align-items: flex-end;
 }
 
+.wp-block-socialproofslider button[type="button"],
+.wp-block-socialproofslider button:not(:hover):not(:active):not(.has-text-color),
+.wp-block-socialproofslider button:not(:hover):not(:active):not(.has-background) {
+	background-color: transparent;
+}
+
 .social-proof-slider-wrap button.slick-arrow,
 .wp-block-socialproofslider .widget-wrap > button.slick-arrow {
 	width: 32px;
@@ -62,6 +68,7 @@
 
 .social-proof-slider-wrap ul.slick-dots {
 	margin: 10px 0 0 0;
+	padding-left: 0;
 }
 
 .social-proof-slider-wrap ul.slick-dots > li {

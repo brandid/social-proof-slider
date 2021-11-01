@@ -62,6 +62,9 @@ If you are still stuck, please use our Product Support Form:
 
 ## Changelog
 
+### 2.2.2 - (Nov 1, 2021)
+* Fix: Fixes invalid CSS syntax error.
+
 ### 2.2.1 - (Sept 9, 2021)
 * Update: Compatible with WordPress 5.8.1
 
