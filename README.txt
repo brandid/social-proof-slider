@@ -1,9 +1,9 @@
 === Social Proof (Testimonial) Slider ===
 Contributors: alexmustin
 Author: brandiD
-Author URI: https://buildmybrandid.com/product/social-proof-testimonial-slider/
-Tags: awards, carousel, content slider, custom post type, features, feedback, jquery, portfolio, responsive, reviews, quotes, sidebar, slider, slideshow, social, testimonial, video, vimeo, widget, youtube
-Requires at least: 4.5
+Author URI: https://buildmybrandid.com/
+Tags: carousel, custom post type, portfolio, quotes, responsive, reviews, slider, slideshow, testimonial, widget
+Requires at least: 4.9
 Tested up to: 5.8.2
 Stable tag: 2.2.3
 Version: 2.2.3
@@ -75,6 +75,9 @@ https://buildmybrandid.com/product-support/
 13. Limit Testimonials by Category
 
 == Changelog ==
+
+= 2.2.3 - (Dec 22, 2021) =
+* Fix: Fixes XSS vulnerability.
 
 = 2.2.2 - (Nov 1, 2021) =
 * Fix: Fixes invalid CSS syntax error.

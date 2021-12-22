@@ -50,6 +50,9 @@ If you are still stuck, please use our Product Support Form:
 
 ## Changelog
 
+### 2.2.3 - (Dec 22, 2021)
+* Fix: Fixes XSS vulnerability.
+
 ### 2.2.2 - (Nov 1, 2021)
 * Fix: Fixes invalid CSS syntax error.
 
