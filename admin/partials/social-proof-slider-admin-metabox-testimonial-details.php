@@ -21,7 +21,7 @@ $atts['settings']['textarea_name'] = 'socialproofslider_testimonial_author_name'
 $atts['settings']['editor_height'] = 100;
 $atts['value'] 			= '';
 
-$socialproofslider_testimonial_author_name = get_post_meta($post->ID, 'socialproofslider_testimonial_author_name', true);
+$socialproofslider_testimonial_author_name = get_post_meta( $post->ID, 'socialproofslider_testimonial_author_name', true );
 
 if ( ! empty( $this->meta[$atts['id']][0] ) ) {
 
@@ -35,11 +35,10 @@ if ( ! empty( $this->meta[$atts['id']][0] ) ) {
 
 apply_filters( $this->plugin_name . '-field-' . $atts['id'], $atts );
 
-?><section><?php
-
-include( plugin_dir_path( __FILE__ ) . $this->plugin_name . '-admin-field-editor.php' );
-
-?></section>
+?>
+<section>
+	<?php include( plugin_dir_path( __FILE__ ) . $this->plugin_name . '-admin-field-editor.php' ); ?>
+</section>
 <?php
 
 
@@ -101,5 +100,3 @@ include( plugin_dir_path( __FILE__ ) . $this->plugin_name . '-admin-field-editor
 
 ?></section>
 <?php
-
-
