@@ -14,26 +14,14 @@ This section describes how to install the plugin and get it working.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Start by adding a new testimonial -- go to the new Testimonials menu option and select 'Add New.'
 4. To use the widget in a sidebar, go to Appearance->Widgets and drag a copy of the 'Social Proof Slider' widget to your desired sidebar.
-5. To configure Shortcode display settings, use the Settings->Social Proof Slider screen. For widgets, you will see the settings panel for each Social Proof Slider widget individually.
+5. To configure shortcode display settings, use the Settings->Social Proof Slider screen. For widgets, you will see the settings panel for each Social Proof Slider widget individually.
 6. Easily embed responsive YouTube or Vimeo videos! Enter your video code into the "Testimonial Text" field in the following format: `https://www.youtube.com/watch?v=abcde123456` or `https://vimeo.com/12345678` and the rest is done automatically! *Note:* It is recommended to disable the "Auto-play" feature when embedding videos.
-
-## Development
-
-To compile the plugin code on your local development environment, you will need to have `Node.js` and `npm` installed.
-
-Follow these steps:
-
-1. Fork the plugin repo into your own GitHub account, then clone it to a folder on your computer.
-2. Open the Terminal and navigate to the plugin directory.
-3. Install the dependencies by typing: `npm install`
-4. Run Webpack: `npx webpack`
-5. You should see the project compile - you're ready to develop!
 
 ## Frequently Asked Questions
 
 ### Can I use the Social Proof Slider with the Gutenberg block editor?
-Yes! We've added Block Editor support to the plugin - just search for 'SP Testimonials Slider' or find it under the 'Common Blocks' category in the list of Blocks.
-Alternatively, you can use a Shortcode block to display the Social Proof Slider - use the following shortcode: `social-proof-slider`
+Yes! This plugin adds a new block - just search for 'SP Testimonials Slider' or find it under the 'Common Blocks' category in the list of blocks.
+Alternatively, you can use a shortcode block to display the Social Proof Slider - use the following shortcode: `[social-proof-slider]`
 
 ### Can I show testimonials by category?
 Yes! We've added the ability to create Categories and assign them to your testimonials. In the Block, there is a setting to Filter Posts. Use the Category slug in the block/shortcode/widget settings to hide or show only testimonials assigned to that category.
@@ -85,7 +73,7 @@ If you are still stuck, please use our Product Support Form:
 * Update: Compatible with WordPress 5.2
 
 ### 2.1.0 - (Feb 21, 2019)
-* Added: Manual Slider Shortcodes: Create a new slider inline, by using shortcodes. A great way to show different testimonials per page. Uses your Shortcode Slider settings.
+* Added: Manual Slider shortcodes: Create a new slider inline, by using shortcodes. A great way to show different testimonials per page. Uses your shortcode Slider settings.
 * Fix: Compatible with WordPress 5.1
 
 ### 2.0.13 - (Jan 21, 2019)
@@ -144,7 +132,7 @@ If you are still stuck, please use our Product Support Form:
 
 ### 2.0.1 - (Mar 11, 2017)
 * Fix: Incorrect PHP opening tag, which caused code to display inside Widget Settings, on some installs
-* Fix: Added Shortcode Instructions to Shortcode Settings page
+* Fix: Added shortcode Instructions to shortcode Settings page
 
 ### 2.0.0
 * Update: Completely refactored all code - now follows the recommended WordPress coding and documentation standards.

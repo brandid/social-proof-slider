@@ -72,8 +72,16 @@ class Social_Proof_Slider_Admin_Metaboxes {
 
 		add_meta_box(
 			'socialproofslider_details_box',
-			apply_filters( $this->plugin_name . '-metabox-title-additional-info', esc_html__( 'Testimonial Details', 'social-proof-slider' ) ),
-			array( $this, 'metabox_cb' ),
+			apply_filters(
+				$this->plugin_name . '-metabox-title-additional-info',
+				esc_html__( 'Testimonial Details',
+				'social-proof-slider',
+				)
+			),
+			array(
+				$this,
+				'metabox_callback' ,
+			),
 			'socialproofslider',
 			'normal',
 			'default',
@@ -136,7 +144,7 @@ class Social_Proof_Slider_Admin_Metaboxes {
 	 * @access 	public
 	 * @return 	void
 	 */
-	public function metabox_cb( $post, $params ) {
+	public function metabox_callback( $post, $params ) {
 
 		if ( ! is_admin() ) { return; }
 		if ( 'socialproofslider' !== $post->post_type ) { return; }
@@ -149,7 +157,7 @@ class Social_Proof_Slider_Admin_Metaboxes {
 
 		include( plugin_dir_path( __FILE__ ) . 'partials/social-proof-slider-admin-metabox-' . $params['args']['file'] . '.php' );
 
-	} // metabox_cb()
+	} // metabox_callback()
 
 	private function sanitizer( $type, $data ) {
 
@@ -259,7 +267,7 @@ class Social_Proof_Slider_Admin_Metaboxes {
 			//$new_value = $this->sanitizer( $type, $_POST[$name] );
 
 			// update_post_meta( $post_id, $name, $new_value );
-			update_post_meta( $post_id, $name, $_POST[$name] );
+			update_post_meta( $post_id, $name, wp_filter_post_kses( $_POST[$name] ) );
 
 		} // foreach
 
