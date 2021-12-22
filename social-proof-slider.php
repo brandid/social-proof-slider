@@ -1,17 +1,5 @@
 <?php
-/**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
- * @link              https://thebrandiD.com
- * @since             2.0.0
- * @package           Social_Proof_Slider
- *
- * @wordpress-plugin
+/*
  * Plugin Name:       Social Proof (Testimonials) Slider
  * Plugin URI:        https://wordpress.org/plugins/social-proof-testimonials-slider/
  * Description:       Showcase a carousel slider of testimonials on your WordPress website! Use the included shortcode or widget. This plugin adds a new Custom Post Type called "Testimonials," and includes a Settings screen to control the display options. Created by brandiD.
@@ -20,8 +8,7 @@
  * Author URI:        https://thebrandiD.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       social-proof-slider
- * Domain Path:       /languages
+ * 
  */
 
 // If this file is called directly, abort.
