@@ -507,9 +507,9 @@ class Social_Proof_Slider_Shared {
 		}
 		$args['verticalalign'] = $setting_vertical_align;
 
-		$setting_do_paddingoverride = 'true';  // default
-		if ( empty( $doPaddingOverride ) || $doPaddingOverride == '' ){
-			$setting_do_paddingoverride = 'false';
+		$setting_do_paddingoverride = 'false';  // default
+		if ( $doPaddingOverride ){
+			$setting_do_paddingoverride = 'true';
 		}
 		$args['doPaddingOverride'] = $setting_do_paddingoverride;
 

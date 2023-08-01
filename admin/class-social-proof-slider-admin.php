@@ -508,8 +508,8 @@ class Social_Proof_Slider_Admin {
 			class="<?php echo esc_attr( $args['id'] ); ?>"
 			id="<?php echo esc_attr( $args['id'] ); ?>"
 			name="<?php echo esc_attr( $args['id'] ); ?>"
-			type="text"
-			value="<?php echo $contentpaddingtop; ?>" /><br>
+			type="number"
+			value="<?php echo $contentpaddingtop; ?>" />px<br>
 			<span class="description"><?php esc_html_e( $args['description'], 'social-proof-slider' ); ?></span>
 		</label>
 		</div>
@@ -535,8 +535,8 @@ class Social_Proof_Slider_Admin {
 			class="<?php echo esc_attr( $args['id'] ); ?>"
 			id="<?php echo esc_attr( $args['id'] ); ?>"
 			name="<?php echo esc_attr( $args['id'] ); ?>"
-			type="text"
-			value="<?php echo $contentpaddingbottom; ?>" /><br>
+			type="number"
+			value="<?php echo $contentpaddingbottom; ?>" />px<br>
 			<span class="description"><?php esc_html_e( $args['description'], 'social-proof-slider' ); ?></span>
 		</label>
 		</div>
@@ -562,8 +562,8 @@ class Social_Proof_Slider_Admin {
 			class="<?php echo esc_attr( $args['id'] ); ?>"
 			id="<?php echo esc_attr( $args['id'] ); ?>"
 			name="<?php echo esc_attr( $args['id'] ); ?>"
-			type="text"
-			value="<?php echo $featimgmargintop; ?>" /><br>
+			type="number"
+			value="<?php echo $featimgmargintop; ?>" />px<br>
 			<span class="description"><?php esc_html_e( $args['description'], 'social-proof-slider' ); ?></span>
 		</label>
 		</div>
@@ -589,8 +589,8 @@ class Social_Proof_Slider_Admin {
 			class="<?php echo esc_attr( $args['id'] ); ?>"
 			id="<?php echo esc_attr( $args['id'] ); ?>"
 			name="<?php echo esc_attr( $args['id'] ); ?>"
-			type="text"
-			value="<?php echo $featimgmarginbottom; ?>" /><br>
+			type="number"
+			value="<?php echo $featimgmarginbottom; ?>" />px<br>
 			<span class="description"><?php esc_html_e( $args['description'], 'social-proof-slider' ); ?></span>
 		</label>
 		</div>
@@ -616,8 +616,8 @@ class Social_Proof_Slider_Admin {
 			class="<?php echo esc_attr( $args['id'] ); ?>"
 			id="<?php echo esc_attr( $args['id'] ); ?>"
 			name="<?php echo esc_attr( $args['id'] ); ?>"
-			type="text"
-			value="<?php echo $textpaddingtop; ?>" /><br>
+			type="number"
+			value="<?php echo $textpaddingtop; ?>" />px<br>
 			<span class="description"><?php esc_html_e( $args['description'], 'social-proof-slider' ); ?></span>
 		</label>
 		</div>
@@ -643,8 +643,8 @@ class Social_Proof_Slider_Admin {
 			class="<?php echo esc_attr( $args['id'] ); ?>"
 			id="<?php echo esc_attr( $args['id'] ); ?>"
 			name="<?php echo esc_attr( $args['id'] ); ?>"
-			type="text"
-			value="<?php echo $textpaddingbottom; ?>" /><br>
+			type="number"
+			value="<?php echo $textpaddingbottom; ?>" />px<br>
 			<span class="description"><?php esc_html_e( $args['description'], 'social-proof-slider' ); ?></span>
 		</label>
 		</div>
@@ -670,8 +670,8 @@ class Social_Proof_Slider_Admin {
 			class="<?php echo esc_attr( $args['id'] ); ?>"
 			id="<?php echo esc_attr( $args['id'] ); ?>"
 			name="<?php echo esc_attr( $args['id'] ); ?>"
-			type="text"
-			value="<?php echo $quotemarginbottom; ?>" /><br>
+			type="number"
+			value="<?php echo $quotemarginbottom; ?>" />px<br>
 			<span class="description"><?php esc_html_e( $args['description'], 'social-proof-slider' ); ?></span>
 		</label>
 		</div>
@@ -697,8 +697,8 @@ class Social_Proof_Slider_Admin {
 			class="<?php echo esc_attr( $args['id'] ); ?>"
 			id="<?php echo esc_attr( $args['id'] ); ?>"
 			name="<?php echo esc_attr( $args['id'] ); ?>"
-			type="text"
-			value="<?php echo $dotsmargintop; ?>" /><br>
+			type="number"
+			value="<?php echo $dotsmargintop; ?>" />px<br>
 			<span class="description"><?php esc_html_e( $args['description'], 'social-proof-slider' ); ?></span>
 		</label>
 		</div>
@@ -749,7 +749,7 @@ class Social_Proof_Slider_Admin {
 			id="<?php echo esc_attr( $args['id'] ); ?>"
 			name="<?php echo esc_attr( $args['id'] ); ?>"
 			type="text"
-			value="<?php echo $imgborderradius; ?>" /><br>
+			value="<?php echo $imgborderradius; ?>" />px<br>
 			<span class="description"><?php esc_html_e( $args['description'], 'social-proof-slider' ); ?></span>
 		</label>
 		</div>
@@ -1224,8 +1224,8 @@ class Social_Proof_Slider_Admin {
 	 */
 	public function social_proof_slider_sanitize_contentpaddingtop_field( $contentpaddingtop ) {
 		// regex: any Digit, then either 'px' or '%'
-		if ( preg_match( '/(\d*)(px|%)/', $contentpaddingtop ) ) {
-			return $contentpaddingtop;
+		if ( preg_match( '/(\d*)(px|%)/', $contentpaddingbottom ) ) {
+			return $contentpaddingbottom;
 		}
 	}
 
@@ -1523,6 +1523,21 @@ class Social_Proof_Slider_Admin {
 		}
 	}
 
+	/**
+	 * Sanitize a number value before being saved to database
+	 *
+	 * @param  string $number $_POST value
+	 * @since  2.2.4
+	 * @return string Sanitized value
+	 */
+	public function social_proof_slider_sanitize_number_field( $number ) {
+		if ( empty( $number ) ) {
+			return;
+		}
+		$newnumber = intval( $number );
+		return $newnumber;
+	}
+
 	/* ==================== REGISTER FIELDS ==================== */
 
 	/**
@@ -1650,6 +1665,8 @@ class Social_Proof_Slider_Admin {
 			)
 		);
 
+		// ----------------------------------------------------------
+
 		add_settings_field(
 			$this->option_name . '_paddingoverride',
 			__( 'Padding Override', 'social-proof-slider' ),
@@ -1670,9 +1687,9 @@ class Social_Proof_Slider_Admin {
 			$this->plugin_name,
 			$this->option_name . '_general',
 			array(
-				'description' 	=> __( 'Enter the value for the content area padding-top, using px or %.', 'social-proof-slider' ),
+				'description' 	=> __( 'Enter the value for the content area padding-top.', 'social-proof-slider' ),
 				'id' 			=> $this->option_name . '_contentpaddingtop',
-				'value' 		=> '20px'
+				'value' 		=> '20'
 			)
 		);
 
@@ -1683,9 +1700,9 @@ class Social_Proof_Slider_Admin {
 			$this->plugin_name,
 			$this->option_name . '_general',
 			array(
-				'description' 	=> __( 'Enter the value for the content area padding-bottom, using px or %.', 'social-proof-slider' ),
+				'description' 	=> __( 'Enter the value for the content area padding-bottom.', 'social-proof-slider' ),
 				'id' 			=> $this->option_name . '_contentpaddingbottom',
-				'value' 		=> '20px'
+				'value' 		=> '20'
 			)
 		);
 
@@ -1696,9 +1713,9 @@ class Social_Proof_Slider_Admin {
 			$this->plugin_name,
 			$this->option_name . '_general',
 			array(
-				'description' 	=> __( 'Enter the value for the Featured Image margin-top, using px or %.', 'social-proof-slider' ),
+				'description' 	=> __( 'Enter the value for the Featured Image margin-top.', 'social-proof-slider' ),
 				'id' 			=> $this->option_name . '_featimgmargintop',
-				'value' 		=> '20px'
+				'value' 		=> '20'
 			)
 		);
 
@@ -1709,9 +1726,9 @@ class Social_Proof_Slider_Admin {
 			$this->plugin_name,
 			$this->option_name . '_general',
 			array(
-				'description' 	=> __( 'Enter the value for the Featured Image margin-bottom, using px or %.', 'social-proof-slider' ),
+				'description' 	=> __( 'Enter the value for the Featured Image margin-bottom.', 'social-proof-slider' ),
 				'id' 			=> $this->option_name . '_featimgmarginbottom',
-				'value' 		=> '20px'
+				'value' 		=> '20'
 			)
 		);
 
@@ -1722,9 +1739,9 @@ class Social_Proof_Slider_Admin {
 			$this->plugin_name,
 			$this->option_name . '_general',
 			array(
-				'description' 	=> __( 'Enter the value for the Testimonial Text padding-top, using px or %.', 'social-proof-slider' ),
+				'description' 	=> __( 'Enter the value for the Testimonial Text padding-top.', 'social-proof-slider' ),
 				'id' 			=> $this->option_name . '_textpaddingtop',
-				'value' 		=> '50px'
+				'value' 		=> '50'
 			)
 		);
 
@@ -1735,9 +1752,9 @@ class Social_Proof_Slider_Admin {
 			$this->plugin_name,
 			$this->option_name . '_general',
 			array(
-				'description' 	=> __( 'Enter the value for the Testimonial Text padding-bottom, using px or %.', 'social-proof-slider' ),
+				'description' 	=> __( 'Enter the value for the Testimonial Text padding-bottom.', 'social-proof-slider' ),
 				'id' 			=> $this->option_name . '_textpaddingbottom',
-				'value' 		=> '50px'
+				'value' 		=> '50'
 			)
 		);
 
@@ -1748,9 +1765,9 @@ class Social_Proof_Slider_Admin {
 			$this->plugin_name,
 			$this->option_name . '_general',
 			array(
-				'description' 	=> __( 'Enter the value for the Quote Text margin-bottom, using px or %.', 'social-proof-slider' ),
+				'description' 	=> __( 'Enter the value for the Quote Text margin-bottom.', 'social-proof-slider' ),
 				'id' 			=> $this->option_name . '_quotemarginbottom',
-				'value' 		=> '30px'
+				'value' 		=> '30'
 			)
 		);
 
@@ -1761,11 +1778,13 @@ class Social_Proof_Slider_Admin {
 			$this->plugin_name,
 			$this->option_name . '_general',
 			array(
-				'description' 	=> __( 'Enter the value for the Dots margin-top, using px or %.', 'social-proof-slider' ),
+				'description' 	=> __( 'Enter the value for the Dots margin-top.', 'social-proof-slider' ),
 				'id' 			=> $this->option_name . '_dotsmargintop',
-				'value' 		=> '10px'
+				'value' 		=> '10'
 			)
 		);
+
+		// ----------------------------------------------------------
 
 		add_settings_field(
 			$this->option_name . '_showfeaturedimg',
@@ -1787,7 +1806,7 @@ class Social_Proof_Slider_Admin {
 			$this->plugin_name,
 			$this->option_name . '_general',
 			array(
-				'description' 	=> __( 'Enter the border radius for the Featured Images, using px or %.', 'social-proof-slider' ),
+				'description' 	=> __( 'Enter the border radius for the Featured Images.', 'social-proof-slider' ),
 				'id' 			=> $this->option_name . '_imgborderradius',
 				'value' 		=> '0'
 			)
@@ -1828,7 +1847,7 @@ class Social_Proof_Slider_Admin {
 			array(
 				'description' 	=> __( 'Enter the thickness of the border around the Featured Image.', 'social-proof-slider' ),
 				'id' 			=> $this->option_name . '_imgborderthickness',
-				'value' 		=> '2px'
+				'value' 		=> '2'
 			)
 		);
 
@@ -1981,25 +2000,25 @@ class Social_Proof_Slider_Admin {
 
 		register_setting( $this->plugin_name, $this->option_name . '_sortby', array( $this, $this->option_name . '_sanitize_sortby_field' ) );
 		register_setting( $this->plugin_name, $this->option_name . '_autoplay' );
-		register_setting( $this->plugin_name, $this->option_name . '_displaytime', array( $this, $this->option_name . '_sanitize_displaytime_field' ) );
+		register_setting( $this->plugin_name, $this->option_name . '_displaytime', array( $this, $this->option_name . '_sanitize_number_field' ) );
 		register_setting( $this->plugin_name, $this->option_name . '_animationstyle', array( $this, $this->option_name . '_sanitize_animationstyle_field' ) );
 		register_setting( $this->plugin_name, $this->option_name . '_autoheight', array( $this, $this->option_name . '_sanitize_autoheight_field' ) );
 		register_setting( $this->plugin_name, $this->option_name . '_verticalalign', array( $this, $this->option_name . '_sanitize_verticalalign_field' ) );
 		register_setting( $this->plugin_name, $this->option_name . '_paddingoverride' );
-		register_setting( $this->plugin_name, $this->option_name . '_contentpaddingtop', array( $this, $this->option_name . '_sanitize_contentpaddingtop_field' ) );
-		register_setting( $this->plugin_name, $this->option_name . '_contentpaddingbottom', array( $this, $this->option_name . '_sanitize_contentpaddingbottom_field' ) );
-		register_setting( $this->plugin_name, $this->option_name . '_featimgmargintop', array( $this, $this->option_name . '_sanitize_featimgmargintop_field' ) );
-		register_setting( $this->plugin_name, $this->option_name . '_featimgmarginbottom', array( $this, $this->option_name . '_sanitize_featimgmarginbottom_field' ) );
-		register_setting( $this->plugin_name, $this->option_name . '_textpaddingtop', array( $this, $this->option_name . '_sanitize_textpaddingtop_field' ) );
-		register_setting( $this->plugin_name, $this->option_name . '_textpaddingbottom', array( $this, $this->option_name . '_sanitize_textpaddingbottom_field' ) );
-		register_setting( $this->plugin_name, $this->option_name . '_quotemarginbottom', array( $this, $this->option_name . '_sanitize_quotemarginbottom_field' ) );
-		register_setting( $this->plugin_name, $this->option_name . '_dotsmargintop', array( $this, $this->option_name . '_sanitize_dotsmargintop_field' ) );
+		register_setting( $this->plugin_name, $this->option_name . '_contentpaddingtop', array( $this, $this->option_name . '_sanitize_number_field' ) );
+		register_setting( $this->plugin_name, $this->option_name . '_contentpaddingbottom', array( $this, $this->option_name . '_sanitize_number_field' ) );
+		register_setting( $this->plugin_name, $this->option_name . '_featimgmargintop', array( $this, $this->option_name . '_sanitize_number_field' ) );
+		register_setting( $this->plugin_name, $this->option_name . '_featimgmarginbottom', array( $this, $this->option_name . '_sanitize_number_field' ) );
+		register_setting( $this->plugin_name, $this->option_name . '_textpaddingtop', array( $this, $this->option_name . '_sanitize_number_field' ) );
+		register_setting( $this->plugin_name, $this->option_name . '_textpaddingbottom', array( $this, $this->option_name . '_sanitize_number_field' ) );
+		register_setting( $this->plugin_name, $this->option_name . '_quotemarginbottom', array( $this, $this->option_name . '_sanitize_number_field' ) );
+		register_setting( $this->plugin_name, $this->option_name . '_dotsmargintop', array( $this, $this->option_name . '_sanitize_number_field' ) );
 		register_setting( $this->plugin_name, $this->option_name . '_showfeaturedimg' );
-		register_setting( $this->plugin_name, $this->option_name . '_imgborderradius', array( $this, $this->option_name . '_sanitize_imgborderradius_field' ) );
+		register_setting( $this->plugin_name, $this->option_name . '_imgborderradius', array( $this, $this->option_name . '_sanitize_number_field' ) );
 		register_setting( $this->plugin_name, $this->option_name . '_showimgborder' );
 		register_setting( $this->plugin_name, $this->option_name . '_imgbordercolor', array( $this, $this->option_name . '_sanitize_imgbordercolor_field' ) );
-		register_setting( $this->plugin_name, $this->option_name . '_imgborderthickness', array( $this, $this->option_name . '_sanitize_imgborderthickness_field' ) );
-		register_setting( $this->plugin_name, $this->option_name . '_imgborderpadding', array( $this, $this->option_name . '_sanitize_imgborderpadding_field' ) );
+		register_setting( $this->plugin_name, $this->option_name . '_imgborderthickness', array( $this, $this->option_name . '_sanitize_number_field' ) );
+		register_setting( $this->plugin_name, $this->option_name . '_imgborderpadding', array( $this, $this->option_name . '_sanitize_number_field' ) );
 		register_setting( $this->plugin_name, $this->option_name . '_bgcolor', array( $this, $this->option_name . '_sanitize_bgcolor_field' ) );
 		register_setting( $this->plugin_name, $this->option_name . '_surroundquotes' );
 		register_setting( $this->plugin_name, $this->option_name . '_textalign', array( $this, $this->option_name . '_sanitize_textalign_field' ) );

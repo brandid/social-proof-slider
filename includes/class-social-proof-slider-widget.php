@@ -402,20 +402,20 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 		$defaults['autoheight'] = 1;
 		$defaults['verticalalign'] = 'align_top';
 		$defaults['paddingoverride'] = 0;
-		$defaults['contentpaddingtop'] = '20px';
-		$defaults['contentpaddingbottom'] = '20px';
-		$defaults['featimgmargintop'] = '20px';
-		$defaults['featimgmarginbottom'] = '20px';
-		$defaults['textpaddingtop'] = '50px';
-		$defaults['textpaddingbottom'] = '50px';
-		$defaults['quotemarginbottom'] = '30px';
-		$defaults['dotsmargintop'] = '10px';
+		$defaults['contentpaddingtop'] = 20;
+		$defaults['contentpaddingbottom'] = 20;
+		$defaults['featimgmargintop'] = 20;
+		$defaults['featimgmarginbottom'] = 20;
+		$defaults['textpaddingtop'] = 50;
+		$defaults['textpaddingbottom'] = 50;
+		$defaults['quotemarginbottom'] = 30;
+		$defaults['dotsmargintop'] = 10;
 		$defaults['showfeaturedimg'] = 1;
-		$defaults['imgborderradius'] = '0px';
+		$defaults['imgborderradius'] = 0;
 		$defaults['showimgborder'] = 0;
 		$defaults['imgbordercolor'] = '#000000';
-		$defaults['imgborderthickness'] = '2px';
-		$defaults['imgborderpadding'] = '6px';
+		$defaults['imgborderthickness'] = 2;
+		$defaults['imgborderpadding'] = 6;
 		$defaults['bgcolor'] = '';
 		$defaults['surroundquotes'] = '';
 		$defaults['textalign'] = 'align_center';
@@ -490,9 +490,9 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				class=""
 				id="<?php echo $field_displaytime_id; ?>"
 				name="<?php echo $field_displaytime_name; ?>"
-				type="text"
+				type="number"
 				value="<?php echo $field_displaytime_value; ?>"
-			/>
+			/>ms
 			<?php
 		echo '</label></div>';
 
@@ -588,9 +588,9 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				class=""
 				id="<?php echo $field_contentpaddingtop_id; ?>"
 				name="<?php echo $field_contentpaddingtop_name; ?>"
-				type="text"
+				type="number"
 				value="<?php echo $field_contentpaddingtop_value; ?>"
-			/>
+			/>px
 			<?php
 		echo '</label></div>';
 
@@ -607,9 +607,9 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				class=""
 				id="<?php echo $field_contentpaddingbottom_id; ?>"
 				name="<?php echo $field_contentpaddingbottom_name; ?>"
-				type="text"
+				type="number"
 				value="<?php echo $field_contentpaddingbottom_value; ?>"
-			/>
+			/>px
 			<?php
 		echo '</label></div>';
 
@@ -626,9 +626,9 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				class=""
 				id="<?php echo $field_featimgmargintop_id; ?>"
 				name="<?php echo $field_featimgmargintop_name; ?>"
-				type="text"
+				type="number"
 				value="<?php echo $field_featimgmargintop_value; ?>"
-			/>
+			/>px
 			<?php
 		echo '</label></div>';
 
@@ -645,9 +645,9 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				class=""
 				id="<?php echo $field_featimgmarginbottom_id; ?>"
 				name="<?php echo $field_featimgmarginbottom_name; ?>"
-				type="text"
+				type="number"
 				value="<?php echo $field_featimgmarginbottom_value; ?>"
-			/>
+			/>px
 			<?php
 		echo '</label></div>';
 
@@ -664,9 +664,9 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				class=""
 				id="<?php echo $field_textpaddingtop_id; ?>"
 				name="<?php echo $field_textpaddingtop_name; ?>"
-				type="text"
+				type="number"
 				value="<?php echo $field_textpaddingtop_value; ?>"
-			/>
+			/>px
 			<?php
 		echo '</label></div>';
 
@@ -683,9 +683,9 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				class=""
 				id="<?php echo $field_textpaddingbottom_id; ?>"
 				name="<?php echo $field_textpaddingbottom_name; ?>"
-				type="text"
+				type="number"
 				value="<?php echo $field_textpaddingbottom_value; ?>"
-			/>
+			/>px
 			<?php
 		echo '</label></div>';
 
@@ -702,9 +702,9 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				class=""
 				id="<?php echo $field_quotemarginbottom_id; ?>"
 				name="<?php echo $field_quotemarginbottom_name; ?>"
-				type="text"
+				type="number"
 				value="<?php echo $field_quotemarginbottom_value; ?>"
-			/>
+			/>px
 			<?php
 		echo '</label></div>';
 
@@ -721,9 +721,9 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				class=""
 				id="<?php echo $field_dotsmargintop_id; ?>"
 				name="<?php echo $field_dotsmargintop_name; ?>"
-				type="text"
+				type="number"
 				value="<?php echo $field_dotsmargintop_value; ?>"
-			/>
+			/>px
 			<?php
 		echo '</label></div>';
 
@@ -761,9 +761,9 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				class="small-number-field"
 				id="<?php echo $field_imgborderradius_id; ?>"
 				name="<?php echo $field_imgborderradius_name; ?>"
-				type="text"
+				type="number"
 				value="<?php echo $field_imgborderradius_value; ?>"
-			/>
+			/>px
 			<?php
 		echo '</label></div>';
 
@@ -819,9 +819,9 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				class=""
 				id="<?php echo $field_imgborderthickness_id; ?>"
 				name="<?php echo $field_imgborderthickness_name; ?>"
-				type="text"
+				type="number"
 				value="<?php echo $field_imgborderthickness_value; ?>"
-			/>
+			/>px
 			<?php
 		echo '</label></div>';
 
@@ -838,9 +838,9 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 				class=""
 				id="<?php echo $field_imgborderpadding_id; ?>"
 				name="<?php echo $field_imgborderpadding_name; ?>"
-				type="text"
+				type="number"
 				value="<?php echo $field_imgborderpadding_value; ?>"
-			/>
+			/>px
 			<?php
 		echo '</label></div>';
 
@@ -1213,14 +1213,14 @@ class Social_Proof_Slider_Widget extends WP_Widget {
 		$instance['autoheight'] = $new_instance['autoheight'];
 		$instance['verticalalign'] = $new_instance['verticalalign'];
 		$instance['paddingoverride'] = $new_instance['paddingoverride'];
-		$instance['contentpaddingtop'] = $new_instance['contentpaddingtop'];
-		$instance['contentpaddingbottom'] = $new_instance['contentpaddingbottom'];
-		$instance['featimgmargintop'] = $new_instance['featimgmargintop'];
-		$instance['featimgmarginbottom'] = $new_instance['featimgmarginbottom'];
-		$instance['textpaddingtop'] = $new_instance['textpaddingtop'];
-		$instance['textpaddingbottom'] = $new_instance['textpaddingbottom'];
-		$instance['quotemarginbottom'] = $new_instance['quotemarginbottom'];
-		$instance['dotsmargintop'] = $new_instance['dotsmargintop'];
+		$instance['contentpaddingtop'] = sanitize_text_field( $new_instance['contentpaddingtop'] );
+		$instance['contentpaddingbottom'] = sanitize_text_field( $new_instance['contentpaddingbottom'] );
+		$instance['featimgmargintop'] = sanitize_text_field( $new_instance['featimgmargintop'] );
+		$instance['featimgmarginbottom'] = sanitize_text_field( $new_instance['featimgmarginbottom'] );
+		$instance['textpaddingtop'] = sanitize_text_field( $new_instance['textpaddingtop'] );
+		$instance['textpaddingbottom'] = sanitize_text_field( $new_instance['textpaddingbottom'] );
+		$instance['quotemarginbottom'] = sanitize_text_field( $new_instance['quotemarginbottom'] );
+		$instance['dotsmargintop'] = sanitize_text_field( $new_instance['dotsmargintop'] );
 		$instance['showfeaturedimg'] = $new_instance['showfeaturedimg'];
 		$instance['imgborderradius'] = $new_instance['imgborderradius'];
 		$instance['showimgborder'] = $new_instance['showimgborder'];

@@ -74,7 +74,7 @@ class Social_Proof_Slider_Sanitize {
 			case 'time'				:
 			case 'week'				: $sanitized = strtotime( $this->data ); break;
 
-			case 'number'			:
+			case 'number'			: $sanitized = intval( $this->data ); break;
 			case 'range'			: $sanitized = intval( $this->data ); break;
 
 			case 'hidden'			:

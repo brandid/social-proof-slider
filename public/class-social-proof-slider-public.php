@@ -175,11 +175,11 @@ class Social_Proof_Slider_Public {
 		$dotsMarginStr = ''; // default
 
 		if ( $doPaddingOverride == 'true' ) {
-			$contentPaddingStr = "padding-top: ".$contentPaddingTop."; padding-bottom: ".$contentPaddingBottom.";";
-			$imgMarginStr = "margin-top:".$featImgMarginTop."; margin-bottom:".$featImgMarginBottom.";";
-			$textPaddingStr = "padding-top: ".$textPaddingTop."; padding-bottom: ".$textPaddingBottom.";";
-			$quoteMarginStr = "margin-bottom: ".$quoteMarginBottom.";";
-			$dotsMarginStr = "margin-top: ".$dotsMarginTop.";";
+			$contentPaddingStr = "padding-top: ".$contentPaddingTop."px; padding-bottom: ".$contentPaddingBottom."px;";
+			$imgMarginStr = "margin-top:".$featImgMarginTop."px; margin-bottom:".$featImgMarginBottom."px;";
+			$textPaddingStr = "padding-top: ".$textPaddingTop."px; padding-bottom: ".$textPaddingBottom."px;";
+			$quoteMarginStr = "margin-bottom: ".$quoteMarginBottom."px;";
+			$dotsMarginStr = "margin-top: ".$dotsMarginTop."px;";
 		}
 
 		$alignStr = '';	// default
@@ -206,7 +206,7 @@ class Social_Proof_Slider_Public {
 		if ( $sc_settings['imageBorderRadius'] === 0 ){
 			echo '#_socialproofslider-shortcode .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius: 0; }'."\n";
 		} else {
-			echo '#_socialproofslider-shortcode .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius:' . $sc_settings['imageBorderRadius'] . '; }'."\n";
+			echo '#_socialproofslider-shortcode .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius:' . $sc_settings['imageBorderRadius'] . 'px; }'."\n";
 		}
 
 		if ( $showImageBorder == '1' ) {

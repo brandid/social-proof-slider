@@ -1,12 +1,12 @@
 === Social Proof (Testimonial) Slider ===
-Contributors: alexmustin
+Contributors: alexmustin, thebrandid
 Author: brandiD
 Author URI: https://buildmybrandid.com/
 Tags: carousel, custom post type, portfolio, quotes, responsive, reviews, slider, slideshow, testimonial, widget
 Requires at least: 4.9
-Tested up to: 5.8.2
-Stable tag: 2.2.3
-Version: 2.2.3
+Tested up to: 6.2.2
+Stable tag: 2.2.4
+Version: 2.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,10 @@ https://buildmybrandid.com/product-support/
 13. Limit Testimonials by Category
 
 == Changelog ==
+
+= 2.2.4 - (July 31, 2023) =
+* Fix: Fixes XSS vulnerability.
+* Update: Changes all Padding Override and Featured Image inputs to use only px units.
 
 = 2.2.3 - (Dec 22, 2021) =
 * Fix: Fixes XSS vulnerability.

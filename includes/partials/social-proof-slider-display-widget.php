@@ -310,7 +310,7 @@ if ( !empty( $categorySlug ) ) {
 
 $paddingStr = '';	// default
 if ( $paddingOverrideStr == 'YES' ) {
-	$paddingStr = 'style="padding-top: '.$contentPaddingTop.'; padding-bottom: '.$contentPaddingBottom.';"';
+	$paddingStr = 'style="padding-top: '.$contentPaddingTop.'px; padding-bottom: '.$contentPaddingBottom.'px;"';
 }
 
 
@@ -338,18 +338,18 @@ echo '#' . $thisWidgetID . ' .social-proof-slider-wrap{ background-color:' . $bg
 
 if ( $paddingOverrideStr == 'YES' ) {
 
-	echo '#' . $thisWidgetID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img-wrap .testimonial-author-img { margin-top: ' . $featImgMarginTop . '; margin-bottom: ' . $featImgMarginBottom .' }'."\n";
-	echo '#' . $thisWidgetID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text { padding-top: ' . $textPaddingTop . '; padding-bottom: ' . $textPaddingBottom .' }'."\n";
-	echo '#' . $thisWidgetID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .quote { margin-bottom: ' . $quoteMarginBottom . '; }'."\n";
-	echo '#' . $thisWidgetID . ' .social-proof-slider-wrap ul.slick-dots { margin-top: ' . $dotsMarginTop . '; }'."\n";
+	echo '#' . $thisWidgetID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img-wrap .testimonial-author-img { margin-top: ' . $featImgMarginTop . 'px; margin-bottom: ' . $featImgMarginBottom .'px }'."\n";
+	echo '#' . $thisWidgetID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text { padding-top: ' . $textPaddingTop . 'px; padding-bottom: ' . $textPaddingBottom .'px }'."\n";
+	echo '#' . $thisWidgetID . ' .social-proof-slider-wrap .testimonial-item .testimonial-text .quote { margin-bottom: ' . $quoteMarginBottom . 'px; }'."\n";
+	echo '#' . $thisWidgetID . ' .social-proof-slider-wrap ul.slick-dots { margin-top: ' . $dotsMarginTop . 'px; }'."\n";
 
 }
 
-echo '#' . $thisWidgetID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius:' . $imgborderradius . '; }'."\n";
+echo '#' . $thisWidgetID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border-radius:' . $imgborderradius . 'px; }'."\n";
 
 if ( $showimgborderStr == 'YES' ) {
 
-	echo '#' . $thisWidgetID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border: ' . $imgborderthickness . ' solid ' . $imgbordercolor . ' !important; padding: ' . $imgborderpadding . ' }'."\n";
+	echo '#' . $thisWidgetID . ' .social-proof-slider-wrap .testimonial-item.featured-image .testimonial-author-img img{ border: ' . $imgborderthickness . 'px solid ' . $imgbordercolor . ' !important; padding: ' . $imgborderpadding . 'px }'."\n";
 
 }
 

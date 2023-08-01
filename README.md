@@ -50,6 +50,10 @@ If you are still stuck, please use our Product Support Form:
 
 ## Changelog
 
+### 2.2.4 - (July 31, 2023)
+* Fix: Fixes XSS vulnerability.
+* Update: Changes all Padding Override and Featured Image inputs to use only px units.
+
 ### 2.2.3 - (Dec 22, 2021)
 * Fix: Fixes XSS vulnerability.
 
